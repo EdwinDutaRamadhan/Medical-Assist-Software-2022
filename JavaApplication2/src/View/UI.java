@@ -5,7 +5,14 @@
  */
 package View;
 
+import Data.userData;
+import Model.userModel;
+import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 
 /**
  *
@@ -13,13 +20,16 @@ import java.awt.Toolkit;
  */
 public class UI extends javax.swing.JFrame {
     boolean crud;
+    DefaultTableModel model;
     /**
      * Creates new form UI
      */
     public UI() {
         initComponents();
         startUp();
-        
+        String [] defaultTable = {"NIM","NAMA","VAKSIN1","VAKSIN2","VAKSIN3","VAKSIN4","VAKSIN5"};
+        model = new DefaultTableModel(defaultTable, 0);
+        dataTable.setModel(model);
     }
     
     
@@ -29,7 +39,7 @@ public class UI extends javax.swing.JFrame {
         double height = toolkit.getScreenSize().getHeight();
         this.setSize((int)width, (int)height);
         dataButtonVisible(false);
-        
+        reset();
     }
 
     /**
@@ -65,7 +75,6 @@ public class UI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(196, 202, 233));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 766));
 
         jPanel1.setBackground(new java.awt.Color(196, 202, 233));
 
@@ -120,30 +129,42 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("MEDICAL ASSIST SOFTWARE");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dashboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(simpanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hapusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tambahButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gantiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(simpanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(hapusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tambahButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gantiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 35, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dashboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(43, 43, 43))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(96, 96, 96)
                 .addComponent(dashboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,9 +181,6 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("MEDICAL ASSIST SOFTWARE");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Manajemen Sistem Data Vaksinasi Mahasiswa FTI UKSW");
 
@@ -177,12 +195,25 @@ public class UI extends javax.swing.JFrame {
                 "NIM", "NAMA", "VAKSIN 1", "VAKSIN 2", "VAKSIN 3", "VAKSIN 4", "VAKSIN 5"
             }
         ));
+        dataTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dataTableMouseClicked(evt);
+            }
+        });
         tabelScroll.setViewportView(dataTable);
 
         nimTextField.setText("NIM");
         nimTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nimTextFieldActionPerformed(evt);
+            }
+        });
+        nimTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nimTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nimTextFieldFocusLost(evt);
             }
         });
 
@@ -192,11 +223,27 @@ public class UI extends javax.swing.JFrame {
                 namaTextFieldActionPerformed(evt);
             }
         });
+        namaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                namaTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                namaTextFieldFocusLost(evt);
+            }
+        });
 
         vaksin1TextField.setText("VAKSIN 1");
         vaksin1TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vaksin1TextFieldActionPerformed(evt);
+            }
+        });
+        vaksin1TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vaksin1TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaksin1TextFieldFocusLost(evt);
             }
         });
 
@@ -206,11 +253,27 @@ public class UI extends javax.swing.JFrame {
                 vaksin2TextFieldActionPerformed(evt);
             }
         });
+        vaksin2TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vaksin2TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaksin2TextFieldFocusLost(evt);
+            }
+        });
 
         vaksin3TextField.setText("VAKSIN 3");
         vaksin3TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vaksin3TextFieldActionPerformed(evt);
+            }
+        });
+        vaksin3TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vaksin3TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaksin3TextFieldFocusLost(evt);
             }
         });
 
@@ -220,11 +283,27 @@ public class UI extends javax.swing.JFrame {
                 vaksin4TextFieldActionPerformed(evt);
             }
         });
+        vaksin4TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vaksin4TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaksin4TextFieldFocusLost(evt);
+            }
+        });
 
         vaksin5TextField.setText("VAKSIN 5");
         vaksin5TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vaksin5TextFieldActionPerformed(evt);
+            }
+        });
+        vaksin5TextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vaksin5TextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                vaksin5TextFieldFocusLost(evt);
             }
         });
 
@@ -236,39 +315,33 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(77, 77, 77)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(nimTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(vaksin1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(vaksin2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(vaksin3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(vaksin4TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vaksin5TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(463, 463, 463)
-                        .addComponent(jLabel1)))
-                .addGap(75, 75, 75))
+                        .addGap(88, 88, 88)
+                        .addComponent(nimTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vaksin1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vaksin2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vaksin3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vaksin4TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vaksin5TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel2)
-                .addGap(29, 29, 29)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nimTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(namaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,8 +352,8 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(vaksin5TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,6 +376,7 @@ public class UI extends javax.swing.JFrame {
 
     private void dataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataButtonActionPerformed
         dataButtonVisible(true);
+        displayDataMahasiswa();
     }//GEN-LAST:event_dataButtonActionPerformed
 
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
@@ -310,7 +384,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
@@ -318,7 +392,8 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_hapusButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
-        // TODO add your handling code here:
+        displayDataMahasiswa();
+        reset();
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     private void gantiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gantiButtonActionPerformed
@@ -326,7 +401,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_gantiButtonActionPerformed
 
     private void nimTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nimTextFieldActionPerformed
-        // TODO add your handling code here:
+        //
     }//GEN-LAST:event_nimTextFieldActionPerformed
 
     private void namaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaTextFieldActionPerformed
@@ -352,6 +427,122 @@ public class UI extends javax.swing.JFrame {
     private void vaksin5TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaksin5TextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_vaksin5TextFieldActionPerformed
+
+    private void dataTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataTableMouseClicked
+        int row = dataTable.getSelectedRow();
+        nimTextField.setText(dataTable.getValueAt(row, 0).toString());
+        namaTextField.setText(dataTable.getValueAt(row, 1).toString());
+        vaksin1TextField.setText(dataTable.getValueAt(row, 2).toString());
+        vaksin2TextField.setText(dataTable.getValueAt(row, 3).toString());
+        vaksin3TextField.setText(dataTable.getValueAt(row, 4).toString());
+        vaksin4TextField.setText(dataTable.getValueAt(row, 5).toString());
+        vaksin5TextField.setText(dataTable.getValueAt(row, 6).toString());
+        nimTextField.setForeground(new Color(0,0,0));
+        namaTextField.setForeground(new Color(0,0,0));
+        vaksin1TextField.setForeground(new Color(0,0,0));
+        vaksin2TextField.setForeground(new Color(0,0,0));
+        vaksin3TextField.setForeground(new Color(0,0,0));
+        vaksin4TextField.setForeground(new Color(0,0,0));
+        vaksin5TextField.setForeground(new Color(0,0,0));
+    }//GEN-LAST:event_dataTableMouseClicked
+
+    private void nimTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nimTextFieldFocusGained
+        if(nimTextField.getText().equals("NIM")){
+            nimTextField.setText("");
+            nimTextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_nimTextFieldFocusGained
+
+    private void namaTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaTextFieldFocusGained
+        if(namaTextField.getText().equals("Nama")){
+            namaTextField.setText("");
+            namaTextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_namaTextFieldFocusGained
+
+    private void vaksin1TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin1TextFieldFocusGained
+        if(vaksin1TextField.getText().equals("Vaksin 1")){
+            vaksin1TextField.setText("");
+            vaksin1TextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_vaksin1TextFieldFocusGained
+
+    private void vaksin2TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin2TextFieldFocusGained
+        if(vaksin2TextField.getText().equals("Vaksin 2")){
+            vaksin2TextField.setText("");
+            vaksin2TextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_vaksin2TextFieldFocusGained
+
+    private void vaksin3TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin3TextFieldFocusGained
+        if(vaksin3TextField.getText().equals("Vaksin 3")){
+            vaksin3TextField.setText("");
+            vaksin3TextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_vaksin3TextFieldFocusGained
+
+    private void vaksin4TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin4TextFieldFocusGained
+        if(vaksin4TextField.getText().equals("Vaksin 4")){
+            vaksin4TextField.setText("");
+            vaksin4TextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_vaksin4TextFieldFocusGained
+
+    private void vaksin5TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin5TextFieldFocusGained
+        if(vaksin5TextField.getText().equals("Vaksin 5")){
+            vaksin5TextField.setText("");
+            vaksin5TextField.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_vaksin5TextFieldFocusGained
+
+    private void nimTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nimTextFieldFocusLost
+        if(nimTextField.getText().equals("")){
+            nimTextField.setText("NIM");
+            nimTextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_nimTextFieldFocusLost
+
+    private void namaTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaTextFieldFocusLost
+        if(namaTextField.getText().equals("")){
+            namaTextField.setText("NAMA");
+            namaTextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_namaTextFieldFocusLost
+
+    private void vaksin1TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin1TextFieldFocusLost
+        if(vaksin1TextField.getText().equals("")){
+            vaksin1TextField.setText("Vaksin 1");
+            vaksin1TextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_vaksin1TextFieldFocusLost
+
+    private void vaksin2TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin2TextFieldFocusLost
+        if(vaksin2TextField.getText().equals("")){
+            vaksin2TextField.setText("Vaksin 2");
+            vaksin2TextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_vaksin2TextFieldFocusLost
+
+    private void vaksin3TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin3TextFieldFocusLost
+        if(vaksin3TextField.getText().equals("")){
+            vaksin3TextField.setText("Vaksin 3");
+            vaksin3TextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_vaksin3TextFieldFocusLost
+
+    private void vaksin4TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin4TextFieldFocusLost
+        if(vaksin4TextField.getText().equals("")){
+            vaksin4TextField.setText("Vaksin 4");
+            vaksin4TextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_vaksin4TextFieldFocusLost
+
+    private void vaksin5TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin5TextFieldFocusLost
+        if(vaksin5TextField.getText().equals("")){
+            vaksin5TextField.setText("Vaksin 5");
+            vaksin5TextField.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_vaksin5TextFieldFocusLost
     private void dataButtonVisible(boolean crud){
         simpanButton.setVisible(crud);
         hapusButton.setVisible(crud);
@@ -365,6 +556,37 @@ public class UI extends javax.swing.JFrame {
         vaksin3TextField.setVisible(crud);
         vaksin4TextField.setVisible(crud);
         vaksin5TextField.setVisible(crud);
+    }
+    private void displayDataMahasiswa(){
+        List<userModel> ls = new ArrayList<userModel>();
+        ls = new userData().getAll();
+        String DataMahasiswa[][] = new String[ls.size()][7];
+        for (int i = 0; i < ls.size(); i++) {
+            DataMahasiswa[i][0] = ls.get(i).getNIM();
+            DataMahasiswa[i][1] = ls.get(i).getNama();
+            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
+            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
+            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
+            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
+            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
+        }
+        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM","NAMA","VAKSIN1","VAKSIN2","VAKSIN3","VAKSIN4","VAKSIN5"}));
+    }
+    private void reset(){
+        nimTextField.setText("NIM");
+        namaTextField.setText("Nama");
+        vaksin1TextField.setText("Vaksin 1");
+        vaksin2TextField.setText("Vaksin 2");
+        vaksin3TextField.setText("Vaksin 3");
+        vaksin4TextField.setText("Vaksin 4");
+        vaksin5TextField.setText("Vaksin 5");
+        nimTextField.setForeground(new Color(153,153,153));
+        namaTextField.setForeground(new Color(153,153,153));
+        vaksin1TextField.setForeground(new Color(153,153,153));
+        vaksin2TextField.setForeground(new Color(153,153,153));
+        vaksin3TextField.setForeground(new Color(153,153,153));
+        vaksin4TextField.setForeground(new Color(153,153,153));
+        vaksin5TextField.setForeground(new Color(153,153,153));
     }
     /**
      * @param args the command line arguments
