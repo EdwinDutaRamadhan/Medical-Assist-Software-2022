@@ -6,13 +6,14 @@
 package View;
 
 import Data.userData;
+import Model.tableModel;
 import Model.userModel;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 
 /**
  *
@@ -21,6 +22,9 @@ import javax.xml.crypto.Data;
 public class UI extends javax.swing.JFrame {
     boolean crud;
     DefaultTableModel model;
+    userModel mahasiswa;
+    tableModel TabelModel;
+    userData data = new userData();
     /**
      * Creates new form UI
      */
@@ -30,6 +34,7 @@ public class UI extends javax.swing.JFrame {
         String [] defaultTable = {"NIM","NAMA","VAKSIN1","VAKSIN2","VAKSIN3","VAKSIN4","VAKSIN5"};
         model = new DefaultTableModel(defaultTable, 0);
         dataTable.setModel(model);
+        
     }
     
     
@@ -139,15 +144,8 @@ public class UI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(simpanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(hapusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tambahButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(gantiButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 35, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +155,14 @@ public class UI extends javax.swing.JFrame {
                                 .addGap(19, 19, 19))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(43, 43, 43))))))
+                                .addGap(43, 43, 43))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(hapusButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tambahButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gantiButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(simpanButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,11 +208,6 @@ public class UI extends javax.swing.JFrame {
         tabelScroll.setViewportView(dataTable);
 
         nimTextField.setText("NIM");
-        nimTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nimTextFieldActionPerformed(evt);
-            }
-        });
         nimTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 nimTextFieldFocusGained(evt);
@@ -218,11 +218,6 @@ public class UI extends javax.swing.JFrame {
         });
 
         namaTextField.setText("NAMA");
-        namaTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaTextFieldActionPerformed(evt);
-            }
-        });
         namaTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 namaTextFieldFocusGained(evt);
@@ -233,11 +228,6 @@ public class UI extends javax.swing.JFrame {
         });
 
         vaksin1TextField.setText("VAKSIN 1");
-        vaksin1TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vaksin1TextFieldActionPerformed(evt);
-            }
-        });
         vaksin1TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 vaksin1TextFieldFocusGained(evt);
@@ -248,11 +238,6 @@ public class UI extends javax.swing.JFrame {
         });
 
         vaksin2TextField.setText("VAKSIN 2");
-        vaksin2TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vaksin2TextFieldActionPerformed(evt);
-            }
-        });
         vaksin2TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 vaksin2TextFieldFocusGained(evt);
@@ -263,11 +248,6 @@ public class UI extends javax.swing.JFrame {
         });
 
         vaksin3TextField.setText("VAKSIN 3");
-        vaksin3TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vaksin3TextFieldActionPerformed(evt);
-            }
-        });
         vaksin3TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 vaksin3TextFieldFocusGained(evt);
@@ -278,11 +258,6 @@ public class UI extends javax.swing.JFrame {
         });
 
         vaksin4TextField.setText("VAKSIN 4");
-        vaksin4TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vaksin4TextFieldActionPerformed(evt);
-            }
-        });
         vaksin4TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 vaksin4TextFieldFocusGained(evt);
@@ -293,11 +268,6 @@ public class UI extends javax.swing.JFrame {
         });
 
         vaksin5TextField.setText("VAKSIN 5");
-        vaksin5TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vaksin5TextFieldActionPerformed(evt);
-            }
-        });
         vaksin5TextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 vaksin5TextFieldFocusGained(evt);
@@ -312,7 +282,7 @@ public class UI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
@@ -334,7 +304,7 @@ public class UI extends javax.swing.JFrame {
                         .addComponent(vaksin4TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(vaksin5TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(114, 114, 114))
+                .addGap(2643, 2643, 2643))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,11 +354,41 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        TabelModel = new tableModel();
+        mahasiswa = new userModel();
+        if (nimTextField.getText().equals(TabelModel.getNIM()) || namaTextField.getText().equals(TabelModel.getNAMA()) ){
+            JOptionPane.showMessageDialog(this, "Masukkan NIM atau Nama terlebih dahulu");
+        }else{
+            mahasiswa.setNIM(nimTextField.getText());
+            mahasiswa.setNama(namaTextField.getText());
+        }
+        if (vaksin1TextField.getText().equals(TabelModel.getVAKSIN1())) {mahasiswa.setVaksin1("-");}else{mahasiswa.setVaksin1(vaksin1TextField.getText());}
+        if (vaksin2TextField.getText().equals(TabelModel.getVAKSIN2())) {mahasiswa.setVaksin2("-");}else{mahasiswa.setVaksin2(vaksin2TextField.getText());}
+        if (vaksin3TextField.getText().equals(TabelModel.getVAKSIN3())) {mahasiswa.setVaksin3("-");}else{mahasiswa.setVaksin3(vaksin3TextField.getText());}
+        if (vaksin4TextField.getText().equals(TabelModel.getVAKSIN4())) {mahasiswa.setVaksin4("-");}else{mahasiswa.setVaksin4(vaksin4TextField.getText());}
+        if (vaksin5TextField.getText().equals(TabelModel.getVAKSIN5())) {mahasiswa.setVaksin5("-");}else{mahasiswa.setVaksin5(vaksin5TextField.getText());}
         
+        if (data.simpanDataMahasiswa(mahasiswa)) {
+            JOptionPane.showMessageDialog(this, "Sukses Menambah Data");
+            displayDataMahasiswa();
+            reset();
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal Menambah Data");
+        }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data ini?","Delete Mahasiswa",0)==0){
+            mahasiswa = new userModel();
+            mahasiswa.setNIM(nimTextField.getText());
+            if (data.hapusDataMahasiswa(mahasiswa)) {
+                JOptionPane.showMessageDialog(this, "Sukses Menghapus Data");
+                displayDataMahasiswa();
+                reset();
+            }else{
+                JOptionPane.showMessageDialog(this, "Gagal Menghapus Data");
+            }
+        }
     }//GEN-LAST:event_hapusButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
@@ -397,36 +397,22 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     private void gantiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gantiButtonActionPerformed
-        // TODO add your handling code here:
+        mahasiswa = new userModel();
+        mahasiswa.setNIM(nimTextField.getText());
+        mahasiswa.setNama(namaTextField.getText());
+        mahasiswa.setVaksin1(vaksin1TextField.getText());
+        mahasiswa.setVaksin2(vaksin2TextField.getText());
+        mahasiswa.setVaksin3(vaksin3TextField.getText());
+        mahasiswa.setVaksin4(vaksin4TextField.getText());
+        mahasiswa.setVaksin5(vaksin5TextField.getText());
+        if (data.gantiDataMahasiswa(mahasiswa)) {
+            JOptionPane.showMessageDialog(this, "Berhasil Ganti Data");
+            displayDataMahasiswa();
+            reset();
+        }else{
+            JOptionPane.showMessageDialog(this, "Gagal Ganti Data");
+        }
     }//GEN-LAST:event_gantiButtonActionPerformed
-
-    private void nimTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nimTextFieldActionPerformed
-        //
-    }//GEN-LAST:event_nimTextFieldActionPerformed
-
-    private void namaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namaTextFieldActionPerformed
-
-    private void vaksin1TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaksin1TextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaksin1TextFieldActionPerformed
-
-    private void vaksin2TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaksin2TextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaksin2TextFieldActionPerformed
-
-    private void vaksin3TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaksin3TextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaksin3TextFieldActionPerformed
-
-    private void vaksin4TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaksin4TextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaksin4TextFieldActionPerformed
-
-    private void vaksin5TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vaksin5TextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vaksin5TextFieldActionPerformed
 
     private void dataTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dataTableMouseClicked
         int row = dataTable.getSelectedRow();
@@ -447,49 +433,49 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_dataTableMouseClicked
 
     private void nimTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nimTextFieldFocusGained
-        if(nimTextField.getText().equals("NIM")){
+        if(nimTextField.getText().equals(TabelModel.getNIM())){
             nimTextField.setText("");
             nimTextField.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_nimTextFieldFocusGained
 
     private void namaTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaTextFieldFocusGained
-        if(namaTextField.getText().equals("Nama")){
+        if(namaTextField.getText().equals(TabelModel.getNAMA())){
             namaTextField.setText("");
             namaTextField.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_namaTextFieldFocusGained
 
     private void vaksin1TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin1TextFieldFocusGained
-        if(vaksin1TextField.getText().equals("Vaksin 1")){
+        if(vaksin1TextField.getText().equals(TabelModel.getVAKSIN1())){
             vaksin1TextField.setText("");
             vaksin1TextField.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_vaksin1TextFieldFocusGained
 
     private void vaksin2TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin2TextFieldFocusGained
-        if(vaksin2TextField.getText().equals("Vaksin 2")){
+        if(vaksin2TextField.getText().equals(TabelModel.getVAKSIN2())){
             vaksin2TextField.setText("");
             vaksin2TextField.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_vaksin2TextFieldFocusGained
 
     private void vaksin3TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin3TextFieldFocusGained
-        if(vaksin3TextField.getText().equals("Vaksin 3")){
+        if(vaksin3TextField.getText().equals(TabelModel.getVAKSIN3())){
             vaksin3TextField.setText("");
             vaksin3TextField.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_vaksin3TextFieldFocusGained
 
     private void vaksin4TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin4TextFieldFocusGained
-        if(vaksin4TextField.getText().equals("Vaksin 4")){
+        if(vaksin4TextField.getText().equals(TabelModel.getVAKSIN4())){
             vaksin4TextField.setText("");
             vaksin4TextField.setForeground(new Color(0,0,0));
         }
     }//GEN-LAST:event_vaksin4TextFieldFocusGained
 
     private void vaksin5TextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin5TextFieldFocusGained
-        if(vaksin5TextField.getText().equals("Vaksin 5")){
+        if(vaksin5TextField.getText().equals(TabelModel.getVAKSIN5())){
             vaksin5TextField.setText("");
             vaksin5TextField.setForeground(new Color(0,0,0));
         }
@@ -497,49 +483,49 @@ public class UI extends javax.swing.JFrame {
 
     private void nimTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nimTextFieldFocusLost
         if(nimTextField.getText().equals("")){
-            nimTextField.setText("NIM");
+            nimTextField.setText(TabelModel.getNIM());
             nimTextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_nimTextFieldFocusLost
 
     private void namaTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaTextFieldFocusLost
         if(namaTextField.getText().equals("")){
-            namaTextField.setText("NAMA");
+            namaTextField.setText(TabelModel.getNAMA());
             namaTextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_namaTextFieldFocusLost
 
     private void vaksin1TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin1TextFieldFocusLost
         if(vaksin1TextField.getText().equals("")){
-            vaksin1TextField.setText("Vaksin 1");
+            vaksin1TextField.setText(TabelModel.getVAKSIN1());
             vaksin1TextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_vaksin1TextFieldFocusLost
 
     private void vaksin2TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin2TextFieldFocusLost
         if(vaksin2TextField.getText().equals("")){
-            vaksin2TextField.setText("Vaksin 2");
+            vaksin2TextField.setText(TabelModel.getVAKSIN2());
             vaksin2TextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_vaksin2TextFieldFocusLost
 
     private void vaksin3TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin3TextFieldFocusLost
         if(vaksin3TextField.getText().equals("")){
-            vaksin3TextField.setText("Vaksin 3");
+            vaksin3TextField.setText(TabelModel.getVAKSIN3());
             vaksin3TextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_vaksin3TextFieldFocusLost
 
     private void vaksin4TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin4TextFieldFocusLost
         if(vaksin4TextField.getText().equals("")){
-            vaksin4TextField.setText("Vaksin 4");
+            vaksin4TextField.setText(TabelModel.getVAKSIN4());
             vaksin4TextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_vaksin4TextFieldFocusLost
 
     private void vaksin5TextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vaksin5TextFieldFocusLost
         if(vaksin5TextField.getText().equals("")){
-            vaksin5TextField.setText("Vaksin 5");
+            vaksin5TextField.setText(TabelModel.getVAKSIN5());
             vaksin5TextField.setForeground(new Color(153,153,153));
         }
     }//GEN-LAST:event_vaksin5TextFieldFocusLost
@@ -557,6 +543,8 @@ public class UI extends javax.swing.JFrame {
         vaksin4TextField.setVisible(crud);
         vaksin5TextField.setVisible(crud);
     }
+
+
     private void displayDataMahasiswa(){
         List<userModel> ls = new ArrayList<userModel>();
         ls = new userData().getAll();
@@ -573,13 +561,14 @@ public class UI extends javax.swing.JFrame {
         dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM","NAMA","VAKSIN1","VAKSIN2","VAKSIN3","VAKSIN4","VAKSIN5"}));
     }
     private void reset(){
-        nimTextField.setText("NIM");
-        namaTextField.setText("Nama");
-        vaksin1TextField.setText("Vaksin 1");
-        vaksin2TextField.setText("Vaksin 2");
-        vaksin3TextField.setText("Vaksin 3");
-        vaksin4TextField.setText("Vaksin 4");
-        vaksin5TextField.setText("Vaksin 5");
+        TabelModel = new tableModel();
+        nimTextField.setText(TabelModel.getNIM());
+        namaTextField.setText(TabelModel.getNAMA());
+        vaksin1TextField.setText(TabelModel.getVAKSIN1());
+        vaksin2TextField.setText(TabelModel.getVAKSIN2());
+        vaksin3TextField.setText(TabelModel.getVAKSIN3());
+        vaksin4TextField.setText(TabelModel.getVAKSIN4());
+        vaksin5TextField.setText(TabelModel.getVAKSIN5());
         nimTextField.setForeground(new Color(153,153,153));
         namaTextField.setForeground(new Color(153,153,153));
         vaksin1TextField.setForeground(new Color(153,153,153));

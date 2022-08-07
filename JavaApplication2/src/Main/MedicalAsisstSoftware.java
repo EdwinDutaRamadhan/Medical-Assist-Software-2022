@@ -5,6 +5,9 @@
  */
 package Main;
 
+import Connection.userConnection;
+import View.UI;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -15,7 +18,8 @@ public class MedicalAsisstSoftware {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        UI start = new UI();
+        start.setVisible(true);
     }
     
 }

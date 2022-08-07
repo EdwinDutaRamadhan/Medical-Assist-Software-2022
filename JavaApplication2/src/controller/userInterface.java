@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface userInterface {
 
-    public boolean simpanDataMahasiswa(userModel player);
+    public boolean simpanDataMahasiswa(userModel mahasiswa);
+    public boolean hapusDataMahasiswa(userModel mahasiswa);
+    public boolean gantiDataMahasiswa(userModel mahasiswa);
     public List<userModel> getAll();
 }

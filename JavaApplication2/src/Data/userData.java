@@ -32,8 +32,7 @@ public class userData implements userInterface {
     public boolean simpanDataMahasiswa(userModel mahasiswa) {
         boolean result = false;
         try{
-            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_mahasiswa"
-            + " VALUES (?,?,?,?,?,?,?)");
+            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_mahasiswa" + " VALUES (?,?,?,?,?,?,?)");
             ps.setString(1, mahasiswa.getNIM());
             ps.setString(2, mahasiswa.getNama());
             ps.setString(3, mahasiswa.getVaksin1());
@@ -73,6 +72,42 @@ public class userData implements userInterface {
         }
         
         return ls;
+    }
+
+    @Override
+    public boolean hapusDataMahasiswa(userModel mahasiswa) {
+        boolean result = false;
+        try {
+            PreparedStatement ps = koneksi.prepareStatement("DELETE FROM tbl_mahasiswa" + " WHERE NIM=?");
+            ps.setString(1, mahasiswa.getNIM());
+            ps.executeUpdate();
+            result = true;
+        } catch (Exception e) {
+            System.out.println("Delete Error\n" + e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public boolean gantiDataMahasiswa(userModel mahasiswa) {
+        boolean result = false;
+        String query = ("UPDATE tbl_mahasiswa SET Nama=?, Vaksin1=?, Vaksin2=?, Vaksin3=?, Vaksin4=?, Vaksin5=? WHERE NIM=?");
+        try {
+            PreparedStatement ps = koneksi.prepareStatement(query);
+            ps.setString(7, mahasiswa.getNIM());
+            ps.setString(1, mahasiswa.getNama());
+            ps.setString(2, mahasiswa.getVaksin1());
+            ps.setString(3, mahasiswa.getVaksin2());
+            ps.setString(4, mahasiswa.getVaksin3());
+            ps.setString(5, mahasiswa.getVaksin4());
+            ps.setString(6, mahasiswa.getVaksin5());
+            ps.executeUpdate();
+            result = true;
+        } catch (SQLException e) {
+            System.out.println("Update Error\n" + e.getMessage());
+        }
+        
+        return result;
     }
     
 }
