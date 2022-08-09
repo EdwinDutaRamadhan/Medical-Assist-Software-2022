@@ -11,7 +11,7 @@ package Model;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class tableModel {
-    private String NIM = "NIM", NAMA = "Nama", VAKSIN1 = "Vaksin1", VAKSIN2 = "Vaksin2", VAKSIN3 = "Vaksin3", VAKSIN4 = "Vaksin4", VAKSIN5 = "Vaksin5";
+    private String NIM = "NIM", NAMA = "Nama", VAKSIN1 = "Vaksin1", VAKSIN2 = "Vaksin2", VAKSIN3 = "Booster1", VAKSIN4 = "Booster2", VAKSIN5 = "Booster3";
 
     public String getNIM() {
         return NIM;
