@@ -17,31 +17,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *[21.00, 8/8/2022] Rosalina: William Jonathan Handoko 672020001
-[21.00, 8/8/2022] Rosalina: Nadya Margareth Angkawijaya 672020002
-[21.00, 8/8/2022] Rosalina: Michael Yohanson Mesak Foeh 672020003
-[21.01, 8/8/2022] Rosalina: Asdie Indra Kurniawan 672020004
-[21.01, 8/8/2022] Rosalina: Bayu Ponco Raharjo 672020022
-[21.02, 8/8/2022] Rosalina: Alfonsus Liguori Penta Paramayoga 672020026
-[21.03, 8/8/2022] Rosalina: Tifano Eng Ogotan 672020019
-[21.03, 8/8/2022] Rosalina: Muhammad Faiq Adhitya Faqih 672020017
-[21.03, 8/8/2022] Rika Ratri: Netiva Hidayah 672020060@student.uksw.edu
-[21.04, 8/8/2022] Rosalina: Natanael Jeffrey Susanto 672020027
-[21.04, 8/8/2022] Rika Ratri: Sindy Cristine Baun 672020052@student.uksw.edu
-[21.04, 8/8/2022] Rosalina: Yemima Clara Wijaya 672020038
-[21.05, 8/8/2022] Rika Ratri: Tiara Syah Indra Putri 672020242@student.uksw.edu
-[21.05, 8/8/2022] Rosalina: Nita Fuji Astuti 672020039
-[21.05, 8/8/2022] Rosalina: Bernadus Enggar Prasetya 672020032
-[21.06, 8/8/2022] Rika Ratri: Usman Syach 672020201@student.uksw.edu
-[21.07, 8/8/2022] Rika Ratri: Jordan Briandika 672020040@student.uksw.edu
-[21.07, 8/8/2022] Rosalina: Bahar Lanang Prakosa 672020046
-[21.07, 8/8/2022] Rosalina: Felix Wisnu Putra Mahendra 672020054
-[21.08, 8/8/2022] Rosalina: Fieryando 672020064
-[21.08, 8/8/2022] Rosalina: Giovano Vallerian Paleva 672020709
-[21.09, 8/8/2022] Rosalina: Ega Fitri Yudha Satria Utama 672020068
-[21.09, 8/8/2022] Rosalina: Demira Intan Suranda 672020118
-[21.10, 8/8/2022] Rika Ratri: Adelliya Dewi Saputri 672020107@student.uksw.edu
-[21.10, 8/8/2022] Rosalina: Evydian Rosa Putri 672020154
+ *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class UI extends javax.swing.JFrame {
@@ -52,6 +28,7 @@ public class UI extends javax.swing.JFrame {
     userData data = new userData();
     double vaksin1,vaksin2,vaksin3,vaksin4,vaksin5;
     int vaksin1Mahasiswa,vaksin2Mahasiswa,vaksin3Mahasiswa,vaksin4Mahasiswa,vaksin5Mahasiswa;
+    double sinovac,bioFarma,novavax,oxfordAZ,plizerBT,moderna,sinopharm;
     
     /**
      * Creates new form UI
@@ -163,6 +140,14 @@ public class UI extends javax.swing.JFrame {
         vaksinDiagram = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         diagramProgressBar1 = new javax.swing.JProgressBar();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        diagramProgressBar2 = new javax.swing.JProgressBar();
+        diagramProgressBar3 = new javax.swing.JProgressBar();
+        diagramProgressBar4 = new javax.swing.JProgressBar();
+        diagramProgressBar5 = new javax.swing.JProgressBar();
+        diagramProgressBar6 = new javax.swing.JProgressBar();
+        diagramProgressBar7 = new javax.swing.JProgressBar();
         boosterDiagram = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         DataPanel = new javax.swing.JPanel();
@@ -239,16 +224,12 @@ public class UI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jumlahMahasiswaCardVaksin1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel28))
-                            .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jumlahMahasiswaCardVaksin1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel28))
+                    .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,8 +244,7 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jumlahMahasiswaCardVaksin1)
                     .addComponent(jLabel28))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout cardVaksin1Layout = new javax.swing.GroupLayout(cardVaksin1);
@@ -479,7 +459,7 @@ public class UI extends javax.swing.JFrame {
         cardVaksin4.setLayout(cardVaksin4Layout);
         cardVaksin4Layout.setHorizontalGroup(
             cardVaksin4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         cardVaksin4Layout.setVerticalGroup(
             cardVaksin4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,7 +505,7 @@ public class UI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel33))
                     .addComponent(vaksin5ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,25 +541,92 @@ public class UI extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(208, 231, 251));
 
-        diagramProgressBar1.setBackground(new java.awt.Color(245, 246, 251));
+        diagramProgressBar1.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar1.setForeground(new java.awt.Color(91, 124, 253));
         diagramProgressBar1.setOrientation(1);
-        diagramProgressBar1.setValue(50);
-        diagramProgressBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        diagramProgressBar1.setBorderPainted(false);
+
+        jLabel22.setFont(new java.awt.Font("Dubai Light", 0, 11)); // NOI18N
+        jLabel22.setText("100%");
+
+        jLabel23.setFont(new java.awt.Font("Dubai Light", 0, 11)); // NOI18N
+        jLabel23.setText("0%");
+
+        diagramProgressBar2.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar2.setForeground(new java.awt.Color(91, 124, 253));
+        diagramProgressBar2.setOrientation(1);
+        diagramProgressBar2.setBorderPainted(false);
+
+        diagramProgressBar3.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar3.setForeground(new java.awt.Color(91, 124, 253));
+        diagramProgressBar3.setOrientation(1);
+        diagramProgressBar3.setBorderPainted(false);
+
+        diagramProgressBar4.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar4.setForeground(new java.awt.Color(91, 124, 253));
+        diagramProgressBar4.setOrientation(1);
+        diagramProgressBar4.setBorderPainted(false);
+
+        diagramProgressBar5.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar5.setForeground(new java.awt.Color(91, 124, 253));
+        diagramProgressBar5.setOrientation(1);
+        diagramProgressBar5.setBorderPainted(false);
+
+        diagramProgressBar6.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar6.setForeground(new java.awt.Color(91, 124, 253));
+        diagramProgressBar6.setOrientation(1);
+        diagramProgressBar6.setBorderPainted(false);
+
+        diagramProgressBar7.setBackground(new java.awt.Color(208, 231, 251));
+        diagramProgressBar7.setForeground(new java.awt.Color(91, 124, 253));
+        diagramProgressBar7.setOrientation(1);
+        diagramProgressBar7.setBorderPainted(false);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel23))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel22)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(diagramProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(diagramProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(diagramProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(diagramProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(diagramProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(diagramProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(diagramProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(diagramProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(diagramProgressBar7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diagramProgressBar6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diagramProgressBar5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diagramProgressBar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diagramProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diagramProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(diagramProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel22)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel23))))
                 .addGap(35, 35, 35))
         );
 
@@ -627,23 +674,24 @@ public class UI extends javax.swing.JFrame {
             .addGroup(DashBoardPanelLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DashBoardPanelLayout.createSequentialGroup()
-                        .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cardVaksin4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(cardVaksin5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
-                        .addComponent(jLabel4))
+                    .addComponent(cardVaksin5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(cardVaksin4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addGroup(DashBoardPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cardVaksin3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cardVaksin1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(cardVaksin2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                        .addGap(89, 89, 89)
+                            .addComponent(cardVaksin2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
+                .addGap(89, 89, 89)
+                .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashBoardPanelLayout.createSequentialGroup()
                         .addComponent(vaksinDiagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76)
                         .addComponent(boosterDiagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)))
-                .addGap(23, 23, 23))
+                        .addGap(68, 68, 68))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DashBoardPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addContainerGap())))
         );
         DashBoardPanelLayout.setVerticalGroup(
             DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,19 +704,19 @@ public class UI extends javax.swing.JFrame {
                         .addComponent(cardVaksin2, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                     .addComponent(boosterDiagram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vaksinDiagram, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(DashBoardPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(cardVaksin3, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(cardVaksin4, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(cardVaksin5, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE))
+                        .addContainerGap(99, Short.MAX_VALUE))
                     .addGroup(DashBoardPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
-                .addGap(63, 63, 63))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addContainerGap())))
         );
 
         DataPanel.setBackground(new java.awt.Color(255, 51, 255));
@@ -1033,7 +1081,7 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
@@ -1055,7 +1103,7 @@ public class UI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 769, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
         );
 
         pack();
@@ -1340,6 +1388,7 @@ public class UI extends javax.swing.JFrame {
     private void dataSortingProgress(){     
         vaksin1 = 0; vaksin2 = 0; vaksin3 = 0; vaksin4 = 0; vaksin5 = 0;
         vaksin1Mahasiswa = 0; vaksin2Mahasiswa = 0; vaksin3Mahasiswa = 0; vaksin4Mahasiswa = 0; vaksin5Mahasiswa = 0;
+        sinovac = 0; bioFarma = 0; novavax = 0; oxfordAZ = 0; plizerBT = 0; moderna = 0; sinopharm = 0;
         List<userModel> ls = new ArrayList<userModel>();
         ls = new userData().getAll();
         String DataSort[][] = new String[ls.size()][7];
@@ -1348,6 +1397,13 @@ public class UI extends javax.swing.JFrame {
                 DataSort[i][1] = ls.get(i).getNama();
                 DataSort[i][2] = ls.get(i).getVaksin1();
                 if (DataSort[i][2].equals("-") == false) {vaksin1++;vaksin1Mahasiswa++;}
+                if(DataSort[i][2].equals("Sinovac") == true){sinovac++;}
+                else if(DataSort[i][2].equals("PT Bio Farma") == true){bioFarma++;}
+                else if(DataSort[i][2].equals("Novavax") == true){novavax++;}
+                else if(DataSort[i][2].equals("Oxford-AstraZeneca") == true){oxfordAZ++;}
+                else if(DataSort[i][2].equals("Plizer-BioNTech") == true){plizerBT++;}
+                else if(DataSort[i][2].equals("Moderna") == true){moderna++;}
+                else if(DataSort[i][2].equals("Sinopharm") == true){sinopharm++;}
                 DataSort[i][3] = ls.get(i).getVaksin2();
                 if (DataSort[i][3].equals("-") == false) {vaksin2++;vaksin2Mahasiswa++;}
                 DataSort[i][4] = ls.get(i).getVaksin3();
@@ -1364,11 +1420,24 @@ public class UI extends javax.swing.JFrame {
         vaksin3ProgressBar.setValue(progressAlgoritm(vaksin3));
         vaksin4ProgressBar.setValue(progressAlgoritm(vaksin4));
         vaksin5ProgressBar.setValue(progressAlgoritm(vaksin5));
+        diagramProgressBar1.setValue(progressDiagramAlgoritm(sinovac));
+        diagramProgressBar2.setValue(progressDiagramAlgoritm(bioFarma));
+        diagramProgressBar3.setValue(progressDiagramAlgoritm(novavax));
+        diagramProgressBar4.setValue(progressDiagramAlgoritm(oxfordAZ));
+        diagramProgressBar5.setValue(progressDiagramAlgoritm(plizerBT));
+        diagramProgressBar6.setValue(progressDiagramAlgoritm(moderna));
+        diagramProgressBar7.setValue(progressDiagramAlgoritm(sinopharm));
         jumlahMahasiswaCardVaksin1.setText("" + vaksin1Mahasiswa);
         jumlahMahasiswaCardVaksin2.setText("" + vaksin2Mahasiswa);
         jumlahMahasiswaCardVaksin3.setText("" + vaksin3Mahasiswa);
         jumlahMahasiswaCardVaksin4.setText("" + vaksin4Mahasiswa);
         jumlahMahasiswaCardVaksin5.setText("" + vaksin5Mahasiswa);
+    }
+    private int progressDiagramAlgoritm(double jenisVaksin){
+        double barisTabel = dataTable.getRowCount();
+        double pembagian = (jenisVaksin/vaksin1);
+        int persentasi = (int) (pembagian * 100);
+        return persentasi;
     }
     private int progressAlgoritm(double vaksin){
         double barisTabel = dataTable.getRowCount();
@@ -1426,6 +1495,12 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton dataButton;
     private javax.swing.JTable dataTable;
     private javax.swing.JProgressBar diagramProgressBar1;
+    private javax.swing.JProgressBar diagramProgressBar2;
+    private javax.swing.JProgressBar diagramProgressBar3;
+    private javax.swing.JProgressBar diagramProgressBar4;
+    private javax.swing.JProgressBar diagramProgressBar5;
+    private javax.swing.JProgressBar diagramProgressBar6;
+    private javax.swing.JProgressBar diagramProgressBar7;
     private javax.swing.JButton gantiButton;
     private javax.swing.JButton hapusButton;
     private javax.swing.JLabel jLabel1;
@@ -1442,6 +1517,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
