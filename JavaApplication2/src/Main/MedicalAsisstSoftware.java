@@ -5,7 +5,6 @@
  */
 package Main;
 
-import Connection.userConnection;
 import View.UI;
 
 /**
@@ -18,8 +17,7 @@ public class MedicalAsisstSoftware {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        UI start = new UI();
-        start.setVisible(true);
+        new UI().setVisible(true);
     }
     
 }
