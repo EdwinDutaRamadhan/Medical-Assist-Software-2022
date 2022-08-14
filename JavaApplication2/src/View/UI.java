@@ -16,7 +16,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import java.util.*;
 
 /**
  *
@@ -30,8 +29,10 @@ public class UI extends javax.swing.JFrame {
     userData data = new userData();
     double vaksin1,vaksin2,vaksin3,vaksin4,vaksin5;
     int vaksin1Mahasiswa,vaksin2Mahasiswa,vaksin3Mahasiswa,vaksin4Mahasiswa,vaksin5Mahasiswa,maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20;
-    double sinovacVaksin,bioFarmaVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
-    
+    int sinovacVaksin,bioFarmaVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
+    int vaksinCardValue1,vaksinCardValue2,vaksinCardValue3,vaksinCardValue4,vaksinCardValue5,vaksinCardValue6,vaksinCardValue7;
+    boolean card1=true,card2=true,card3=true,card4=true,card5=true,card6=true,card7=true;
+    boolean sinovac=true,biofarma=true,novavax=true,oxfordaz=true,pfizerbt=true,moderna=true,sinopharm=true;
     /**
      * Creates new form UI
      */
@@ -63,8 +64,9 @@ public class UI extends javax.swing.JFrame {
         aboutButton.setContentAreaFilled(false);
         dashboardButton.setForeground(new Color(91,124,253));
         dataSortingProgress();
-        cardValueStorage();
+        cardSortingAlgortim();
         progressImplements();
+        
     } 
     
     private void colorStartUp(){
@@ -166,6 +168,7 @@ public class UI extends javax.swing.JFrame {
         diagramHalfMaxValue5 = new javax.swing.JLabel();
         diagramHalfMaxValue7 = new javax.swing.JLabel();
         diagramHalfMaxValue6 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         boosterDiagram = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         diagramHalfMaxValue10 = new javax.swing.JLabel();
@@ -177,6 +180,7 @@ public class UI extends javax.swing.JFrame {
         diagramMaxValueBooster = new javax.swing.JLabel();
         diagramProgressBarBooster1 = new javax.swing.JProgressBar();
         diagramHalfMaxValue12 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         cardVaksin6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         cardVaksinImage1 = new javax.swing.JLabel();
@@ -285,13 +289,16 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jumlahMahasiswaCardVaksin1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel28))
-                    .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jumlahMahasiswaCardVaksin1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel28))
+                            .addComponent(jLabel17))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,10 +311,9 @@ public class UI extends javax.swing.JFrame {
                             .addComponent(jumlahMahasiswaCardVaksin1)
                             .addComponent(jLabel28))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE))
+                        .addComponent(vaksin1ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(8, 11, Short.MAX_VALUE)
                         .addComponent(jLabel13)))
                 .addContainerGap())
         );
@@ -316,7 +322,7 @@ public class UI extends javax.swing.JFrame {
         cardVaksin1.setLayout(cardVaksin1Layout);
         cardVaksin1Layout.setHorizontalGroup(
             cardVaksin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         cardVaksin1Layout.setVerticalGroup(
             cardVaksin1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,13 +362,17 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jumlahMahasiswaCardVaksin2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel36))
-                    .addComponent(vaksin2ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jumlahMahasiswaCardVaksin2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel36)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(vaksin2ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,8 +387,8 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jumlahMahasiswaCardVaksin2)
                     .addComponent(jLabel36))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vaksin2ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(vaksin2ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout cardVaksin2Layout = new javax.swing.GroupLayout(cardVaksin2);
@@ -423,13 +433,17 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jumlahMahasiswaCardVaksin3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel35))
-                    .addComponent(vaksin3ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jumlahMahasiswaCardVaksin3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel35)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(vaksin3ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,8 +458,8 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jumlahMahasiswaCardVaksin3)
                     .addComponent(jLabel35))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vaksin3ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(vaksin3ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout cardVaksin3Layout = new javax.swing.GroupLayout(cardVaksin3);
@@ -493,13 +507,16 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jumlahMahasiswaCardVaksin4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel34))
-                    .addComponent(vaksin4ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jumlahMahasiswaCardVaksin4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel34)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(vaksin4ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,15 +531,15 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jumlahMahasiswaCardVaksin4)
                     .addComponent(jLabel34))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vaksin4ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(vaksin4ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout cardVaksin4Layout = new javax.swing.GroupLayout(cardVaksin4);
         cardVaksin4.setLayout(cardVaksin4Layout);
         cardVaksin4Layout.setHorizontalGroup(
             cardVaksin4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
         cardVaksin4Layout.setVerticalGroup(
             cardVaksin4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,13 +579,17 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jumlahMahasiswaCardVaksin5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel33))
-                    .addComponent(vaksin5ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel21)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jumlahMahasiswaCardVaksin5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel33)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(vaksin5ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,8 +604,8 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jumlahMahasiswaCardVaksin5)
                     .addComponent(jLabel33))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vaksin5ProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(vaksin5ProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout cardVaksin5Layout = new javax.swing.GroupLayout(cardVaksin5);
@@ -686,6 +707,11 @@ public class UI extends javax.swing.JFrame {
         diagramHalfMaxValue6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         diagramHalfMaxValue6.setText("Sinopharm");
 
+        jLabel22.setFont(new java.awt.Font("Dubai", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Vaccine");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -693,46 +719,52 @@ public class UI extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(diagramMaxValueVaksin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(diagramHalfMaxValueVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(diagramHalfMaxValue2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(diagramProgressBarVaksin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(diagramProgressBaVaksinr2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(diagramProgressBarVaksin3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(diagramHalfMaxValue3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(diagramMaxValueVaksin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(diagramHalfMaxValueVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(diagramHalfMaxValue2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(diagramProgressBarVaksin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(diagramHalfMaxValue4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(diagramHalfMaxValue1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(diagramProgressBarVaksin4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(diagramProgressBarVaksin5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diagramHalfMaxValue5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(diagramHalfMaxValue7, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(diagramProgressBarVaksin6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(diagramProgressBarVaksin7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(diagramHalfMaxValue6))
-                .addGap(51, 51, 51))
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(diagramProgressBaVaksinr2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(diagramProgressBarVaksin3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(diagramHalfMaxValue3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(diagramHalfMaxValue4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(diagramHalfMaxValue1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(diagramProgressBarVaksin4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(diagramProgressBarVaksin5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(diagramHalfMaxValue5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(diagramHalfMaxValue7, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(diagramProgressBarVaksin6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(diagramProgressBarVaksin7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(diagramHalfMaxValue6))
+                        .addGap(51, 51, 51))))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(diagramProgressBarVaksin7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(diagramProgressBarVaksin6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -817,6 +849,11 @@ public class UI extends javax.swing.JFrame {
         diagramHalfMaxValue12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         diagramHalfMaxValue12.setText("Plizer-BioNTech");
 
+        jLabel25.setFont(new java.awt.Font("Dubai", 1, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("Booster");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -842,12 +879,17 @@ public class UI extends javax.swing.JFrame {
                         .addComponent(diagramHalfMaxValue11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(diagramHalfMaxValue10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(diagramProgressBarBooster3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(diagramProgressBarBooster2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -884,7 +926,6 @@ public class UI extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(208, 231, 251));
 
         cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png"))); // NOI18N
-        cardVaksinImage1.setPreferredSize(new java.awt.Dimension(90, 90));
 
         cardTitle1.setFont(new java.awt.Font("Dubai", 1, 18)); // NOI18N
         cardTitle1.setForeground(new java.awt.Color(102, 102, 102));
@@ -902,7 +943,7 @@ public class UI extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cardVaksinImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cardVaksinImage1)
                 .addContainerGap(30, Short.MAX_VALUE))
             .addComponent(cardTitle1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(cardVaksinValue1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
@@ -911,7 +952,7 @@ public class UI extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cardVaksinImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cardVaksinImage1)
                 .addGap(18, 18, 18)
                 .addComponent(cardTitle1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1236,21 +1277,18 @@ public class UI extends javax.swing.JFrame {
         DashBoardPanelLayout.setHorizontalGroup(
             DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DashBoardPanelLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(25, 25, 25)
                 .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cardVaksin5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(cardVaksin4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addGroup(DashBoardPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cardVaksin3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(cardVaksin1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(cardVaksin2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
+                    .addComponent(cardVaksin5, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addComponent(cardVaksin4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                    .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cardVaksin1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                        .addComponent(cardVaksin2, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                        .addComponent(cardVaksin3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DashBoardPanelLayout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
                     .addGroup(DashBoardPanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1271,8 +1309,8 @@ public class UI extends javax.swing.JFrame {
                             .addGroup(DashBoardPanelLayout.createSequentialGroup()
                                 .addComponent(vaksinDiagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(boosterDiagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(36, Short.MAX_VALUE))))
+                                .addComponent(boosterDiagram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(28, 28, 28))
         );
         DashBoardPanelLayout.setVerticalGroup(
             DashBoardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1670,7 +1708,7 @@ public class UI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 769, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
         );
 
         pack();
@@ -1712,8 +1750,12 @@ public class UI extends javax.swing.JFrame {
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         TabelModel = new tableModel();
         mahasiswa = new userModel();
-        if (nimTextField.getText().equals(TabelModel.getNIM()) || namaTextField.getText().equals(TabelModel.getNAMA()) ){
-            JOptionPane.showMessageDialog(this, "Masukkan NIM atau Nama terlebih dahulu");
+        if(nimTextField.getText().equals(TabelModel.getNIM()) && namaTextField.getText().equals(TabelModel.getNAMA())){
+            JOptionPane.showMessageDialog(this, "Masukkan NIM dan Nama Terlebih dahulu");
+        }else if (nimTextField.getText().equals(TabelModel.getNIM())){
+            JOptionPane.showMessageDialog(this, "Masukkan NIM terlebih dahulu");
+        }else if(namaTextField.getText().equals(TabelModel.getNAMA())){
+            JOptionPane.showMessageDialog(this, "Masukkan Nama terlebih dahulu");
         }else{
             mahasiswa.setNIM(nimTextField.getText());
             mahasiswa.setNama(namaTextField.getText());
@@ -1729,20 +1771,24 @@ public class UI extends javax.swing.JFrame {
             displayDataMahasiswa();
             reset();
         } else {
-            JOptionPane.showMessageDialog(this, "Gagal Menambah Data");
+            System.out.println("Gagal Menambah Data");
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        if(JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data ini?","Delete Mahasiswa",0)==0){
-            mahasiswa = new userModel();
-            mahasiswa.setNIM(nimTextField.getText());
-            if (data.hapusDataMahasiswa(mahasiswa)) {
-                JOptionPane.showMessageDialog(this, "Sukses Menghapus Data");
-                displayDataMahasiswa();
-                reset();
-            }else{
-                JOptionPane.showMessageDialog(this, "Gagal Menghapus Data");
+        if(nimTextField.getText().equals(TabelModel.getNIM()) && namaTextField.getText().equals(TabelModel.getNAMA())){
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin dihapus");
+        }else{
+            if(JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data ini?","Delete Mahasiswa",0)==0){
+                mahasiswa = new userModel();
+                mahasiswa.setNIM(nimTextField.getText());
+                if (data.hapusDataMahasiswa(mahasiswa)) {
+                    JOptionPane.showMessageDialog(this, "Sukses Menghapus Data");
+                    displayDataMahasiswa();
+                    reset();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Gagal Menghapus Data");
+                }
             }
         }
     }//GEN-LAST:event_hapusButtonActionPerformed
@@ -1754,24 +1800,24 @@ public class UI extends javax.swing.JFrame {
 
     private void gantiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gantiButtonActionPerformed
         mahasiswa = new userModel();
-        if (nimTextField.getText().equals(TabelModel.getNIM()) || namaTextField.getText().equals(TabelModel.getNAMA()) ){
-            JOptionPane.showMessageDialog(this, "Masukkan NIM atau Nama terlebih dahulu");
+        if(nimTextField.getText().equals(TabelModel.getNIM()) && namaTextField.getText().equals(TabelModel.getNAMA())){
+            JOptionPane.showMessageDialog(this, "Pilih data yang ingin diganti");
         }else{
             mahasiswa.setNIM(nimTextField.getText());
             mahasiswa.setNama(namaTextField.getText());
-        }
-        if (vaksin1TextField.getText().equals(TabelModel.getVAKSIN1())) {mahasiswa.setVaksin1("-");}else{mahasiswa.setVaksin1(vaksin1TextField.getText());}
-        if (vaksin2TextField.getText().equals(TabelModel.getVAKSIN2())) {mahasiswa.setVaksin2("-");}else{mahasiswa.setVaksin2(vaksin2TextField.getText());}
-        if (vaksin3TextField.getText().equals(TabelModel.getVAKSIN3())) {mahasiswa.setVaksin3("-");}else{mahasiswa.setVaksin3(vaksin3TextField.getText());}
-        if (vaksin4TextField.getText().equals(TabelModel.getVAKSIN4())) {mahasiswa.setVaksin4("-");}else{mahasiswa.setVaksin4(vaksin4TextField.getText());}
-        if (vaksin5TextField.getText().equals(TabelModel.getVAKSIN5())) {mahasiswa.setVaksin5("-");}else{mahasiswa.setVaksin5(vaksin5TextField.getText());}
-        
-        if (data.gantiDataMahasiswa(mahasiswa)) {
-            JOptionPane.showMessageDialog(this, "Berhasil Ganti Data");
-            displayDataMahasiswa();
-            reset();
-        }else{
-            JOptionPane.showMessageDialog(this, "Gagal Ganti Data");
+            if (vaksin1TextField.getText().equals(TabelModel.getVAKSIN1())) {mahasiswa.setVaksin1("-");}else{mahasiswa.setVaksin1(vaksin1TextField.getText());}
+            if (vaksin2TextField.getText().equals(TabelModel.getVAKSIN2())) {mahasiswa.setVaksin2("-");}else{mahasiswa.setVaksin2(vaksin2TextField.getText());}
+            if (vaksin3TextField.getText().equals(TabelModel.getVAKSIN3())) {mahasiswa.setVaksin3("-");}else{mahasiswa.setVaksin3(vaksin3TextField.getText());}
+            if (vaksin4TextField.getText().equals(TabelModel.getVAKSIN4())) {mahasiswa.setVaksin4("-");}else{mahasiswa.setVaksin4(vaksin4TextField.getText());}
+            if (vaksin5TextField.getText().equals(TabelModel.getVAKSIN5())) {mahasiswa.setVaksin5("-");}else{mahasiswa.setVaksin5(vaksin5TextField.getText());}
+
+            if (data.gantiDataMahasiswa(mahasiswa)) {
+                JOptionPane.showMessageDialog(this, "Berhasil Ganti Data");
+                displayDataMahasiswa();
+                reset();
+            }else{
+                JOptionPane.showMessageDialog(this, "Gagal Ganti Data");
+            }
         }
     }//GEN-LAST:event_gantiButtonActionPerformed
 
@@ -1971,21 +2017,267 @@ public class UI extends javax.swing.JFrame {
         diagramValueResponsive();
         
     }
-    private void cardValueStorage(){
-        int sinovacValue = (int) sinovacVaksin;
-        int biofarmaValue = (int) bioFarmaVaksin;
-        int novavaxValue = (int) novavaxVaksin;
-        int oxfordValue = (int) oxfordAZVaksin;
-        int pfizerValue = (int) pfizerBTVaksin;
-        int modernaValue = (int) modernaVaksin;
-        int sinopharmValue = (int) sinopharmVaksin; 
-        String sinovacImage = "/Image/sinovacCard.png";
-        
-        cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(sinovacImage)));
-        cardTitle1.setText("Sinovac");
-        cardVaksinValue1.setText("" + sinovacValue);
+    private void cardSortingAlgortim(){
+        //String sinovacString = "" + sinovacVaksin;
+        int vaccineArray[] = {sinovacVaksin,bioFarmaVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin};
+        showSort(vaccineArray);
+        Arrays.sort(vaccineArray);
+        showSort(vaccineArray);
+        System.out.println("Card 7 : "+vaksinCardValue7);
+        System.out.println("Card 6 : "+vaksinCardValue6);
+        System.out.println("Card 5 : "+vaksinCardValue5);
+        System.out.println("Card 4 : "+vaksinCardValue4);
+        System.out.println("Card 3 : "+vaksinCardValue3);
+        System.out.println("Card 2 : "+vaksinCardValue2);
+        System.out.println("Card 1 : "+vaksinCardValue1);
+        titleSort(sinovacVaksin);
+        titleSort(bioFarmaVaksin);
+        titleSort(novavaxVaksin);
+        titleSort(oxfordAZVaksin);
+        titleSort(pfizerBTVaksin);
+        titleSort(modernaVaksin);
+        titleSort(sinopharmVaksin);
     }
-    
+    public void showSort(int[] sortVaksin){
+        for (int i = 0; i < 7; ) {
+            System.out.println(i + ": " + sortVaksin[i]);
+            vaksinCardValue7 = sortVaksin[0];
+            vaksinCardValue6 = sortVaksin[1];
+            vaksinCardValue5 = sortVaksin[2];
+            vaksinCardValue4 = sortVaksin[3];
+            vaksinCardValue3 = sortVaksin[4];
+            vaksinCardValue2 = sortVaksin[5];
+            vaksinCardValue1 = sortVaksin[6];
+            i++;
+        }
+    }
+    public void titleSort(int value){
+        if (value == vaksinCardValue1 && card1 == true) {
+            cardVaksinValue1.setText("" + vaksinCardValue1);
+            if (vaksinCardValue1 == sinovacVaksin && sinovac == true) {//========================================================================= Card 1 =========================================================//
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle1.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue1 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle1.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue1 == novavaxVaksin && novavax == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle1.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue1 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle1.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue1 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle1.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue1 == modernaVaksin && moderna == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle1.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue1 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle1.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card1 = false;
+        }else if (value == vaksinCardValue2 && card2 == true) {//========================================================================= Card 2 =========================================================//
+            cardVaksinValue2.setText("" + vaksinCardValue2);
+            if (vaksinCardValue2 == sinovacVaksin && sinovac == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle2.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue2 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle2.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue2 == novavaxVaksin && novavax == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle2.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue2 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle2.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue2 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle2.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue2 == modernaVaksin && moderna == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle2.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue2 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle2.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card2 = false;
+        }else if (value == vaksinCardValue3 && card3 == true) {//========================================================================= Card 3 =========================================================//
+            cardVaksinValue3.setText("" + vaksinCardValue3);
+            if (vaksinCardValue3 == sinovacVaksin && sinovac == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle3.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue3 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle3.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue3 == novavaxVaksin && novavax == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle3.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue3 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle3.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue3 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle3.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue3 == modernaVaksin && moderna == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle3.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue3 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle3.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card3 = false;
+        }else if (value == vaksinCardValue4 && card4 == true) {//========================================================================= Card 4 =========================================================//
+            cardVaksinValue4.setText("" + vaksinCardValue4);
+            if (vaksinCardValue4 == sinovacVaksin && sinovac == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle4.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue4 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle4.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue4 == novavaxVaksin && novavax == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle4.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue4 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle4.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue4 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle4.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue4 == modernaVaksin && moderna == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle4.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue4 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle4.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card4 = false;
+        }else if (value == vaksinCardValue5 && card5 == true) {
+            cardVaksinValue5.setText("" + vaksinCardValue5);
+            if (vaksinCardValue5 == sinovacVaksin && sinovac == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle5.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue5 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle5.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue5 == novavaxVaksin && novavax == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle5.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue5 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle5.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue5 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle5.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue5 == modernaVaksin && moderna == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle5.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue5 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle5.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card5 = false;
+        }else if (value == vaksinCardValue6 && card6 == true) {
+            cardVaksinValue6.setText("" + vaksinCardValue6);
+            if (vaksinCardValue6 == sinovacVaksin && sinovac == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle6.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue3 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle6.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue6 == novavaxVaksin && novavax == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle6.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue6 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle6.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue6 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle6.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue6 == modernaVaksin && moderna == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle6.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue6 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle6.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card6 = false;
+        }else if (value == vaksinCardValue7 && card7 == true) {
+            cardVaksinValue7.setText("" + vaksinCardValue7);
+            if (vaksinCardValue7 == sinovacVaksin && sinovac == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
+                cardTitle77.setText("Sinovac");
+                sinovac = false;
+            }else if (vaksinCardValue7 == bioFarmaVaksin && biofarma == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/biofarmaCard.png")));
+                cardTitle77.setText("BioFarma");
+                biofarma = false;
+            }else if (vaksinCardValue7 == novavaxVaksin && novavax == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/novavaxCard.png")));
+                cardTitle77.setText("Novavax");
+                novavax = false;
+            }else if (vaksinCardValue7 == oxfordAZVaksin && oxfordaz == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/astrazenecaCard.png")));
+                cardTitle77.setText("AstraZeneca");
+                oxfordaz = false;
+            }else if (vaksinCardValue7 == pfizerBTVaksin && pfizerbt == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/pfizerCard.png")));
+                cardTitle77.setText("Pfizer");
+                pfizerbt = false;
+            }else if (vaksinCardValue7 == modernaVaksin && moderna == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/modernaCard.png")));
+                cardTitle77.setText("Moderna");
+                moderna = false;
+            }else if (vaksinCardValue7 == sinopharmVaksin && sinopharm == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinopharmCard.png")));
+                cardTitle77.setText("Sinopharm");
+                sinopharm = false;
+            }
+            card7 = false;
+        }
+    }
     private void diagramValueResponsive(){
     if (sinovacVaksin > maxDiagramVaksinValue || bioFarmaVaksin > maxDiagramVaksinValue || novavaxVaksin > maxDiagramVaksinValue || oxfordAZVaksin > maxDiagramVaksinValue | pfizerBTVaksin > maxDiagramVaksinValue || modernaVaksin > maxDiagramVaksinValue || sinopharmVaksin > maxDiagramVaksinValue) {
             maxDiagramVaksinValue += 20;
@@ -2155,8 +2447,10 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
@@ -2207,22 +2501,4 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel vaksinDiagram;
     // End of variables declaration//GEN-END:variables
 
-    private void reverse(int[] arrayCard) {
-        // Length of the array
-        int n = arrayCard.length;
-  
-        // Swaping the first half elements with last half
-        // elements
-        for (int i = 0; i < n / 2; i++) {
-  
-            // Storing the first half elements temporarily
-            int temp = arrayCard[i];
-  
-            // Assigning the first half to the last half
-            arrayCard[i] = arrayCard[n - i - 1];
-  
-            // Assigning the last half to the first half
-            arrayCard[n - i - 1] = temp;
-        }
-    }
 }
