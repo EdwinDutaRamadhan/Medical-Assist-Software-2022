@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -33,6 +33,7 @@ public class UI extends javax.swing.JFrame {
     int vaksinCardValue1,vaksinCardValue2,vaksinCardValue3,vaksinCardValue4,vaksinCardValue5,vaksinCardValue6,vaksinCardValue7;
     boolean card1=true,card2=true,card3=true,card4=true,card5=true,card6=true,card7=true;
     boolean sinovac=true,biofarma=true,novavax=true,oxfordaz=true,pfizerbt=true,moderna=true,sinopharm=true;
+    int sinovacValue,biofarmaValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue;
     /**
      * Creates new form UI
      */
@@ -1724,6 +1725,8 @@ public class UI extends javax.swing.JFrame {
         AboutPanel.setVisible(false);
         dataSortingProgress();
         progressImplements();
+        cardSortingAlgortim();
+        
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
     private void dataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataButtonActionPerformed
@@ -2017,19 +2020,46 @@ public class UI extends javax.swing.JFrame {
         diagramValueResponsive();
         
     }
-    private void cardSortingAlgortim(){
+    public void cardSortingAlgortim(){
         //String sinovacString = "" + sinovacVaksin;
-        int vaccineArray[] = {sinovacVaksin,bioFarmaVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin};
-        showSort(vaccineArray);
+        sinovac=true;
+        biofarma=true;
+        novavax=true;
+        oxfordaz=true;
+        pfizerbt=true;
+        moderna=true;
+        sinopharm=true;
+        card1 = true;
+        card2 = true;
+        card3 = true;
+        card4 = true;
+        card5 = true;
+        card6 = true;
+        card7 = true;
+        sinovacValue = sinovacVaksin;
+        biofarmaValue = bioFarmaVaksin;
+        novavaxValue = novavaxVaksin;
+        oxfordazValue = oxfordAZVaksin;
+        pfizerbtValue = pfizerBTVaksin;
+        modernaValue = modernaVaksin;
+        sinopharmValue = sinopharmVaksin;
+        int vaccineArray[] = {sinovacValue,biofarmaValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue};
         Arrays.sort(vaccineArray);
         showSort(vaccineArray);
-        System.out.println("Card 7 : "+vaksinCardValue7);
-        System.out.println("Card 6 : "+vaksinCardValue6);
-        System.out.println("Card 5 : "+vaksinCardValue5);
-        System.out.println("Card 4 : "+vaksinCardValue4);
-        System.out.println("Card 3 : "+vaksinCardValue3);
-        System.out.println("Card 2 : "+vaksinCardValue2);
-        System.out.println("Card 1 : "+vaksinCardValue1);
+        //System.out.println("Card 7 : "+vaksinCardValue7);
+        //System.out.println("Card 6 : "+vaksinCardValue6);
+        //System.out.println("Card 5 : "+vaksinCardValue5);
+        //System.out.println("Card 4 : "+vaksinCardValue4);
+        ///System.out.println("Card 3 : "+vaksinCardValue3);
+        //System.out.println("Card 2 : "+vaksinCardValue2);
+       // System.out.println("Card 1 : "+vaksinCardValue1);
+        cardVaksinValue1.setText("" + vaksinCardValue1);
+        cardVaksinValue2.setText("" + vaksinCardValue2);
+        cardVaksinValue3.setText("" + vaksinCardValue3);
+        cardVaksinValue4.setText("" + vaksinCardValue4);
+        cardVaksinValue5.setText("" + vaksinCardValue5);
+        cardVaksinValue6.setText("" + vaksinCardValue6);
+        cardVaksinValue7.setText("" + vaksinCardValue7);
         titleSort(sinovacVaksin);
         titleSort(bioFarmaVaksin);
         titleSort(novavaxVaksin);
@@ -2037,10 +2067,11 @@ public class UI extends javax.swing.JFrame {
         titleSort(pfizerBTVaksin);
         titleSort(modernaVaksin);
         titleSort(sinopharmVaksin);
+        System.out.println("==============");
     }
     public void showSort(int[] sortVaksin){
         for (int i = 0; i < 7; ) {
-            System.out.println(i + ": " + sortVaksin[i]);
+            //System.out.println(i + ": " + sortVaksin[i]);
             vaksinCardValue7 = sortVaksin[0];
             vaksinCardValue6 = sortVaksin[1];
             vaksinCardValue5 = sortVaksin[2];
@@ -2052,8 +2083,17 @@ public class UI extends javax.swing.JFrame {
         }
     }
     public void titleSort(int value){
+        //System.out.println("Sinovac Vaksin : " + sinovacVaksin);
+        //System.out.println("Vaksin Card Value 2 : " +  vaksinCardValue2);
+        System.out.println("Card 1: " + card1);
+        System.out.println("Card 2 : " + card2);
+        System.out.println("Card 3 : " + card3);
+        System.out.println("Card 4 : " + card4);
+        System.out.println("Card 5 : " + card5);
+        System.out.println("Card 6 : " + card6);
+        System.out.println("Card 7 : " + card7);
         if (value == vaksinCardValue1 && card1 == true) {
-            cardVaksinValue1.setText("" + vaksinCardValue1);
+            
             if (vaksinCardValue1 == sinovacVaksin && sinovac == true) {//========================================================================= Card 1 =========================================================//
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle1.setText("Sinovac");
@@ -2085,7 +2125,7 @@ public class UI extends javax.swing.JFrame {
             }
             card1 = false;
         }else if (value == vaksinCardValue2 && card2 == true) {//========================================================================= Card 2 =========================================================//
-            cardVaksinValue2.setText("" + vaksinCardValue2);
+            
             if (vaksinCardValue2 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle2.setText("Sinovac");
@@ -2117,7 +2157,7 @@ public class UI extends javax.swing.JFrame {
             }
             card2 = false;
         }else if (value == vaksinCardValue3 && card3 == true) {//========================================================================= Card 3 =========================================================//
-            cardVaksinValue3.setText("" + vaksinCardValue3);
+            
             if (vaksinCardValue3 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle3.setText("Sinovac");
@@ -2149,7 +2189,7 @@ public class UI extends javax.swing.JFrame {
             }
             card3 = false;
         }else if (value == vaksinCardValue4 && card4 == true) {//========================================================================= Card 4 =========================================================//
-            cardVaksinValue4.setText("" + vaksinCardValue4);
+            
             if (vaksinCardValue4 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle4.setText("Sinovac");
@@ -2181,7 +2221,7 @@ public class UI extends javax.swing.JFrame {
             }
             card4 = false;
         }else if (value == vaksinCardValue5 && card5 == true) {
-            cardVaksinValue5.setText("" + vaksinCardValue5);
+            
             if (vaksinCardValue5 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle5.setText("Sinovac");
@@ -2213,7 +2253,7 @@ public class UI extends javax.swing.JFrame {
             }
             card5 = false;
         }else if (value == vaksinCardValue6 && card6 == true) {
-            cardVaksinValue6.setText("" + vaksinCardValue6);
+            
             if (vaksinCardValue6 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle6.setText("Sinovac");
@@ -2245,7 +2285,7 @@ public class UI extends javax.swing.JFrame {
             }
             card6 = false;
         }else if (value == vaksinCardValue7 && card7 == true) {
-            cardVaksinValue7.setText("" + vaksinCardValue7);
+            
             if (vaksinCardValue7 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png")));
                 cardTitle77.setText("Sinovac");
