@@ -8,11 +8,17 @@ package View;
 import Data.userData;
 import Model.tableModel;
 import Model.userModel;
+import com.mysql.jdbc.Connection;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -233,11 +239,11 @@ public class UI extends javax.swing.JFrame {
         boosterSorting(pfizerBTBooster);
         boosterSorting(oxfordAZBooster);
         boosterSorting(modernaBoosterValue);
-        System.out.println("=====");
+        //System.out.println("=====");
     }
     private void sortData(int[] sortBooster){
         for (int i = 0; i < 3; ) {
-            System.out.println(i + ": " + sortBooster[i]);
+            //System.out.println(i + ": " + sortBooster[i]);
             boosterValue3 = sortBooster[0];
             boosterValue2 = sortBooster[1];
             boosterValue1 = sortBooster[2];
@@ -245,10 +251,10 @@ public class UI extends javax.swing.JFrame {
         }        
     }
     private void boosterSorting(int value){
-        System.out.println(pfizerCard);
-        System.out.println(astrazenecaCard);
-        System.out.println(modernaCard);
-        System.out.println("=====");
+//        System.out.println(pfizerCard);
+//        System.out.println(astrazenecaCard);
+//        System.out.println(modernaCard);
+//        System.out.println("=====");
         if(value == boosterValue1 && card8 == true){
             if (boosterValue1 == pfizerBTBooster && pfizerCard == true) {//========================================================================= Card 1 =========================================================//
                 cardBoosterImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
@@ -794,6 +800,14 @@ public class UI extends javax.swing.JFrame {
         gantiButton = new javax.swing.JButton();
         tambahPanel = new javax.swing.JPanel();
         tambahButton = new javax.swing.JButton();
+        showComboBox = new javax.swing.JComboBox();
+        searchTextField = new javax.swing.JTextField();
+        exportComboBox = new javax.swing.JComboBox();
+        sendMailComboBox = new javax.swing.JComboBox();
+        exportPanel = new javax.swing.JPanel();
+        exportButton = new javax.swing.JButton();
+        sendMailPanel = new javax.swing.JPanel();
+        sendMailButton = new javax.swing.JButton();
         AboutPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         dashboardButton = new javax.swing.JButton();
@@ -2200,7 +2214,7 @@ public class UI extends javax.swing.JFrame {
         });
         tabelScroll.setViewportView(dataTable);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/footerImage2.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/footerImage2.png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Dubai Medium", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(40, 159, 217));
@@ -2384,6 +2398,95 @@ public class UI extends javax.swing.JFrame {
             .addComponent(tambahButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
 
+        showComboBox.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        showComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Show All", "Show Vaccine 1", "Show Vaccine 2", "Show Booster 1", "Show Booster 2", "Show Booster 3" }));
+        showComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showComboBoxActionPerformed(evt);
+            }
+        });
+
+        searchTextField.setText("Search");
+        searchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchTextFieldKeyTyped(evt);
+            }
+        });
+
+        exportComboBox.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        exportComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Export PDF", "Export Excel", "Export Txt" }));
+
+        sendMailComboBox.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
+        sendMailComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Send Mail Vaccine 1", "Send Mail Vaccine 2", "Send Mail Booster 1", "Send Mail Booster 2", "Send Mail Booster 3" }));
+
+        exportPanel.setPreferredSize(new java.awt.Dimension(137, 30));
+
+        exportButton.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
+        exportButton.setForeground(new java.awt.Color(91, 123, 253));
+        exportButton.setText("Export");
+        exportButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        exportButton.setContentAreaFilled(false);
+        exportButton.setFocusable(false);
+        exportButton.setPreferredSize(new java.awt.Dimension(111, 30));
+        exportButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                exportButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                exportButtonMouseExited(evt);
+            }
+        });
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout exportPanelLayout = new javax.swing.GroupLayout(exportPanel);
+        exportPanel.setLayout(exportPanelLayout);
+        exportPanelLayout.setHorizontalGroup(
+            exportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exportButton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+        );
+        exportPanelLayout.setVerticalGroup(
+            exportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        sendMailPanel.setPreferredSize(new java.awt.Dimension(131, 30));
+
+        sendMailButton.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
+        sendMailButton.setForeground(new java.awt.Color(91, 123, 253));
+        sendMailButton.setText("Send Mail");
+        sendMailButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        sendMailButton.setContentAreaFilled(false);
+        sendMailButton.setFocusable(false);
+        sendMailButton.setPreferredSize(new java.awt.Dimension(111, 30));
+        sendMailButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sendMailButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sendMailButtonMouseExited(evt);
+            }
+        });
+        sendMailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendMailButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout sendMailPanelLayout = new javax.swing.GroupLayout(sendMailPanel);
+        sendMailPanel.setLayout(sendMailPanelLayout);
+        sendMailPanelLayout.setHorizontalGroup(
+            sendMailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sendMailButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+        );
+        sendMailPanelLayout.setVerticalGroup(
+            sendMailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sendMailButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout DataPanelLayout = new javax.swing.GroupLayout(DataPanel);
         DataPanel.setLayout(DataPanelLayout);
         DataPanelLayout.setHorizontalGroup(
@@ -2419,21 +2522,41 @@ public class UI extends javax.swing.JFrame {
                                 .addComponent(simpanPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(40, 40, 40)))
                 .addGap(28, 28, 28)
-                .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DataPanelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 990, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DataPanelLayout.createSequentialGroup()
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(exportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(sendMailComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sendMailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(showComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DataPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 990, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         DataPanelLayout.setVerticalGroup(
             DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DataPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sendMailComboBox)
+                    .addComponent(showComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(sendMailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(exportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(exportComboBox)
+                    .addComponent(searchTextField))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1))
             .addGroup(DataPanelLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2610,6 +2733,8 @@ public class UI extends javax.swing.JFrame {
         DashBoardPanel.setVisible(true);
         DataPanel.setVisible(false);
         AboutPanel.setVisible(false);
+        displayDataMahasiswa();
+        reset();
         dataSortingProgress();
         progressImplements();
         cardVaksinSortingAlgortim();
@@ -2666,7 +2791,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        if(nimTextField.getText().equals(TabelModel.getNIM()) && namaTextField.getText().equals(TabelModel.getNAMA())){
+        if(nimTextField.getText().equals(TabelModel.getNIM()) || namaTextField.getText().equals(TabelModel.getNAMA())){
             JOptionPane.showMessageDialog(this, "Pilih data yang ingin dihapus");
         }else{
             if(JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data ini?","Delete Mahasiswa",0)==0){
@@ -2690,7 +2815,7 @@ public class UI extends javax.swing.JFrame {
 
     private void gantiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gantiButtonActionPerformed
         mahasiswa = new userModel();
-        if(nimTextField.getText().equals(TabelModel.getNIM()) && namaTextField.getText().equals(TabelModel.getNAMA())){
+        if(nimTextField.getText().equals(TabelModel.getNIM()) || namaTextField.getText().equals(TabelModel.getNAMA())){
             JOptionPane.showMessageDialog(this, "Pilih data yang ingin diganti");
         }else{
             mahasiswa.setNIM(nimTextField.getText());
@@ -2867,6 +2992,77 @@ public class UI extends javax.swing.JFrame {
         tambahButton.setForeground(colorSource.biruMuda());
     }//GEN-LAST:event_tambahButtonMouseExited
 
+    private void showComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showComboBoxActionPerformed
+        System.out.println(showComboBox.getSelectedIndex());
+        switch(showComboBox.getSelectedIndex()){
+            case 0 ://show all
+                displayDataMahasiswa();
+        break;
+            case 1 ://show vaksin 1
+                showOnlySort(1);
+        break;
+            case 2 ://show vaksin 2
+                showOnlySort(2);
+        break;
+            case 3 ://show booster 1
+                showOnlySort(3);
+        break;
+            case 4 ://show booster 2
+                showOnlySort(4);
+        break;
+            case 5 ://show booster 3
+                showOnlySort(5);
+        break;
+        }
+    }//GEN-LAST:event_showComboBoxActionPerformed
+
+    private void searchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextFieldKeyTyped
+
+    private void sendMailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMailButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sendMailButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void exportButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportButtonMouseEntered
+        exportButton.setForeground(Color.white);
+        exportPanel.setBackground(colorSource.biruMuda());
+    }//GEN-LAST:event_exportButtonMouseEntered
+
+    private void exportButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportButtonMouseExited
+        exportButton.setForeground(colorSource.biruMuda());
+        exportPanel.setBackground(colorSource.background());
+    }//GEN-LAST:event_exportButtonMouseExited
+
+    private void sendMailButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMailButtonMouseEntered
+        sendMailButton.setForeground(Color.white);
+        sendMailPanel.setBackground(colorSource.biruMuda());
+    }//GEN-LAST:event_sendMailButtonMouseEntered
+
+    private void sendMailButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMailButtonMouseExited
+        sendMailButton.setForeground(colorSource.biruMuda());
+        sendMailPanel.setBackground(colorSource.background());
+    }//GEN-LAST:event_sendMailButtonMouseExited
+    private void showOnlySort(int value){
+        List<userModel> ls = new ArrayList<userModel>();
+        ls = new userData().showOnly(value);
+        String DataMahasiswa[][] = new String[ls.size()][7];
+        for (int i = 0; i < ls.size(); i++) {
+            DataMahasiswa[i][0] = ls.get(i).getNIM();
+            DataMahasiswa[i][1] = ls.get(i).getNama();
+            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
+            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
+            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
+            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
+            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
+        }
+        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM","NAMA","VAKSIN1","VAKSIN2","BOOSTER1","BOOSTER2","BOOSTER3"}));
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -2980,6 +3176,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JProgressBar diagramProgressBarVaksin5;
     private javax.swing.JProgressBar diagramProgressBarVaksin6;
     private javax.swing.JProgressBar diagramProgressBarVaksin7;
+    private javax.swing.JButton exportButton;
+    private javax.swing.JComboBox exportComboBox;
+    private javax.swing.JPanel exportPanel;
     private javax.swing.JButton gantiButton;
     private javax.swing.JPanel gantiPanel;
     private javax.swing.JButton hapusButton;
@@ -3044,6 +3243,11 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel persentasiVaksin3;
     private javax.swing.JLabel persentasiVaksin4;
     private javax.swing.JLabel persentasiVaksin5;
+    private javax.swing.JTextField searchTextField;
+    private javax.swing.JButton sendMailButton;
+    private javax.swing.JComboBox sendMailComboBox;
+    private javax.swing.JPanel sendMailPanel;
+    private javax.swing.JComboBox showComboBox;
     private javax.swing.JButton simpanButton;
     private javax.swing.JPanel simpanPanel;
     private javax.swing.JScrollPane tabelScroll;

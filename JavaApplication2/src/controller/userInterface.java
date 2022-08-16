@@ -16,4 +16,5 @@ public interface userInterface {
     public boolean hapusDataMahasiswa(userModel mahasiswa);
     public boolean gantiDataMahasiswa(userModel mahasiswa);
     public List<userModel> getAll();
+    public List<userModel> showOnly(int value);
 }
