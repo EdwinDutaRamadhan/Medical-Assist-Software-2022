@@ -8,21 +8,30 @@ package View;
 import Data.userData;
 import Model.tableModel;
 import Model.userModel;
-import com.mysql.jdbc.Connection;
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.*;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -59,7 +68,7 @@ public class UI extends javax.swing.JFrame {
         this.setSize((int)width, (int)height);
     }
     private void defaultTableModel(){
-        String [] defaultTable = {"NIM","NAMA","VAKSIN1","VAKSIN2","BOOSTER1","BOOSTER2","BOOSTER#"};
+        String [] defaultTable = {"NIM","NAMA","VAKSIN1","VAKSIN2","BOOSTER1","BOOSTER2","BOOSTER3"};
         model = new DefaultTableModel(defaultTable, 0);
         dataTable.setModel(model);
     }
@@ -803,11 +812,11 @@ public class UI extends javax.swing.JFrame {
         showComboBox = new javax.swing.JComboBox();
         searchTextField = new javax.swing.JTextField();
         exportComboBox = new javax.swing.JComboBox();
-        sendMailComboBox = new javax.swing.JComboBox();
         exportPanel = new javax.swing.JPanel();
         exportButton = new javax.swing.JButton();
-        sendMailPanel = new javax.swing.JPanel();
-        sendMailButton = new javax.swing.JButton();
+        browsePanel = new javax.swing.JPanel();
+        browseButton = new javax.swing.JButton();
+        browseText = new javax.swing.JTextField();
         AboutPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         dashboardButton = new javax.swing.JButton();
@@ -2416,9 +2425,6 @@ public class UI extends javax.swing.JFrame {
         exportComboBox.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
         exportComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Export PDF", "Export Excel", "Export Txt" }));
 
-        sendMailComboBox.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        sendMailComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Send Mail Vaccine 1", "Send Mail Vaccine 2", "Send Mail Booster 1", "Send Mail Booster 2", "Send Mail Booster 3" }));
-
         exportPanel.setPreferredSize(new java.awt.Dimension(137, 30));
 
         exportButton.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
@@ -2453,39 +2459,48 @@ public class UI extends javax.swing.JFrame {
             .addComponent(exportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        sendMailPanel.setPreferredSize(new java.awt.Dimension(131, 30));
+        browsePanel.setPreferredSize(new java.awt.Dimension(131, 30));
 
-        sendMailButton.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
-        sendMailButton.setForeground(new java.awt.Color(91, 123, 253));
-        sendMailButton.setText("Send Mail");
-        sendMailButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        sendMailButton.setContentAreaFilled(false);
-        sendMailButton.setFocusable(false);
-        sendMailButton.setPreferredSize(new java.awt.Dimension(111, 30));
-        sendMailButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        browseButton.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
+        browseButton.setForeground(new java.awt.Color(91, 123, 253));
+        browseButton.setText("Browse");
+        browseButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        browseButton.setContentAreaFilled(false);
+        browseButton.setFocusable(false);
+        browseButton.setPreferredSize(new java.awt.Dimension(111, 30));
+        browseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                sendMailButtonMouseEntered(evt);
+                browseButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                sendMailButtonMouseExited(evt);
+                browseButtonMouseExited(evt);
             }
         });
-        sendMailButton.addActionListener(new java.awt.event.ActionListener() {
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendMailButtonActionPerformed(evt);
+                browseButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout sendMailPanelLayout = new javax.swing.GroupLayout(sendMailPanel);
-        sendMailPanel.setLayout(sendMailPanelLayout);
-        sendMailPanelLayout.setHorizontalGroup(
-            sendMailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sendMailButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+        javax.swing.GroupLayout browsePanelLayout = new javax.swing.GroupLayout(browsePanel);
+        browsePanel.setLayout(browsePanelLayout);
+        browsePanelLayout.setHorizontalGroup(
+            browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, browsePanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(browseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        sendMailPanelLayout.setVerticalGroup(
-            sendMailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sendMailButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        browsePanelLayout.setVerticalGroup(
+            browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
+
+        browseText.setEditable(false);
+        browseText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                browseTextKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout DataPanelLayout = new javax.swing.GroupLayout(DataPanel);
         DataPanel.setLayout(DataPanelLayout);
@@ -2525,16 +2540,16 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DataPanelLayout.createSequentialGroup()
-                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(browseText)
+                        .addGap(18, 18, 18)
+                        .addComponent(browsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(exportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(sendMailComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendMailPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(41, 41, 41)
                         .addComponent(showComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DataPanelLayout.createSequentialGroup()
@@ -2549,13 +2564,17 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sendMailComboBox)
-                    .addComponent(showComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(sendMailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(exportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(exportComboBox)
-                    .addComponent(searchTextField))
-                .addGap(17, 17, 17)
+                    .addGroup(DataPanelLayout.createSequentialGroup()
+                        .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(showComboBox)
+                            .addComponent(browsePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(exportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(exportComboBox)
+                            .addComponent(browseText))
+                        .addGap(17, 17, 17))
+                    .addGroup(DataPanelLayout.createSequentialGroup()
+                        .addComponent(searchTextField)
+                        .addGap(18, 18, 18)))
                 .addComponent(jLabel1))
             .addGroup(DataPanelLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
@@ -3020,14 +3039,75 @@ public class UI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextFieldKeyTyped
 
-    private void sendMailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMailButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sendMailButtonActionPerformed
-
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(this);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String date = dateFormat.format(new Date());
+        try {
+            File save = fileChooser.getSelectedFile();
+            String path = save.getAbsolutePath();
+            path = path +"_"+date+".xlsx";
+            browseText.setText(path);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_browseButtonActionPerformed
+   
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        // TODO add your handling code here:
+        switch(exportComboBox.getSelectedIndex()){
+                case 0 :
+                    //System.out.println("0");
+                    exportToExcel();
+            break;
+                case 1 :
+            break;
+                case 2 :
+            break; 
+        
+        }
     }//GEN-LAST:event_exportButtonActionPerformed
-
+    public void exportToExcel(){
+        XSSFWorkbook workBook = new XSSFWorkbook();
+        XSSFSheet workSheet = workBook.createSheet();
+        //TableModel model = dataTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
+        TreeMap<String, Object[] > map = new TreeMap<>();
+        map.put("0", new Object[]{model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),
+        model.getColumnName(4),model.getColumnName(5),model.getColumnName(6)});
+        
+        for (int i = 1; i < model.getRowCount(); ) {
+            map.put(Integer.toString(i), new Object[]{model.getValueAt(i, 0),model.getValueAt(i, 1),
+            model.getValueAt(i, 2),model.getValueAt(i, 3),model.getValueAt(i, 4),model.getValueAt(i, 5),
+            model.getValueAt(i, 6)});
+            i++;
+        }
+        Set<String> id = map.keySet();
+        XSSFRow fRow;
+        int rowId = 0;
+        
+        for (String key: id) {
+            fRow = workSheet.createRow(rowId);
+            Object[] value = map.get(key);
+            int cellId = 0;
+            for(Object object : value){
+                XSSFCell cell = fRow.createCell(cellId);
+                cell.setCellValue(object.toString());
+                cellId++;
+            }
+            rowId++;
+        }
+        try(FileOutputStream output = new FileOutputStream(new File(browseText.getText()));) {
+            
+            workBook.write(output);
+            JOptionPane.showMessageDialog(this, "Export Excel Berhasil!");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     private void exportButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportButtonMouseEntered
         exportButton.setForeground(Color.white);
         exportPanel.setBackground(colorSource.biruMuda());
@@ -3038,15 +3118,19 @@ public class UI extends javax.swing.JFrame {
         exportPanel.setBackground(colorSource.background());
     }//GEN-LAST:event_exportButtonMouseExited
 
-    private void sendMailButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMailButtonMouseEntered
-        sendMailButton.setForeground(Color.white);
-        sendMailPanel.setBackground(colorSource.biruMuda());
-    }//GEN-LAST:event_sendMailButtonMouseEntered
+    private void browseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_browseButtonMouseEntered
+        browseButton.setForeground(Color.white);
+        browsePanel.setBackground(colorSource.biruMuda());
+    }//GEN-LAST:event_browseButtonMouseEntered
 
-    private void sendMailButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMailButtonMouseExited
-        sendMailButton.setForeground(colorSource.biruMuda());
-        sendMailPanel.setBackground(colorSource.background());
-    }//GEN-LAST:event_sendMailButtonMouseExited
+    private void browseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_browseButtonMouseExited
+        browseButton.setForeground(colorSource.biruMuda());
+        browsePanel.setBackground(colorSource.background());
+    }//GEN-LAST:event_browseButtonMouseExited
+
+    private void browseTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_browseTextKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_browseTextKeyTyped
     private void showOnlySort(int value){
         List<userModel> ls = new ArrayList<userModel>();
         ls = new userData().showOnly(value);
@@ -3110,6 +3194,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel boosterTitle1;
     private javax.swing.JLabel boosterTitle2;
     private javax.swing.JLabel boosterTitle3;
+    private javax.swing.JButton browseButton;
+    private javax.swing.JPanel browsePanel;
+    private javax.swing.JTextField browseText;
     private javax.swing.JPanel cardBooster1;
     private javax.swing.JPanel cardBooster2;
     private javax.swing.JPanel cardBooster3;
@@ -3244,9 +3331,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel persentasiVaksin4;
     private javax.swing.JLabel persentasiVaksin5;
     private javax.swing.JTextField searchTextField;
-    private javax.swing.JButton sendMailButton;
-    private javax.swing.JComboBox sendMailComboBox;
-    private javax.swing.JPanel sendMailPanel;
     private javax.swing.JComboBox showComboBox;
     private javax.swing.JButton simpanButton;
     private javax.swing.JPanel simpanPanel;
