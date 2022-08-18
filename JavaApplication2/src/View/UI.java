@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.apache.poi.ss.usermodel.Cell;
@@ -3040,32 +3042,68 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTextFieldKeyTyped
 
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(this);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-        String date = dateFormat.format(new Date());
-        try {
-            File save = fileChooser.getSelectedFile();
-            String path = save.getAbsolutePath();
-            path = path +"_"+date+".xlsx";
-            browseText.setText(path);
-        } catch (Exception e) {
+        if (exportComboBox.getSelectedIndex()==0) {
+            JOptionPane.showMessageDialog(this, "Export PDF tidak perlu isi alamat file");
+        } else {
+            JFileChooser fileChooser = new JFileChooser();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+            String date = dateFormat.format(new Date());
+            switch(exportComboBox.getSelectedIndex()){
+                case 0://pdf
+                    fileChooser.showOpenDialog(this);
+                        try {
+                            File save = fileChooser.getSelectedFile();
+                            String path = save.getAbsolutePath();
+                            path = path +"_"+date+".pdf";
+                            browseText.setText(path);
+                        } catch (Exception e) {
+                            System.out.println("PDF save gagal");
+                        }
+                break;
+                case 1://Excel
+
+                    fileChooser.showOpenDialog(this);
+
+                        try {
+                            File save = fileChooser.getSelectedFile();
+                            String path = save.getAbsolutePath();
+                            path = path +"_"+date+".xlsx";
+                            browseText.setText(path);
+                        } catch (Exception e) {
+                            System.out.println("Excel save gagal");
+                        }
+                break;
+                case 2:
+                break;
+            }
         }
     }//GEN-LAST:event_browseButtonActionPerformed
    
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         switch(exportComboBox.getSelectedIndex()){
-                case 0 :
-                    //System.out.println("0");
-                    exportToExcel();
+                case 0 ://PDF
+                        exportToPDF();
             break;
-                case 1 :
+                case 1 ://Excel
+                    if (browseText.getText().equals("")==true) {
+                        JOptionPane.showMessageDialog(this, "Pilih lokasi export terlebih dahulu");
+                    }else{
+                        exportToExcel();
+                    }
             break;
                 case 2 :
             break; 
         
         }
     }//GEN-LAST:event_exportButtonActionPerformed
+    public void exportToPDF(){
+        MessageFormat footer = new MessageFormat("Halaman_ {0,number,integer}");
+        MessageFormat header = new MessageFormat("Medical Assist Software");
+        try {
+            dataTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        } catch (Exception e) {
+        }
+    }
     public void exportToExcel(){
         XSSFWorkbook workBook = new XSSFWorkbook();
         XSSFSheet workSheet = workBook.createSheet();
