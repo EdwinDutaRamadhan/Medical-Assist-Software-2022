@@ -8,11 +8,18 @@ package View;
 import Data.userData;
 import Model.tableModel;
 import Model.userModel;
+import java.awt.AWTKeyStroke;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import static java.awt.event.KeyEvent.VK_0;
+import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -20,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -30,8 +36,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
 /**
@@ -54,6 +58,7 @@ public class UI extends javax.swing.JFrame {
     boolean sinovac=true,biofarma=true,novavax=true,oxfordaz=true,pfizerbt=true,moderna=true,sinopharm=true;
     boolean pfizerCard = true, astrazenecaCard = true, modernaCard =true;
     int sinovacValue,biofarmaValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue;
+    int typedCode = 0;
     /**
      * Creates new form UI
      */
@@ -182,6 +187,7 @@ public class UI extends javax.swing.JFrame {
             DataMahasiswa[i][6] = ls.get(i).getVaksin5();
         }
         dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM","NAMA","VAKSIN1","VAKSIN2","BOOSTER1","BOOSTER2","BOOSTER3"}));
+        
     }
     private void reset(){
         TabelModel = new tableModel();
@@ -199,6 +205,8 @@ public class UI extends javax.swing.JFrame {
         vaksin3TextField.setForeground(colorSource.abuabu());
         vaksin4TextField.setForeground(colorSource.abuabu());
         vaksin5TextField.setForeground(colorSource.abuabu());
+        showComboBox.setSelectedIndex(0);
+        exportComboBox.setSelectedIndex(0);
     }
     private void dataSortingProgress(){     
         vaksin1 = 0; vaksin2 = 0; vaksin3 = 0; vaksin4 = 0; vaksin5 = 0;
@@ -250,11 +258,9 @@ public class UI extends javax.swing.JFrame {
         boosterSorting(pfizerBTBooster);
         boosterSorting(oxfordAZBooster);
         boosterSorting(modernaBoosterValue);
-        //System.out.println("=====");
     }
     private void sortData(int[] sortBooster){
         for (int i = 0; i < 3; ) {
-            //System.out.println(i + ": " + sortBooster[i]);
             boosterValue3 = sortBooster[0];
             boosterValue2 = sortBooster[1];
             boosterValue1 = sortBooster[2];
@@ -262,10 +268,6 @@ public class UI extends javax.swing.JFrame {
         }        
     }
     private void boosterSorting(int value){
-//        System.out.println(pfizerCard);
-//        System.out.println(astrazenecaCard);
-//        System.out.println(modernaCard);
-//        System.out.println("=====");
         if(value == boosterValue1 && card8 == true){
             if (boosterValue1 == pfizerBTBooster && pfizerCard == true) {//========================================================================= Card 1 =========================================================//
                 cardBoosterImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
@@ -343,11 +345,9 @@ public class UI extends javax.swing.JFrame {
         titleSort(pfizerBTVaksin);
         titleSort(modernaVaksin);
         titleSort(sinopharmVaksin);
-        //System.out.println("==============");
     }
     public void showSort(int[] sortVaksin){
         for (int i = 0; i < 7; ) {
-            //System.out.println(i + ": " + sortVaksin[i]);
             vaksinCardValue7 = sortVaksin[0];
             vaksinCardValue6 = sortVaksin[1];
             vaksinCardValue5 = sortVaksin[2];
@@ -359,15 +359,6 @@ public class UI extends javax.swing.JFrame {
         }
     }
     public void titleSort(int value){
-        //System.out.println("Sinovac Vaksin : " + sinovacVaksin);
-        //System.out.println("Vaksin Card Value 2 : " +  vaksinCardValue2);
-//        System.out.println("Card 1: " + card1);
-//        System.out.println("Card 2 : " + card2);
-//        System.out.println("Card 3 : " + card3);
-//        System.out.println("Card 4 : " + card4);
-//        System.out.println("Card 5 : " + card5);
-//        System.out.println("Card 6 : " + card6);
-//        System.out.println("Card 7 : " + card7);
         if (value == vaksinCardValue1 && card1 == true) {
             
             if (vaksinCardValue1 == sinovacVaksin && sinovac == true) {//========================================================================= Card 1 =========================================================//
@@ -660,6 +651,8 @@ public class UI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mainPanel = new javax.swing.JPanel();
         DashBoardPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -819,12 +812,17 @@ public class UI extends javax.swing.JFrame {
         browsePanel = new javax.swing.JPanel();
         browseButton = new javax.swing.JButton();
         browseText = new javax.swing.JTextField();
+        searchPanel = new javax.swing.JPanel();
+        searchButton = new javax.swing.JButton();
         AboutPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         dashboardButton = new javax.swing.JButton();
         dataButton = new javax.swing.JButton();
         aboutButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+
+        jMenuItem1.setText("jMenuItem1");
+        jPopupMenu1.add(jMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(196, 202, 233));
@@ -2418,7 +2416,18 @@ public class UI extends javax.swing.JFrame {
         });
 
         searchTextField.setText("Search");
+        searchTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchTextFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchTextFieldFocusLost(evt);
+            }
+        });
         searchTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchTextFieldKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 searchTextFieldKeyTyped(evt);
             }
@@ -2498,11 +2507,37 @@ public class UI extends javax.swing.JFrame {
         );
 
         browseText.setEditable(false);
-        browseText.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                browseTextKeyTyped(evt);
+
+        searchButton.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
+        searchButton.setForeground(new java.awt.Color(91, 123, 253));
+        searchButton.setText("Search");
+        searchButton.setBorderPainted(false);
+        searchButton.setContentAreaFilled(false);
+        searchButton.setFocusable(false);
+        searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                searchButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                searchButtonMouseExited(evt);
             }
         });
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
+        searchPanel.setLayout(searchPanelLayout);
+        searchPanelLayout.setHorizontalGroup(
+            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+        );
+        searchPanelLayout.setVerticalGroup(
+            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout DataPanelLayout = new javax.swing.GroupLayout(DataPanel);
         DataPanel.setLayout(DataPanelLayout);
@@ -2514,12 +2549,12 @@ public class UI extends javax.swing.JFrame {
                     .addGroup(DataPanelLayout.createSequentialGroup()
                         .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(namaTextField)
@@ -2543,15 +2578,17 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(tabelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DataPanelLayout.createSequentialGroup()
                         .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(browseText)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(browseText, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(browsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(exportComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(exportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(showComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DataPanelLayout.createSequentialGroup()
@@ -2567,16 +2604,19 @@ public class UI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DataPanelLayout.createSequentialGroup()
-                        .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(showComboBox)
-                            .addComponent(browsePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                            .addComponent(exportPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                            .addComponent(exportComboBox)
-                            .addComponent(browseText))
+                        .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(showComboBox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(browsePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(exportPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(exportComboBox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(browseText, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(17, 17, 17))
                     .addGroup(DataPanelLayout.createSequentialGroup()
                         .addComponent(searchTextField)
-                        .addGap(18, 18, 18)))
+                        .addGap(18, 18, 18))
+                    .addGroup(DataPanelLayout.createSequentialGroup()
+                        .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel1))
             .addGroup(DataPanelLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
@@ -3014,7 +3054,6 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_tambahButtonMouseExited
 
     private void showComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showComboBoxActionPerformed
-        System.out.println(showComboBox.getSelectedIndex());
         switch(showComboBox.getSelectedIndex()){
             case 0 ://show all
                 displayDataMahasiswa();
@@ -3036,51 +3075,32 @@ public class UI extends javax.swing.JFrame {
         break;
         }
     }//GEN-LAST:event_showComboBoxActionPerformed
-
-    private void searchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchTextFieldKeyTyped
-
+    
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         if (exportComboBox.getSelectedIndex()==0) {
             JOptionPane.showMessageDialog(this, "Export PDF tidak perlu isi alamat file");
         } else {
-            JFileChooser fileChooser = new JFileChooser();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-            String date = dateFormat.format(new Date());
             switch(exportComboBox.getSelectedIndex()){
                 case 0://pdf
-                    fileChooser.showOpenDialog(this);
-                        try {
-                            File save = fileChooser.getSelectedFile();
-                            String path = save.getAbsolutePath();
-                            path = path +"_"+date+".pdf";
-                            browseText.setText(path);
-                        } catch (Exception e) {
-                            System.out.println("PDF save gagal");
-                        }
+                    fileChooser(".pdf");
                 break;
                 case 1://Excel
-
-                    fileChooser.showOpenDialog(this);
-
-                        try {
-                            File save = fileChooser.getSelectedFile();
-                            String path = save.getAbsolutePath();
-                            path = path +"_"+date+".xlsx";
-                            browseText.setText(path);
-                        } catch (Exception e) {
-                            System.out.println("Excel save gagal");
-                        }
+                    fileChooser(".xlsx");
                 break;
-                case 2:
+                case 2://txt
+                    fileChooser(".txt");
                 break;
             }
         }
     }//GEN-LAST:event_browseButtonActionPerformed
    
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        switch(exportComboBox.getSelectedIndex()){
+        if (dataTable.getRowCount()==0) {
+            JOptionPane.showMessageDialog(this, "Tidak ada data yang bisa di-eksport");
+           displayDataMahasiswa();
+           reset();
+        }else{
+            switch(exportComboBox.getSelectedIndex()){
                 case 0 ://PDF
                         exportToPDF();
             break;
@@ -3092,12 +3112,53 @@ public class UI extends javax.swing.JFrame {
                     }
             break;
                 case 2 :
+                    if (browseText.getText().equals("")==true) {
+                        JOptionPane.showMessageDialog(this, "Pilih lokasi export terlebih dahulu");
+                    }else{
+                        exportToTXT();
+                    }
             break; 
         
         }
+        }
+        
+        browseText.setText("");
     }//GEN-LAST:event_exportButtonActionPerformed
+    private void fileChooser(String dataType){
+        JFileChooser fileChooser = new JFileChooser();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String date = dateFormat.format(new Date());
+        fileChooser.showOpenDialog(this);
+        try {
+            File save = fileChooser.getSelectedFile();
+            String path = save.getAbsolutePath();
+            path = path +"_"+date+dataType;
+            browseText.setText(path);
+        } catch (Exception e) {
+            
+        }
+    }
+    public void exportToTXT(){
+        String filePath = browseText.getText();
+        File file = new File(filePath);
+        try {
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < dataTable.getRowCount(); i++) {
+                for (int j = 0; j < dataTable.getColumnCount(); j++) {
+                    bw.write(dataTable.getValueAt(i, j).toString()+" ");
+                }
+                bw.newLine();
+            }
+            bw.close();
+            fw.close();
+            JOptionPane.showMessageDialog(this, "Berhasil export file.txt");
+        } catch (IOException | HeadlessException e) {
+           
+        }
+    }
     public void exportToPDF(){
-        MessageFormat footer = new MessageFormat("Halaman_ {0,number,integer}");
+        MessageFormat footer = new MessageFormat("Halaman {0,number,integer}");
         MessageFormat header = new MessageFormat("Medical Assist Software");
         try {
             dataTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
@@ -3166,9 +3227,79 @@ public class UI extends javax.swing.JFrame {
         browsePanel.setBackground(colorSource.background());
     }//GEN-LAST:event_browseButtonMouseExited
 
-    private void browseTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_browseTextKeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_browseTextKeyTyped
+    private void searchTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFieldFocusGained
+        if(searchTextField.getText().equals("Search")){
+            searchTextField.setText("");
+            searchTextField.setForeground(colorSource.hitam());
+        }
+    }//GEN-LAST:event_searchTextFieldFocusGained
+
+    private void searchTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchTextFieldFocusLost
+        if(searchTextField.getText().equals("")){
+            searchTextField.setText("Search");
+            searchTextField.setForeground(colorSource.abuabu());
+        }
+    }//GEN-LAST:event_searchTextFieldFocusLost
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        if (searchTextField.getText().equals("Search")) {
+            JOptionPane.showMessageDialog(this, "Isi textfield search terlebih dahulu");
+        }else {
+            searchData(searchTextField.getText());
+            if (dataTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Data yang dicari tidak ditemukan");
+                displayDataMahasiswa();            
+            }
+        }
+        reset();  
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void searchButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseEntered
+        searchButton.setForeground(Color.white);
+        searchPanel.setBackground(colorSource.biruMuda());
+    }//GEN-LAST:event_searchButtonMouseEntered
+
+    private void searchButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseExited
+        searchButton.setForeground(colorSource.biruMuda());
+        searchPanel.setBackground(colorSource.background());
+    }//GEN-LAST:event_searchButtonMouseExited
+
+    private void searchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyTyped
+
+    }//GEN-LAST:event_searchTextFieldKeyTyped
+
+    private void searchTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyPressed
+        if (evt.getKeyCode() ==8){reset();displayDataMahasiswa();}
+        if (searchTextField.getText().equals("Search")) {
+            JOptionPane.showMessageDialog(this, "Isi textfield search terlebih dahulu");
+        }else {
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                searchData(searchTextField.getText());
+                if (dataTable.getRowCount()==0) {
+                    JOptionPane.showMessageDialog(this, "Data yang dicari tidak ditemukan");
+                    displayDataMahasiswa();            
+                }
+            }
+        }
+        reset();  
+    }//GEN-LAST:event_searchTextFieldKeyPressed
+    
+
+    private void searchData(String input){
+        List<userModel> ls = new ArrayList<userModel>();
+        ls = new userData().searchData(input);
+        String DataMahasiswa[][] = new String[ls.size()][7];
+        for (int i = 0; i < ls.size(); i++) {
+            DataMahasiswa[i][0] = ls.get(i).getNIM();
+            DataMahasiswa[i][1] = ls.get(i).getNama();
+            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
+            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
+            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
+            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
+            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
+        }
+        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM","NAMA","VAKSIN1","VAKSIN2","BOOSTER1","BOOSTER2","BOOSTER3"}));
+    }
     private void showOnlySort(int value){
         List<userModel> ls = new ArrayList<userModel>();
         ls = new userData().showOnly(value);
@@ -3214,6 +3345,7 @@ public class UI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new UI().setVisible(true);
             }
@@ -3338,6 +3470,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -3355,6 +3488,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin2;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin3;
@@ -3368,6 +3502,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel persentasiVaksin3;
     private javax.swing.JLabel persentasiVaksin4;
     private javax.swing.JLabel persentasiVaksin5;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JPanel searchPanel;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JComboBox showComboBox;
     private javax.swing.JButton simpanButton;

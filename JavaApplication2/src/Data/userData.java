@@ -140,7 +140,49 @@ public class userData implements userInterface {
             }            
            
         } catch (Exception e) {
-            System.out.println("SELECT tbl_mahasiswa eror");
+            System.out.println("showonly tbl_mahasiswa eror");
+        }
+        
+        return ls;
+    }
+
+    @Override
+    public List<userModel> searchData(String input) {
+        List<userModel> ls = new ArrayList<>();
+        
+        try {
+           PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_mahasiswa");
+           ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                mahasiswa = new userModel();
+                mahasiswa.setNIM(rs.getString(1));
+                mahasiswa.setNama(rs.getString(2));
+                mahasiswa.setVaksin1(rs.getString(3));
+                mahasiswa.setVaksin2(rs.getString(4));
+                mahasiswa.setVaksin3(rs.getString(5));
+                mahasiswa.setVaksin4(rs.getString(6));
+                mahasiswa.setVaksin5(rs.getString(7));
+                
+                if(rs.getString(1).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }else if(rs.getString(2).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }else if(rs.getString(3).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }else if(rs.getString(4).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }else if(rs.getString(5).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }else if(rs.getString(6).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }else if(rs.getString(7).equalsIgnoreCase(input) == true){
+                    ls.add(mahasiswa);
+                }
+                
+            }            
+           
+        } catch (Exception e) {
+            System.out.println("Search eror");
         }
         
         return ls;

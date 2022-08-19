@@ -17,4 +17,5 @@ public interface userInterface {
     public boolean gantiDataMahasiswa(userModel mahasiswa);
     public List<userModel> getAll();
     public List<userModel> showOnly(int value);
+    public List<userModel> searchData(String input);
 }
