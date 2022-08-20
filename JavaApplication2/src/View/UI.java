@@ -9,9 +9,15 @@ import Data.userData;
 import Language.language;
 import Model.userModel;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,6 +37,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -47,6 +54,7 @@ public class UI extends javax.swing.JFrame {
     UrlSource urlSource = new UrlSource();
     ColorSource colorSource = new ColorSource();
     language bahasa = new language();
+    public String NimCard;
     double vaksin1,vaksin2,vaksin3,vaksin4,vaksin5;
     int vaksin1Mahasiswa,vaksin2Mahasiswa,vaksin3Mahasiswa,vaksin4Mahasiswa,vaksin5Mahasiswa,maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20;
     int sinovacVaksin,bioFarmaVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
@@ -93,6 +101,7 @@ public class UI extends javax.swing.JFrame {
         cardVaksinSortingAlgortim();
         progressImplements();
         cardBoosterSortingAlgoritm();
+        hiddenPanel.setVisible(false);
     } 
     
     class UrlSource{
@@ -190,6 +199,7 @@ public class UI extends javax.swing.JFrame {
         
     }
     private void reset(){
+        nimTextField.setEditable(true);
         nimTextField.setText(bahasa.getNIM());
         namaTextField.setText(bahasa.getNAMA());
         vaksin1TextField.setText(bahasa.getVAKSIN1());
@@ -845,8 +855,33 @@ public class UI extends javax.swing.JFrame {
         browseText = new javax.swing.JTextField();
         searchPanel = new javax.swing.JPanel();
         searchButton = new javax.swing.JButton();
+        hiddenPanel = new javax.swing.JPanel();
+        vaksinCardPrint = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        vaksin1CardPrint = new javax.swing.JLabel();
+        vaksin2CardPrint = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        booster1CardPrint = new javax.swing.JLabel();
+        booster2CardPrint = new javax.swing.JLabel();
+        booster3CardPrint = new javax.swing.JLabel();
+        nimCardPrint = new javax.swing.JLabel();
+        namaCardPrint = new javax.swing.JLabel();
         AboutPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         dashboardButton = new javax.swing.JButton();
         dataButton = new javax.swing.JButton();
         aboutButton = new javax.swing.JButton();
@@ -2460,13 +2495,10 @@ public class UI extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchTextFieldKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                searchTextFieldKeyTyped(evt);
-            }
         });
 
         exportComboBox.setFont(new java.awt.Font("Dubai Medium", 0, 14)); // NOI18N
-        exportComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Export PDF", "Export Excel", "Export Txt" }));
+        exportComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Export PDF", "Export Excel", "Export Txt", "Export Card(PDF)" }));
 
         exportPanel.setPreferredSize(new java.awt.Dimension(137, 30));
 
@@ -2690,26 +2722,261 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        vaksinCardPrint.setBackground(new java.awt.Color(0, 204, 204));
+        vaksinCardPrint.setPreferredSize(new java.awt.Dimension(800, 400));
+
+        jLabel3.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        jLabel3.setText("Kartu Vaksinasi");
+
+        jLabel5.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel5.setText("NIM");
+
+        jLabel6.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel6.setText("NAMA");
+
+        jLabel7.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("DOSIS");
+
+        jLabel8.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("JENIS VAKSIN");
+
+        jLabel9.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("VALIDASI");
+
+        jLabel10.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("I");
+
+        jLabel17.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("II");
+
+        vaksin1CardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        vaksin1CardPrint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vaksin1CardPrint.setText("VAKSIN 1");
+
+        vaksin2CardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        vaksin2CardPrint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vaksin2CardPrint.setText("VAKSIN 2");
+
+        jLabel20.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("STATUS PEMBERIAN VAKSINASI");
+
+        jPanel10.setBackground(new java.awt.Color(51, 255, 255));
+
+        jLabel21.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("DOSIS");
+
+        jLabel22.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("STATUS PEMBERIAN BOOSTER");
+
+        jLabel25.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel25.setText("I");
+
+        jLabel26.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("II");
+
+        jLabel27.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel27.setText("III");
+
+        jLabel28.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("JENIS BOOSTER");
+
+        jLabel29.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("VALIDASI");
+
+        booster1CardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        booster1CardPrint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        booster1CardPrint.setText("DOSIS - 1");
+
+        booster2CardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        booster2CardPrint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        booster2CardPrint.setText("DOSIS - 2");
+
+        booster3CardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        booster3CardPrint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        booster3CardPrint.setText("DOSIS - 3");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(booster3CardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(booster2CardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(booster1CardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel28)
+                    .addComponent(jLabel29))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(booster1CardPrint))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(booster2CardPrint))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(booster3CardPrint))
+                .addContainerGap(97, Short.MAX_VALUE))
+        );
+
+        nimCardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        nimCardPrint.setText("NIM USER");
+
+        namaCardPrint.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
+        namaCardPrint.setText("NAMA USER");
+
+        javax.swing.GroupLayout vaksinCardPrintLayout = new javax.swing.GroupLayout(vaksinCardPrint);
+        vaksinCardPrint.setLayout(vaksinCardPrintLayout);
+        vaksinCardPrintLayout.setHorizontalGroup(
+            vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                        .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nimCardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(namaCardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                        .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(vaksin2CardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vaksinCardPrintLayout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(vaksin1CardPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(jLabel3)))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        vaksinCardPrintLayout.setVerticalGroup(
+            vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vaksinCardPrintLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(30, 30, 30)
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(nimCardPrint))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(namaCardPrint))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(vaksin1CardPrint))
+                .addGap(18, 18, 18)
+                .addGroup(vaksinCardPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(vaksin2CardPrint))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout hiddenPanelLayout = new javax.swing.GroupLayout(hiddenPanel);
+        hiddenPanel.setLayout(hiddenPanelLayout);
+        hiddenPanelLayout.setHorizontalGroup(
+            hiddenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1346, Short.MAX_VALUE)
+            .addGroup(hiddenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(hiddenPanelLayout.createSequentialGroup()
+                    .addGap(373, 373, 373)
+                    .addComponent(vaksinCardPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(373, Short.MAX_VALUE)))
+        );
+        hiddenPanelLayout.setVerticalGroup(
+            hiddenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 747, Short.MAX_VALUE)
+            .addGroup(hiddenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(hiddenPanelLayout.createSequentialGroup()
+                    .addGap(96, 96, 96)
+                    .addComponent(vaksinCardPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(96, Short.MAX_VALUE)))
+        );
+
         AboutPanel.setMinimumSize(new java.awt.Dimension(1082, 747));
         AboutPanel.setName(""); // NOI18N
         AboutPanel.setPreferredSize(new java.awt.Dimension(1366, 714));
         AboutPanel.setRequestFocusEnabled(false);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/aboutImage.png"))); // NOI18N
-
         javax.swing.GroupLayout AboutPanelLayout = new javax.swing.GroupLayout(AboutPanel);
         AboutPanel.setLayout(AboutPanelLayout);
         AboutPanelLayout.setHorizontalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AboutPanelLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 1366, Short.MAX_VALUE)
         );
         AboutPanelLayout.setVerticalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AboutPanelLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 747, Short.MAX_VALUE)
         );
 
         dashboardButton.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
@@ -2788,6 +3055,11 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(DashBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(AboutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(hiddenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2813,6 +3085,11 @@ public class UI extends javax.swing.JFrame {
                     .addGap(54, 54, 54)
                     .addComponent(AboutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 715, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(hiddenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(17, 17, 17)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2823,7 +3100,7 @@ public class UI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 769, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
         );
 
         pack();
@@ -2867,17 +3144,21 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
+        boolean prompt = true;
         mahasiswa = new userModel();
-        if(nimTextField.getText().equals(bahasa.getNIM()) && namaTextField.getText().equals(bahasa.getNAMA())){
-            JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection3());
-        }else if (nimTextField.getText().equals(bahasa.getNIM())){
-            JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection1());
-        }else if(namaTextField.getText().equals(bahasa.getNAMA())){
-            JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection2());
-        }else{
-            mahasiswa.setNIM(nimTextField.getText());
-            mahasiswa.setNama(namaTextField.getText());
-        }
+            if(nimTextField.getText().equals(bahasa.getNIM()) && namaTextField.getText().equals(bahasa.getNAMA())){
+                JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection3());
+                prompt =false;
+            }else if (nimTextField.getText().equals(bahasa.getNIM())){
+                JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection1());
+                prompt = false;
+            }else if(namaTextField.getText().equals(bahasa.getNAMA())){
+                JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection2());
+                prompt = false;
+            }else{
+                mahasiswa.setNIM(nimTextField.getText());
+                mahasiswa.setNama(namaTextField.getText());
+            }
         if (vaksin1TextField.getText().equals(bahasa.getVAKSIN1())) {mahasiswa.setVaksin1("-");}else{mahasiswa.setVaksin1(vaksin1TextField.getText());}
         if (vaksin2TextField.getText().equals(bahasa.getVAKSIN2())) {mahasiswa.setVaksin2("-");}else{mahasiswa.setVaksin2(vaksin2TextField.getText());}
         if (vaksin3TextField.getText().equals(bahasa.getVAKSIN3())) {mahasiswa.setVaksin3("-");}else{mahasiswa.setVaksin3(vaksin3TextField.getText());}
@@ -2888,11 +3169,16 @@ public class UI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sukses Menambah Data");
             displayDataMahasiswa();
             reset();
-        } else {
+        }else {
             System.out.println("Gagal Menambah Data");
+            if (prompt == true) {
+                showMessageDialog("NIM tidak dapat diduplikat");
+            }
         }
     }//GEN-LAST:event_simpanButtonActionPerformed
-
+    private void showMessageDialog(String input){
+        JOptionPane.showMessageDialog(this, input);
+    }
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         if(nimTextField.getText().equals(bahasa.getNIM()) || namaTextField.getText().equals(bahasa.getNAMA())){
             JOptionPane.showMessageDialog(this, "Pilih data yang ingin dihapus");
@@ -2934,7 +3220,7 @@ public class UI extends javax.swing.JFrame {
                 displayDataMahasiswa();
                 reset();
             }else{
-                JOptionPane.showMessageDialog(this, "Gagal Ganti Data");
+                showMessageDialog("NIM tidak dapat diduplikat");
             }
         }
     }//GEN-LAST:event_gantiButtonActionPerformed
@@ -2955,6 +3241,14 @@ public class UI extends javax.swing.JFrame {
         vaksin3TextField.setForeground(colorSource.hitam());
         vaksin4TextField.setForeground(colorSource.hitam());
         vaksin5TextField.setForeground(colorSource.hitam());
+        nimCardPrint.setText(dataTable.getValueAt(row, 0).toString());
+        namaCardPrint.setText(dataTable.getValueAt(row, 1).toString());
+        vaksin1CardPrint.setText(dataTable.getValueAt(row, 2).toString());
+        vaksin2CardPrint.setText(dataTable.getValueAt(row, 3).toString());
+        booster1CardPrint.setText(dataTable.getValueAt(row, 4).toString());
+        booster2CardPrint.setText(dataTable.getValueAt(row, 5).toString());
+        booster3CardPrint.setText(dataTable.getValueAt(row, 6).toString());   
+        nimTextField.setEditable(false);
     }//GEN-LAST:event_dataTableMouseClicked
 
     private void nimTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nimTextFieldFocusGained
@@ -3119,7 +3413,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_showComboBoxActionPerformed
     
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
-        if (exportComboBox.getSelectedIndex()==0) {
+        if (exportComboBox.getSelectedIndex()==0 || exportComboBox.getSelectedIndex()==3) {
             JOptionPane.showMessageDialog(this, "Export PDF tidak perlu isi alamat file");
         } else {
             switch(exportComboBox.getSelectedIndex()){
@@ -3160,12 +3454,43 @@ public class UI extends javax.swing.JFrame {
                         exportToTXT();
                     }
             break; 
+                case 3 :  
+                    printCard(vaksinCardPrint);
+            break;
         
-        }
+            }
         }
         
         browseText.setText("");
     }//GEN-LAST:event_exportButtonActionPerformed
+    private void printCard(final JPanel panel){
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        printerJob.setJobName("Print Record");
+        
+        printerJob.setPrintable(new Printable() {
+
+            @Override
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                if (pageIndex > 0) {
+                    return Printable.NO_SUCH_PAGE;
+                }
+                Graphics2D graphics2D = (Graphics2D)graphics;
+                graphics2D.translate(pageFormat.getImageableX()*2, pageFormat.getImageableY()*2);
+                graphics2D.scale(0.5, 0.5);
+                panel.paint(graphics2D);
+                return Printable.PAGE_EXISTS;
+            }
+        });
+        boolean returningResult = printerJob.printDialog();
+        if (returningResult) {
+            try {
+                printerJob.print();
+                System.out.println("gagal");
+            } catch (Exception e) {
+                showMessageDialog("Print Error");
+            }
+        }
+    }
     private void fileChooser(String dataType){
         JFileChooser fileChooser = new JFileChooser();
         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
@@ -3306,10 +3631,6 @@ public class UI extends javax.swing.JFrame {
         searchPanel.setBackground(colorSource.background());
     }//GEN-LAST:event_searchButtonMouseExited
 
-    private void searchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyTyped
-
-    }//GEN-LAST:event_searchTextFieldKeyTyped
-
     private void searchTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyPressed
         if (evt.getKeyCode() ==8){reset();displayDataMahasiswa();}
         if (searchTextField.getText().equals(bahasa.getSearch())) {
@@ -3417,6 +3738,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel DataPanel;
     private javax.swing.JButton aboutButton;
     private javax.swing.JComboBox bahasaComboBox;
+    private javax.swing.JLabel booster1CardPrint;
+    private javax.swing.JLabel booster2CardPrint;
+    private javax.swing.JLabel booster3CardPrint;
     private javax.swing.JLabel boosterCardValue1;
     private javax.swing.JLabel boosterCardValue2;
     private javax.swing.JLabel boosterCardValue3;
@@ -3514,19 +3838,36 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel gantiPanel;
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel hapusPanel;
+    private javax.swing.JPanel hiddenPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -3555,7 +3896,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel labelMahasiswa4;
     private javax.swing.JLabel labelMahasiswa5;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JLabel namaCardPrint;
     private javax.swing.JTextField namaTextField;
+    private javax.swing.JLabel nimCardPrint;
     private javax.swing.JTextField nimTextField;
     private javax.swing.JLabel persentasiVaksin1;
     private javax.swing.JLabel persentasiVaksin2;
@@ -3571,8 +3914,10 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JScrollPane tabelScroll;
     private javax.swing.JButton tambahButton;
     private javax.swing.JPanel tambahPanel;
+    private javax.swing.JLabel vaksin1CardPrint;
     private javax.swing.JProgressBar vaksin1ProgressBar;
     private javax.swing.JTextField vaksin1TextField;
+    private javax.swing.JLabel vaksin2CardPrint;
     private javax.swing.JProgressBar vaksin2ProgressBar;
     private javax.swing.JTextField vaksin2TextField;
     private javax.swing.JProgressBar vaksin3ProgressBar;
@@ -3581,6 +3926,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JTextField vaksin4TextField;
     private javax.swing.JProgressBar vaksin5ProgressBar;
     private javax.swing.JTextField vaksin5TextField;
+    private javax.swing.JPanel vaksinCardPrint;
     private javax.swing.JPanel vaksinDiagram;
     // End of variables declaration//GEN-END:variables
 

@@ -12,6 +12,7 @@ package Model;
  */
 public class userModel {
     private String NIM, Nama, Vaksin1, Vaksin2, Vaksin3, vaksin4, vaksin5;
+    private String NIMCard, NamaCard, Vaksin1Card, Vaksin2Card, Vaksin3Card, Vaksin4Card, Vaksin5Card;
 
     public String getNIM() {
         return NIM;
@@ -68,5 +69,61 @@ public class userModel {
     public void setVaksin5(String vaksin5) {
         this.vaksin5 = vaksin5;
     }
-  
+
+    public String getNIMCard() {
+        return NIMCard;
+    }
+
+    public void setNIMCard(String NIMCard) {
+        this.NIMCard = NIMCard;
+    }
+
+    public String getNamaCard() {
+        return NamaCard;
+    }
+
+    public void setNamaCard(String NamaCard) {
+        this.NamaCard = NamaCard;
+    }
+
+    public String getVaksin1Card() {
+        return Vaksin1Card;
+    }
+
+    public void setVaksin1Card(String Vaksin1Card) {
+        this.Vaksin1Card = Vaksin1Card;
+    }
+
+    public String getVaksin2Card() {
+        return Vaksin2Card;
+    }
+
+    public void setVaksin2Card(String Vaksin2Card) {
+        this.Vaksin2Card = Vaksin2Card;
+    }
+
+    public String getVaksin3Card() {
+        return Vaksin3Card;
+    }
+
+    public void setVaksin3Card(String Vaksin3Card) {
+        this.Vaksin3Card = Vaksin3Card;
+    }
+
+    public String getVaksin4Card() {
+        return Vaksin4Card;
+    }
+
+    public void setVaksin4Card(String Vaksin4Card) {
+        this.Vaksin4Card = Vaksin4Card;
+    }
+
+    public String getVaksin5Card() {
+        return Vaksin5Card;
+    }
+
+    public void setVaksin5Card(String Vaksin5Card) {
+        this.Vaksin5Card = Vaksin5Card;
+    }
+    
 }
