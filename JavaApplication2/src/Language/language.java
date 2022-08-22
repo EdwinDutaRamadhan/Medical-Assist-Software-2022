@@ -13,7 +13,7 @@ package Language;
 public class language {
     private String MessageInputProtection1,MessageInputProtection2,MessageInputProtection3; 
     private String MessageDialog1, MessageDialog2,MessageDialog3,MessageDialog4,MessageDialog5;
-    private String NIM , NAMA, BOOSTER, VAKSIN, VAKSIN1, VAKSIN2, VAKSIN3, VAKSIN4, VAKSIN5,Search,Mahasiswa,Dashboard,Data,About;
+    private String NIM , NAMA, BOOSTER, VAKSIN, VAKSIN1, VAKSIN2, VAKSIN3, VAKSIN4, VAKSIN5,Search,Mahasiswa,Dashboard,Data,Information,Other;
     private String ButtonSimpan,ButtonHapus,ButtonGanti,ButtonTambah,ButtonSearch,ButtonBrowse,ButtonExport;
     private String MessageError1,MessageError2,MessageError3,MessageError4,MessageError5,MessageError6,MessageError7,MessageError8,MessageError9,MessageError10;
     public void setLanguage(String bahasa) {
@@ -52,7 +52,7 @@ public class language {
                 this.Mahasiswa = "Mahasiswa";
                 this.Dashboard = "Dasbor";
                 this.Data = "Data";
-                this.About = "Tentang";
+                this.Other = "Lainnya";
                 //=====Button=====
                 this.ButtonSimpan = "Simpan";
                 this.ButtonHapus = "Hapus";
@@ -61,6 +61,7 @@ public class language {
                 this.ButtonSearch = "Cari";
                 this.ButtonBrowse = "Jelajahi";
                 this.ButtonExport = "Ekspor";
+                this.Information = "Informasi";
                 break;
             case "English":
                 //=====Message=====
@@ -96,7 +97,7 @@ public class language {
                 this.Mahasiswa = "Student";
                 this.Dashboard = "Dashboard";
                 this.Data = "Data";
-                this.About = "About";
+                this.Other = "Other";
                 //=====Button=====
                 this.ButtonSimpan = "Save";
                 this.ButtonHapus = "Delete";
@@ -105,6 +106,7 @@ public class language {
                 this.ButtonSearch = "Search";
                 this.ButtonBrowse = "Browse";
                 this.ButtonExport = "Eksport";
+                this.Information = "Information";
                 break;
             case "Spanish":
                 //=====Message=====
@@ -140,7 +142,7 @@ public class language {
                 this.Mahasiswa = "Alumno";
                 this.Dashboard = "Tablero";
                 this.Data = "Datos";
-                this.About = "Sobre";
+                this.Other = "Otro";
                 //=====Button=====
                 this.ButtonSimpan = "Ahorrar";
                 this.ButtonHapus = "Borrar";
@@ -149,6 +151,7 @@ public class language {
                 this.ButtonSearch = "Búsqueda";
                 this.ButtonBrowse = "Navegar";
                 this.ButtonExport = "Eksport";
+                this.Information = "información";
                 break;
         }
     }
@@ -175,7 +178,6 @@ public class language {
     public String getMahasiswa() {return Mahasiswa;}
     public String getDashboard() {return Dashboard;}
     public String getData() {return Data; }
-    public String getAbout() {return About;}
     public String getMessageDialog1() {return MessageDialog1;}
     public String getMessageDialog2() {return MessageDialog2;}
     public String getMessageDialog3() {return MessageDialog3;}
@@ -191,5 +193,8 @@ public class language {
     public String getMessageError8() {return MessageError8;}
     public String getMessageError9() {return MessageError9;}
     public String getMessageError10() {return MessageError10;}
+    public String getInformation() {return Information;}
+    public String getOther() {return Other;}
+    
     
 }

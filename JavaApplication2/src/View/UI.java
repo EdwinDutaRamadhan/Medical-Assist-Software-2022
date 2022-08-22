@@ -8,6 +8,7 @@ package View;
 import Data.userData;
 import Language.language;
 import Model.userModel;
+import Storage.valueData;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -53,20 +54,28 @@ public class UI extends javax.swing.JFrame {
     userData data = new userData();
     UrlSource urlSource = new UrlSource();
     ColorSource colorSource = new ColorSource();
+    valueData value = new valueData();
     language bahasa = new language();
-    public String NimCard;
-    double vaksin1,vaksin2,vaksin3,vaksin4,vaksin5;
-    int vaksin1Mahasiswa,vaksin2Mahasiswa,vaksin3Mahasiswa,vaksin4Mahasiswa,vaksin5Mahasiswa,maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20;
-    int sinovacVaksin,bioFarmaVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
+    int maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20,card1InformationRepeater = 0;
+    int sinovacVaksin,sputnikVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
     int vaksinCardValue1,vaksinCardValue2,vaksinCardValue3,vaksinCardValue4,vaksinCardValue5,vaksinCardValue6,vaksinCardValue7,boosterValue1,boosterValue2,boosterValue3;
     boolean card1=true,card2=true,card3=true,card4=true,card5=true,card6=true,card7=true,card8 = true, card9 = true, card10=true;
-    boolean sinovac=true,biofarma=true,novavax=true,oxfordaz=true,pfizerbt=true,moderna=true,sinopharm=true;
+    boolean sinovac=true,sputnik=true,novavax=true,oxfordaz=true,pfizerbt=true,moderna=true,sinopharm=true;
     boolean pfizerCard = true, astrazenecaCard = true, modernaCard =true, tableClicked = false;
-    int sinovacValue,biofarmaValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue;
+    int sinovacValue,sputnikValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue;
     /**
      * Creates new form UI
      */
     public UI() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        double width = toolkit.getScreenSize().getWidth();
+        double height = toolkit.getScreenSize().getHeight();
+        
+        if (width > 1366 && height > 768) {
+            this.setSize(1366, 768);
+        }else{
+            this.setSize((int)width, (int)height);
+        }   
         initComponents();
         bahasa();
         displayDataMahasiswa();
@@ -74,12 +83,9 @@ public class UI extends javax.swing.JFrame {
         startUp();
         colorStartUp();
         defaultTableModel();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        double width = toolkit.getScreenSize().getWidth();
-        double height = toolkit.getScreenSize().getHeight();
-        this.setSize((int)width, (int)height);
         
     }
+
     private void defaultTableModel(){
         String [] defaultTable = {"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()};
         model = new DefaultTableModel(defaultTable, 0);
@@ -93,10 +99,11 @@ public class UI extends javax.swing.JFrame {
         DashBoardPanel.setVisible(true);
         DataPanel.setVisible(false);
         AboutPanel.setVisible(false);
+        InformationPanel.setVisible(false);
         dashboardButton.setContentAreaFilled(false);
         dataButton.setContentAreaFilled(false);
-        aboutButton.setContentAreaFilled(false);
-        aboutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
+        otherButton.setContentAreaFilled(false);
+        otherButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
         dashboardButton.setForeground(new Color(91,124,253));
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.dashboard1Url)));
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
@@ -109,7 +116,7 @@ public class UI extends javax.swing.JFrame {
     
     class UrlSource{
         String sinovacUrl = "/Image/sinovacCard.png";
-        String biofarmaUrl = "/Image/biofarmaCard.png";
+        String sputnik = "/Image/sputnikCard.png";
         String novavaxUrl = "/Image/novavaxCard.png";
         String astrazenecaUrl = "/Image/astrazenecaCard.png";
         String pfizerUrl = "/Image/pfizerCard.png";
@@ -137,6 +144,55 @@ public class UI extends javax.swing.JFrame {
         }
         public Color background(){
             return new Color(245,246,251);
+        }
+        public Color SinovacCardPanel(boolean val){
+            if (val == true) {
+                return new Color(16,116,182);
+            } else {
+                return new Color(98,177,229);
+            }
+        }
+        public Color SputnikCardPanel(boolean val){
+            if (val == true) {
+                return new Color(0,165,143);
+            } else {
+                return new Color(71,236,214);
+            }
+        }
+        public Color NovavaxCardPanel(boolean val){
+            if (val == true) {
+                return new Color(149,182,71);
+            } else {
+                return new Color(193,213,147);
+            }
+        }
+        public Color AstrazenecaCardPanel(boolean val){
+            if (val == true) {
+                return new Color(250,168,33);
+            } else {
+                return new Color(254,204,124);
+            }
+        }
+        public Color PfizerCardPanel(boolean val){
+            if (val == true) {
+                return new Color(199,60,60);
+            } else {
+                return new Color(223,140,140);
+            }
+        }
+        public Color ModernaCardPanel(boolean val){
+            if (val == true) {
+                return new Color(66,84,106);
+            } else {
+                return new Color(135,154,174);
+            }
+        }
+        public Color SinopharmCardPanel(boolean val){
+            if (val == true) {
+                return new Color(128,90,163);
+            } else {
+                return new Color(204,153,210);
+            }
         }
     }
     private void colorStartUp(){
@@ -246,7 +302,8 @@ public class UI extends javax.swing.JFrame {
         labelMahasiswa5.setText(bahasa.getMahasiswa());
         dashboardButton.setText(bahasa.getDashboard());
         dataButton.setText(bahasa.getData());
-        aboutButton.setText(bahasa.getAbout());
+        informationButton.setText(bahasa.getInformation());
+        otherButton.setText(bahasa.getOther());
         //=======Button========
         simpanButton.setText(bahasa.getButtonSimpan());
         hapusButton.setText(bahasa.getButtonHapus());
@@ -260,9 +317,9 @@ public class UI extends javax.swing.JFrame {
         tableClicked = false;
     }
     private void dataSortingProgress(){     
-        vaksin1 = 0; vaksin2 = 0; vaksin3 = 0; vaksin4 = 0; vaksin5 = 0;
-        vaksin1Mahasiswa = 0; vaksin2Mahasiswa = 0; vaksin3Mahasiswa = 0; vaksin4Mahasiswa = 0; vaksin5Mahasiswa = 0;
-        sinovacVaksin = 0; bioFarmaVaksin = 0; novavaxVaksin = 0; oxfordAZVaksin = 0; pfizerBTVaksin = 0; modernaVaksin = 0; sinopharmVaksin = 0;
+        value.setVaksin1(0); value.setVaksin2(0); value.setVaksin3(0);value.setVaksin4(0);value.setVaksin5(0);
+        value.setMahasiswaVaksin1(0); value.setMahasiswaVaksin2(0);value.setMahasiswaVaksin3(0);value.setMahasiswaVaksin4(0);value.setMahasiswaVaksin5(0);
+        sinovacVaksin = 0; sputnikVaksin = 0; novavaxVaksin = 0; oxfordAZVaksin = 0; pfizerBTVaksin = 0; modernaVaksin = 0; sinopharmVaksin = 0;
         pfizerBTBooster = 0; oxfordAZBooster = 0; modernaBooster = 0;
         List<userModel> ls = new ArrayList<userModel>();
         ls = new userData().getAll();
@@ -271,25 +328,25 @@ public class UI extends javax.swing.JFrame {
                 DataSort[i][0] = ls.get(i).getNIM();
                 DataSort[i][1] = ls.get(i).getNama();
                 DataSort[i][2] = ls.get(i).getVaksin1();
-                if (DataSort[i][2].equals("-") == false) {vaksin1++;vaksin1Mahasiswa++;}
+                if (DataSort[i][2].equals("-") == false) {value.addVaksin1();value.addMahasiswaVaksin1();}
                 if(DataSort[i][2].equals("Sinovac") == true){sinovacVaksin++;}
-                else if(DataSort[i][2].equals("PT Bio Farma") == true){bioFarmaVaksin++;}
+                else if(DataSort[i][2].equals("Sputnik V") == true){sputnikVaksin++;}
                 else if(DataSort[i][2].equals("Novavax") == true){novavaxVaksin++;}
                 else if(DataSort[i][2].equals("Oxford-AstraZeneca") == true){oxfordAZVaksin++;}
                 else if(DataSort[i][2].equals("Pfizer-BioNTech") == true){pfizerBTVaksin++;}
                 else if(DataSort[i][2].equals("Moderna") == true){modernaVaksin++;}
                 else if(DataSort[i][2].equals("Sinopharm") == true){sinopharmVaksin++;}
                 DataSort[i][3] = ls.get(i).getVaksin2();
-                if (DataSort[i][3].equals("-") == false) {vaksin2++;vaksin2Mahasiswa++;}
+                if (DataSort[i][3].equals("-") == false) {value.addVaksin2();value.addMahasiswaVaksin2();}
                 DataSort[i][4] = ls.get(i).getVaksin3();
-                if (DataSort[i][4].equals("-") == false) {vaksin3++;vaksin3Mahasiswa++;}
+                if (DataSort[i][4].equals("-") == false) {value.addVaksin3();value.addMahasiswaVaksin3();}
                 if (DataSort[i][4].equals("Pfizer-BioNTech") == true) {pfizerBTBooster++;}
                 else if (DataSort[i][4].equals("Oxford-AstraZeneca") == true) {oxfordAZBooster++;}
                 else if (DataSort[i][4].equals("Moderna") == true) {modernaBooster++;}
                 DataSort[i][5] = ls.get(i).getVaksin4();
-                if (DataSort[i][5].equals("-") == false) {vaksin4++;vaksin4Mahasiswa++;}
+                if (DataSort[i][5].equals("-") == false) {value.addVaksin4();value.addMahasiswaVaksin4();}
                 DataSort[i][6] = ls.get(i).getVaksin5();
-                if (DataSort[i][6].equals("-") == false) {vaksin5++;vaksin5Mahasiswa++;}
+                if (DataSort[i][6].equals("-") == false) {value.addVaksin5();value.addMahasiswaVaksin5();}
             }
         diagramValueResponsive();
         
@@ -370,16 +427,16 @@ public class UI extends javax.swing.JFrame {
     
     private void cardVaksinSortingAlgortim(){
         //String sinovacString = "" + sinovacVaksin;
-        sinovac=true;biofarma=true;novavax=true;oxfordaz=true;pfizerbt=true;moderna=true;sinopharm=true;
+        sinovac=true;sputnik=true;novavax=true;oxfordaz=true;pfizerbt=true;moderna=true;sinopharm=true;
         card1 = true;card2 = true;card3 = true;card4 = true;card5 = true;card6 = true;card7 = true;
         sinovacValue = sinovacVaksin;
-        biofarmaValue = bioFarmaVaksin;
+        sputnikValue = sputnikVaksin;
         novavaxValue = novavaxVaksin;
         oxfordazValue = oxfordAZVaksin;
         pfizerbtValue = pfizerBTVaksin;
         modernaValue = modernaVaksin;
         sinopharmValue = sinopharmVaksin;
-        int vaccineArray[] = {sinovacValue,biofarmaValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue};
+        int vaccineArray[] = {sinovacValue,sputnikValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue};
         Arrays.sort(vaccineArray);
         showSort(vaccineArray);
         cardVaksinValue1.setText("" + vaksinCardValue1);
@@ -390,7 +447,7 @@ public class UI extends javax.swing.JFrame {
         cardVaksinValue6.setText("" + vaksinCardValue6);
         cardVaksinValue7.setText("" + vaksinCardValue7);
         titleSort(sinovacVaksin);
-        titleSort(bioFarmaVaksin);
+        titleSort(sputnikVaksin);
         titleSort(novavaxVaksin);
         titleSort(oxfordAZVaksin);
         titleSort(pfizerBTVaksin);
@@ -416,10 +473,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle1.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue1 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle1.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue1 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle1.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue1 == novavaxVaksin && novavax == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle1.setText("Novavax");
@@ -448,10 +505,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle2.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue2 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle2.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue2 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle2.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue2 == novavaxVaksin && novavax == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle2.setText("Novavax");
@@ -480,10 +537,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle3.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue3 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle3.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue3 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle3.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue3 == novavaxVaksin && novavax == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle3.setText("Novavax");
@@ -512,10 +569,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle4.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue4 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle4.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue4 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle4.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue4 == novavaxVaksin && novavax == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle4.setText("Novavax");
@@ -544,10 +601,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle5.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue5 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle5.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue5 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle5.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue5 == novavaxVaksin && novavax == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle5.setText("Novavax");
@@ -576,10 +633,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle6.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue3 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle6.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue3 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle6.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue6 == novavaxVaksin && novavax == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle6.setText("Novavax");
@@ -608,10 +665,10 @@ public class UI extends javax.swing.JFrame {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle77.setText("Sinovac");
                 sinovac = false;
-            }else if (vaksinCardValue7 == bioFarmaVaksin && biofarma == true) {
-                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.biofarmaUrl)));
-                cardTitle77.setText("BioFarma");
-                biofarma = false;
+            }else if (vaksinCardValue7 == sputnikVaksin && sputnik == true) {
+                cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
+                cardTitle77.setText("Sputnik V");
+                sputnik = false;
             }else if (vaksinCardValue7 == novavaxVaksin && novavax == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle77.setText("Novavax");
@@ -637,7 +694,7 @@ public class UI extends javax.swing.JFrame {
         }
     }
     private void diagramValueResponsive(){
-    if (sinovacVaksin > maxDiagramVaksinValue || bioFarmaVaksin > maxDiagramVaksinValue || novavaxVaksin > maxDiagramVaksinValue || oxfordAZVaksin > maxDiagramVaksinValue | pfizerBTVaksin > maxDiagramVaksinValue || modernaVaksin > maxDiagramVaksinValue || sinopharmVaksin > maxDiagramVaksinValue) {
+    if (sinovacVaksin > maxDiagramVaksinValue || sputnikVaksin > maxDiagramVaksinValue || novavaxVaksin > maxDiagramVaksinValue || oxfordAZVaksin > maxDiagramVaksinValue | pfizerBTVaksin > maxDiagramVaksinValue || modernaVaksin > maxDiagramVaksinValue || sinopharmVaksin > maxDiagramVaksinValue) {
             maxDiagramVaksinValue += 20;
         }
     if (pfizerBTBooster > maxDiagramBoosterValue || oxfordAZBooster > maxDiagramBoosterValue || modernaBooster > maxDiagramBoosterValue) {
@@ -661,18 +718,18 @@ public class UI extends javax.swing.JFrame {
     diagramProgressBarBooster3.setMaximum(maxDiagramBoosterValue);
     }
     private void progressImplements(){
-        vaksin1ProgressBar.setValue(progressAlgoritm(vaksin1));
-        vaksin2ProgressBar.setValue(progressAlgoritm(vaksin2));
-        vaksin3ProgressBar.setValue(progressAlgoritm(vaksin3));
-        vaksin4ProgressBar.setValue(progressAlgoritm(vaksin4));
-        vaksin5ProgressBar.setValue(progressAlgoritm(vaksin5));
-        persentasiVaksin1.setText(progressAlgoritm(vaksin1)+"%");
-        persentasiVaksin2.setText(progressAlgoritm(vaksin2)+"%");
-        persentasiVaksin3.setText(progressAlgoritm(vaksin3)+"%");
-        persentasiVaksin4.setText(progressAlgoritm(vaksin4)+"%");
-        persentasiVaksin5.setText(progressAlgoritm(vaksin5)+"%");
+        vaksin1ProgressBar.setValue(progressAlgoritm(value.getVaksin1()));
+        vaksin2ProgressBar.setValue(progressAlgoritm(value.getVaksin2()));
+        vaksin3ProgressBar.setValue(progressAlgoritm(value.getVaksin3()));
+        vaksin4ProgressBar.setValue(progressAlgoritm(value.getVaksin4()));
+        vaksin5ProgressBar.setValue(progressAlgoritm(value.getVaksin5()));
+        persentasiVaksin1.setText(progressAlgoritm(value.getVaksin1()) +"%");
+        persentasiVaksin2.setText(progressAlgoritm(value.getVaksin2())+"%");
+        persentasiVaksin3.setText(progressAlgoritm(value.getVaksin3())+"%");
+        persentasiVaksin4.setText(progressAlgoritm(value.getVaksin4())+"%");
+        persentasiVaksin5.setText(progressAlgoritm(value.getVaksin5())+"%");
         diagramProgressBarVaksin1.setValue(sinovacVaksin);
-        diagramProgressBaVaksinr2.setValue(bioFarmaVaksin);
+        diagramProgressBaVaksinr2.setValue(sputnikVaksin);
         diagramProgressBarVaksin3.setValue(novavaxVaksin);
         diagramProgressBarVaksin4.setValue(oxfordAZVaksin);
         diagramProgressBarVaksin5.setValue(pfizerBTVaksin);
@@ -681,11 +738,11 @@ public class UI extends javax.swing.JFrame {
         diagramProgressBarBooster1.setValue(pfizerBTBooster);
         diagramProgressBarBooster2.setValue(oxfordAZBooster);
         diagramProgressBarBooster3.setValue(modernaBooster);
-        jumlahMahasiswaCardVaksin1.setText("" + vaksin1Mahasiswa);
-        jumlahMahasiswaCardVaksin2.setText("" + vaksin2Mahasiswa);
-        jumlahMahasiswaCardVaksin3.setText("" + vaksin3Mahasiswa);
-        jumlahMahasiswaCardVaksin4.setText("" + vaksin4Mahasiswa);
-        jumlahMahasiswaCardVaksin5.setText("" + vaksin5Mahasiswa);
+        jumlahMahasiswaCardVaksin1.setText("" + value.getMahasiswaVaksin1());
+        jumlahMahasiswaCardVaksin2.setText("" + value.getMahasiswaVaksin2());
+        jumlahMahasiswaCardVaksin3.setText("" + value.getMahasiswaVaksin3());
+        jumlahMahasiswaCardVaksin4.setText("" + value.getMahasiswaVaksin4());
+        jumlahMahasiswaCardVaksin5.setText("" + value.getMahasiswaVaksin5());
     }
     private int progressAlgoritm(double vaksin){
         double barisTabel = dataTable.getRowCount();
@@ -693,6 +750,145 @@ public class UI extends javax.swing.JFrame {
         int persentasi = (int) (pembagian * 100);
         return persentasi;
     }
+    private void printCard(final JPanel panel){
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        printerJob.setJobName("Print Record");
+        
+        printerJob.setPrintable(new Printable() {
+
+            @Override
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                if (pageIndex > 0) {
+                    return Printable.NO_SUCH_PAGE;
+                }
+                Graphics2D graphics2D = (Graphics2D)graphics;
+                graphics2D.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+                graphics2D.scale(0.6, 0.6);
+                panel.paint(graphics2D);
+                return Printable.PAGE_EXISTS;
+            }
+        });
+        boolean returningResult = printerJob.printDialog();
+        if (returningResult) {
+            try {
+                printerJob.print();
+            } catch (Exception e) {
+                showMessageDialog("Print Error");
+            }
+        }
+    }
+    private void fileChooser(String dataType){
+        JFileChooser fileChooser = new JFileChooser();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        String date = dateFormat.format(new Date());
+        fileChooser.showOpenDialog(this);
+        try {
+            File save = fileChooser.getSelectedFile();
+            String path = save.getAbsolutePath();
+            path = path +"_"+date+dataType;
+            browseText.setText(path);
+        } catch (Exception e) {
+            
+        }
+    }
+    public void exportToTXT(){
+        String filePath = browseText.getText();
+        File file = new File(filePath);
+        try {
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < dataTable.getRowCount(); i++) {
+                for (int j = 0; j < dataTable.getColumnCount(); j++) {
+                    bw.write(dataTable.getValueAt(i, j).toString()+" ");
+                }
+                bw.newLine();
+            }
+            bw.close();
+            fw.close();
+            JOptionPane.showMessageDialog(this, bahasa.getMessageError7());
+        } catch (IOException | HeadlessException e) {
+        }
+    }
+    public void exportToPDF(){
+        MessageFormat footer = new MessageFormat("Halaman {0,number,integer}");
+        MessageFormat header = new MessageFormat("Medical Assist Software");
+        try {
+            dataTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        } catch (Exception e) {
+        }
+    }
+    public void exportToExcel(){
+        XSSFWorkbook workBook = new XSSFWorkbook();
+        XSSFSheet workSheet = workBook.createSheet();
+        //TableModel model = dataTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
+        TreeMap<String, Object[] > map = new TreeMap<>();
+        map.put("0", new Object[]{model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),
+        model.getColumnName(4),model.getColumnName(5),model.getColumnName(6)});
+        
+        for (int i = 1; i < model.getRowCount(); ) {
+            map.put(Integer.toString(i), new Object[]{model.getValueAt(i, 0),model.getValueAt(i, 1),
+            model.getValueAt(i, 2),model.getValueAt(i, 3),model.getValueAt(i, 4),model.getValueAt(i, 5),
+            model.getValueAt(i, 6)});
+            i++;
+        }
+        Set<String> id = map.keySet();
+        XSSFRow fRow;
+        int rowId = 0;
+        
+        for (String key: id) {
+            fRow = workSheet.createRow(rowId);
+            Object[] value = map.get(key);
+            int cellId = 0;
+            for(Object object : value){
+                XSSFCell cell = fRow.createCell(cellId);
+                cell.setCellValue(object.toString());
+                cellId++;
+            }
+            rowId++;
+        }
+        try(FileOutputStream output = new FileOutputStream(new File(browseText.getText()));) {
+            
+            workBook.write(output);
+            JOptionPane.showMessageDialog(this, bahasa.getMessageError8());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+     private void searchData(String input){
+        List<userModel> ls = new ArrayList<userModel>();
+        ls = new userData().searchData(input);
+        String DataMahasiswa[][] = new String[ls.size()][7];
+        for (int i = 0; i < ls.size(); i++) {
+            DataMahasiswa[i][0] = ls.get(i).getNIM();
+            DataMahasiswa[i][1] = ls.get(i).getNama();
+            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
+            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
+            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
+            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
+            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
+        }
+        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
+    }
+    private void showOnlySort(int value){
+        List<userModel> ls = new ArrayList<userModel>();
+        ls = new userData().showOnly(value);
+        String DataMahasiswa[][] = new String[ls.size()][7];
+        for (int i = 0; i < ls.size(); i++) {
+            DataMahasiswa[i][0] = ls.get(i).getNIM();
+            DataMahasiswa[i][1] = ls.get(i).getNama();
+            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
+            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
+            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
+            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
+            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
+        }
+        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -704,6 +900,8 @@ public class UI extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         DashBoardPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -893,17 +1091,76 @@ public class UI extends javax.swing.JFrame {
         nimCardPrint = new javax.swing.JLabel();
         namaCardPrint = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        InformationPanel = new javax.swing.JPanel();
+        centerInformationPanel = new javax.swing.JPanel();
+        informationPanel = new javax.swing.JPanel();
+        informationImage = new javax.swing.JLabel();
+        informationVaksinTitle = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        informationVaksin = new javax.swing.JLabel();
+        informationBooster1 = new javax.swing.JLabel();
+        informationBooster2 = new javax.swing.JLabel();
+        informationBooster3 = new javax.swing.JLabel();
+        informationEfektivitas1 = new javax.swing.JLabel();
+        informationEfektivitas2 = new javax.swing.JLabel();
+        informationEfektivitas3 = new javax.swing.JLabel();
+        informationJenisVaksin = new javax.swing.JLabel();
+        informationEfikasi = new javax.swing.JLabel();
+        informationDosis = new javax.swing.JLabel();
+        informationUsia = new javax.swing.JLabel();
+        informationPanel1 = new javax.swing.JPanel();
+        sinovacInformationButton = new javax.swing.JButton();
+        informationPanel2 = new javax.swing.JPanel();
+        sputnikInformationButton = new javax.swing.JButton();
+        informationPanel3 = new javax.swing.JPanel();
+        novavaxInformationButton = new javax.swing.JButton();
+        informationPanel4 = new javax.swing.JPanel();
+        astrazenecaInformationButton = new javax.swing.JButton();
+        informationPanel5 = new javax.swing.JPanel();
+        pfizerInformationButton = new javax.swing.JButton();
+        informationPanel6 = new javax.swing.JPanel();
+        modernaInformationButton = new javax.swing.JButton();
+        informationPanel7 = new javax.swing.JPanel();
+        sinopharmInformationButton = new javax.swing.JButton();
         AboutPanel = new javax.swing.JPanel();
         dashboardButton = new javax.swing.JButton();
         dataButton = new javax.swing.JButton();
-        aboutButton = new javax.swing.JButton();
+        otherButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         bahasaComboBox = new javax.swing.JComboBox();
+        informationButton = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
         jPopupMenu1.add(jMenuItem1);
 
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(jLabel20)
+                .addContainerGap(322, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(jLabel20)
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Medical Assist Software");
         setBackground(new java.awt.Color(196, 202, 233));
         setUndecorated(true);
 
@@ -1377,7 +1634,7 @@ public class UI extends javax.swing.JFrame {
         diagramHalfMaxValue3.setFont(new java.awt.Font("Dubai Light", 0, 11)); // NOI18N
         diagramHalfMaxValue3.setForeground(new java.awt.Color(91, 124, 253));
         diagramHalfMaxValue3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        diagramHalfMaxValue3.setText("BioFarma");
+        diagramHalfMaxValue3.setText("Sputnik V");
 
         diagramHalfMaxValue4.setFont(new java.awt.Font("Dubai Light", 0, 11)); // NOI18N
         diagramHalfMaxValue4.setForeground(new java.awt.Color(91, 124, 253));
@@ -2582,7 +2839,7 @@ public class UI extends javax.swing.JFrame {
         );
         browsePanelLayout.setVerticalGroup(
             browsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(browseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         browseText.setEditable(false);
@@ -2685,8 +2942,8 @@ public class UI extends javax.swing.JFrame {
                     .addGroup(DataPanelLayout.createSequentialGroup()
                         .addGroup(DataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(showComboBox, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(browsePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                            .addComponent(exportPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(browsePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(exportPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                             .addComponent(exportComboBox, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(browseText, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(17, 17, 17))
@@ -2993,7 +3250,7 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(vaksinCardPrint1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(vaksin2CardPrint))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(vaksinCardPrint1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(vaksinCardPrint1Layout.createSequentialGroup()
@@ -3040,6 +3297,491 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
+        InformationPanel.setBackground(new java.awt.Color(245, 246, 251));
+
+        centerInformationPanel.setBackground(new java.awt.Color(255, 255, 255));
+        centerInformationPanel.setPreferredSize(new java.awt.Dimension(300, 440));
+
+        informationPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        informationImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png"))); // NOI18N
+
+        informationVaksinTitle.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        informationVaksinTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationVaksinTitle.setText("VACCINE");
+
+        jLabel31.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel31.setText(" Jenis Vaksin");
+
+        jLabel32.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel32.setText(" Efikasi*");
+
+        jLabel33.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel33.setText(" Dosis");
+
+        jLabel34.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel34.setText(" Kelompok Usia");
+
+        jLabel35.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setText("Vaksin");
+
+        jLabel36.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setText("Booster");
+
+        jLabel37.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setText("Efektivitas");
+
+        informationVaksin.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationVaksin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationVaksin.setText("Vaksin");
+        informationVaksin.setPreferredSize(new java.awt.Dimension(79, 21));
+
+        informationBooster1.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationBooster1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationBooster1.setText("Bosoter");
+        informationBooster1.setPreferredSize(new java.awt.Dimension(89, 21));
+
+        informationBooster2.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationBooster2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationBooster2.setText("Booster");
+        informationBooster2.setPreferredSize(new java.awt.Dimension(89, 21));
+
+        informationBooster3.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationBooster3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationBooster3.setText("Booster");
+        informationBooster3.setPreferredSize(new java.awt.Dimension(89, 21));
+
+        informationEfektivitas1.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationEfektivitas1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationEfektivitas1.setText("Efektivitas");
+        informationEfektivitas1.setPreferredSize(new java.awt.Dimension(89, 21));
+
+        informationEfektivitas2.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationEfektivitas2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationEfektivitas2.setText("Efektivitas");
+        informationEfektivitas2.setPreferredSize(new java.awt.Dimension(89, 21));
+
+        informationEfektivitas3.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
+        informationEfektivitas3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationEfektivitas3.setText("Efektivitas");
+        informationEfektivitas3.setPreferredSize(new java.awt.Dimension(89, 21));
+
+        informationJenisVaksin.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
+        informationJenisVaksin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationJenisVaksin.setText("Jenis Vaksin");
+
+        informationEfikasi.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
+        informationEfikasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationEfikasi.setText("Efikasi");
+
+        informationDosis.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
+        informationDosis.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationDosis.setText("Dosis");
+
+        informationUsia.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
+        informationUsia.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationUsia.setText("Rentan Usia");
+
+        javax.swing.GroupLayout informationPanelLayout = new javax.swing.GroupLayout(informationPanel);
+        informationPanel.setLayout(informationPanelLayout);
+        informationPanelLayout.setHorizontalGroup(
+            informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addGroup(informationPanelLayout.createSequentialGroup()
+                .addComponent(informationVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(informationBooster1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(informationEfektivitas1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+            .addGroup(informationPanelLayout.createSequentialGroup()
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(informationPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(informationUsia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(informationPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(informationJenisVaksin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(informationPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(informationEfikasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(informationPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(informationDosis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(informationPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(informationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(informationVaksinTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(informationPanelLayout.createSequentialGroup()
+                        .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(informationPanelLayout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(informationBooster2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, informationPanelLayout.createSequentialGroup()
+                                .addComponent(informationBooster3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(informationEfektivitas2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(informationEfektivitas3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
+        );
+        informationPanelLayout.setVerticalGroup(
+            informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(informationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(informationImage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(informationVaksinTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel31)
+                    .addComponent(informationJenisVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(informationEfikasi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(informationDosis))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(informationUsia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(informationVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(informationBooster1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(informationEfektivitas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(informationEfektivitas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(informationBooster2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(informationBooster3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(informationEfektivitas3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout centerInformationPanelLayout = new javax.swing.GroupLayout(centerInformationPanel);
+        centerInformationPanel.setLayout(centerInformationPanelLayout);
+        centerInformationPanelLayout.setHorizontalGroup(
+            centerInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(centerInformationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(informationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        centerInformationPanelLayout.setVerticalGroup(
+            centerInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(centerInformationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(informationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        informationPanel1.setBackground(new java.awt.Color(16, 116, 182));
+
+        sinovacInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        sinovacInformationButton.setForeground(new java.awt.Color(98, 177, 229));
+        sinovacInformationButton.setText("SINOVAC");
+        sinovacInformationButton.setBorderPainted(false);
+        sinovacInformationButton.setContentAreaFilled(false);
+        sinovacInformationButton.setFocusable(false);
+        sinovacInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonSinovacMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sinovacInformationButtonMouseExited(evt);
+            }
+        });
+        sinovacInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sinovacInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel1Layout = new javax.swing.GroupLayout(informationPanel1);
+        informationPanel1.setLayout(informationPanel1Layout);
+        informationPanel1Layout.setHorizontalGroup(
+            informationPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sinovacInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        informationPanel1Layout.setVerticalGroup(
+            informationPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sinovacInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        informationPanel2.setBackground(new java.awt.Color(0, 165, 143));
+
+        sputnikInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        sputnikInformationButton.setForeground(new java.awt.Color(71, 236, 214));
+        sputnikInformationButton.setText("SPUTNIK V");
+        sputnikInformationButton.setBorderPainted(false);
+        sputnikInformationButton.setContentAreaFilled(false);
+        sputnikInformationButton.setFocusable(false);
+        sputnikInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sputnikInformationButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sputnikInformationButtonMouseExited(evt);
+            }
+        });
+        sputnikInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sputnikInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel2Layout = new javax.swing.GroupLayout(informationPanel2);
+        informationPanel2.setLayout(informationPanel2Layout);
+        informationPanel2Layout.setHorizontalGroup(
+            informationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sputnikInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+        informationPanel2Layout.setVerticalGroup(
+            informationPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sputnikInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        informationPanel3.setBackground(new java.awt.Color(149, 182, 71));
+
+        novavaxInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        novavaxInformationButton.setForeground(new java.awt.Color(193, 213, 147));
+        novavaxInformationButton.setText("NOVAVAX");
+        novavaxInformationButton.setBorderPainted(false);
+        novavaxInformationButton.setContentAreaFilled(false);
+        novavaxInformationButton.setFocusable(false);
+        novavaxInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                novavaxInformationButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                novavaxInformationButtonMouseExited(evt);
+            }
+        });
+        novavaxInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novavaxInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel3Layout = new javax.swing.GroupLayout(informationPanel3);
+        informationPanel3.setLayout(informationPanel3Layout);
+        informationPanel3Layout.setHorizontalGroup(
+            informationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(novavaxInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        informationPanel3Layout.setVerticalGroup(
+            informationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(novavaxInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        informationPanel4.setBackground(new java.awt.Color(250, 168, 33));
+
+        astrazenecaInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        astrazenecaInformationButton.setForeground(new java.awt.Color(254, 204, 124));
+        astrazenecaInformationButton.setText("ASTRAZENECA");
+        astrazenecaInformationButton.setBorderPainted(false);
+        astrazenecaInformationButton.setContentAreaFilled(false);
+        astrazenecaInformationButton.setFocusable(false);
+        astrazenecaInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                astrazenecaInformationButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                astrazenecaInformationButtonMouseExited(evt);
+            }
+        });
+        astrazenecaInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                astrazenecaInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel4Layout = new javax.swing.GroupLayout(informationPanel4);
+        informationPanel4.setLayout(informationPanel4Layout);
+        informationPanel4Layout.setHorizontalGroup(
+            informationPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(astrazenecaInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+        informationPanel4Layout.setVerticalGroup(
+            informationPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(astrazenecaInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        informationPanel5.setBackground(new java.awt.Color(199, 60, 60));
+
+        pfizerInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        pfizerInformationButton.setForeground(new java.awt.Color(223, 140, 140));
+        pfizerInformationButton.setText("PFIZER");
+        pfizerInformationButton.setBorderPainted(false);
+        pfizerInformationButton.setContentAreaFilled(false);
+        pfizerInformationButton.setFocusable(false);
+        pfizerInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pfizerInformationButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pfizerInformationButtonMouseExited(evt);
+            }
+        });
+        pfizerInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pfizerInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel5Layout = new javax.swing.GroupLayout(informationPanel5);
+        informationPanel5.setLayout(informationPanel5Layout);
+        informationPanel5Layout.setHorizontalGroup(
+            informationPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pfizerInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        informationPanel5Layout.setVerticalGroup(
+            informationPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pfizerInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        informationPanel6.setBackground(new java.awt.Color(66, 84, 106));
+
+        modernaInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        modernaInformationButton.setForeground(new java.awt.Color(135, 154, 174));
+        modernaInformationButton.setText("MODERNA");
+        modernaInformationButton.setBorderPainted(false);
+        modernaInformationButton.setContentAreaFilled(false);
+        modernaInformationButton.setFocusable(false);
+        modernaInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modernaInformationButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modernaInformationButtonMouseExited(evt);
+            }
+        });
+        modernaInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modernaInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel6Layout = new javax.swing.GroupLayout(informationPanel6);
+        informationPanel6.setLayout(informationPanel6Layout);
+        informationPanel6Layout.setHorizontalGroup(
+            informationPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(modernaInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        informationPanel6Layout.setVerticalGroup(
+            informationPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(modernaInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        informationPanel7.setBackground(new java.awt.Color(128, 90, 163));
+
+        sinopharmInformationButton.setFont(new java.awt.Font("Dubai Medium", 1, 24)); // NOI18N
+        sinopharmInformationButton.setForeground(new java.awt.Color(204, 153, 210));
+        sinopharmInformationButton.setText("SINOPHARM");
+        sinopharmInformationButton.setBorderPainted(false);
+        sinopharmInformationButton.setContentAreaFilled(false);
+        sinopharmInformationButton.setFocusable(false);
+        sinopharmInformationButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sinopharmInformationButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sinopharmInformationButtonMouseExited(evt);
+            }
+        });
+        sinopharmInformationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sinopharmInformationButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout informationPanel7Layout = new javax.swing.GroupLayout(informationPanel7);
+        informationPanel7.setLayout(informationPanel7Layout);
+        informationPanel7Layout.setHorizontalGroup(
+            informationPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sinopharmInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        );
+        informationPanel7Layout.setVerticalGroup(
+            informationPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sinopharmInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout InformationPanelLayout = new javax.swing.GroupLayout(InformationPanel);
+        InformationPanel.setLayout(InformationPanelLayout);
+        InformationPanelLayout.setHorizontalGroup(
+            InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InformationPanelLayout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(informationPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(centerInformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(informationPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(183, Short.MAX_VALUE))
+        );
+        InformationPanelLayout.setVerticalGroup(
+            InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InformationPanelLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationPanelLayout.createSequentialGroup()
+                        .addComponent(informationPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(informationPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationPanelLayout.createSequentialGroup()
+                        .addComponent(informationPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(informationPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(centerInformationPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(informationPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+        );
+
+        AboutPanel.setBackground(new java.awt.Color(245, 246, 251));
         AboutPanel.setMinimumSize(new java.awt.Dimension(1082, 747));
         AboutPanel.setName(""); // NOI18N
         AboutPanel.setPreferredSize(new java.awt.Dimension(1366, 714));
@@ -3085,17 +3827,17 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        aboutButton.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
-        aboutButton.setForeground(new java.awt.Color(153, 153, 153));
-        aboutButton.setText("  About");
-        aboutButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        aboutButton.setBorderPainted(false);
-        aboutButton.setContentAreaFilled(false);
-        aboutButton.setFocusPainted(false);
-        aboutButton.setFocusable(false);
-        aboutButton.addActionListener(new java.awt.event.ActionListener() {
+        otherButton.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        otherButton.setForeground(new java.awt.Color(153, 153, 153));
+        otherButton.setText("  Other");
+        otherButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        otherButton.setBorderPainted(false);
+        otherButton.setContentAreaFilled(false);
+        otherButton.setFocusPainted(false);
+        otherButton.setFocusable(false);
+        otherButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutButtonActionPerformed(evt);
+                otherButtonActionPerformed(evt);
             }
         });
 
@@ -3111,47 +3853,69 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        informationButton.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
+        informationButton.setForeground(new java.awt.Color(153, 153, 153));
+        informationButton.setText("  Information");
+        informationButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        informationButton.setBorderPainted(false);
+        informationButton.setContentAreaFilled(false);
+        informationButton.setFocusPainted(false);
+        informationButton.setFocusable(false);
+        informationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informationButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1466, Short.MAX_VALUE)
+            .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addGap(225, 225, 225)
+                .addGap(129, 129, 129)
                 .addComponent(dashboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139)
+                .addComponent(informationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(otherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bahasaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(82, 82, 82))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(DashBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(AboutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1466, Short.MAX_VALUE))
+                .addComponent(AboutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(hiddenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(InformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(dashboardButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(aboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)))
-                    .addComponent(bahasaComboBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+                            .addComponent(otherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bahasaComboBox)
+                            .addComponent(informationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(12, 12, 12)
+                .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
@@ -3168,17 +3932,22 @@ public class UI extends javax.swing.JFrame {
                     .addGap(58, 58, 58)
                     .addComponent(hiddenPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(18, Short.MAX_VALUE)))
+            .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                    .addContainerGap(58, Short.MAX_VALUE)
+                    .addComponent(InformationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1466, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -3187,14 +3956,16 @@ public class UI extends javax.swing.JFrame {
     private void dashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtonActionPerformed
         dashboardButton.setForeground(new Color(91,124,253));
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.dashboard1Url)));
-        aboutButton.setForeground(colorSource.abuabu());
-        aboutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
+        otherButton.setForeground(colorSource.abuabu());
+        otherButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
         dataButton.setForeground(colorSource.abuabu());
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
+        informationButton.setForeground(colorSource.abuabu());
         dataButtonVisible(false);
         DashBoardPanel.setVisible(true);
         DataPanel.setVisible(false);
         AboutPanel.setVisible(false);
+        InformationPanel.setVisible(false);
         displayDataMahasiswa();
         reset();
         dataSortingProgress();
@@ -3206,10 +3977,12 @@ public class UI extends javax.swing.JFrame {
     private void dataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataButtonActionPerformed
         dashboardButton.setForeground(colorSource.abuabu());
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.dashboard2Url)));
-        aboutButton.setForeground(colorSource.abuabu());
-        aboutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
+        otherButton.setForeground(colorSource.abuabu());
+        otherButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
         dataButton.setForeground(new Color(91,124,253));
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data1Url)));
+        informationButton.setForeground(colorSource.abuabu());
+        InformationPanel.setVisible(false);
         dataButtonVisible(true);
         DashBoardPanel.setVisible(false);
         DataPanel.setVisible(true);
@@ -3217,18 +3990,20 @@ public class UI extends javax.swing.JFrame {
         displayDataMahasiswa();
     }//GEN-LAST:event_dataButtonActionPerformed
 
-    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
+    private void otherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_otherButtonActionPerformed
         dashboardButton.setForeground(colorSource.abuabu());
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.dashboard2Url)));
-        aboutButton.setForeground(new Color(91,124,253));
-        aboutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about1Url)));
+        otherButton.setForeground(new Color(91,124,253));
+        otherButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about1Url)));
         dataButton.setForeground(colorSource.abuabu());
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
+        informationButton.setForeground(colorSource.abuabu());
+        InformationPanel.setVisible(false);
         DashBoardPanel.setVisible(false);
         DataPanel.setVisible(false);
         AboutPanel.setVisible(true);
         dataButtonVisible(false);
-    }//GEN-LAST:event_aboutButtonActionPerformed
+    }//GEN-LAST:event_otherButtonActionPerformed
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         boolean prompt = true;
@@ -3555,114 +4330,6 @@ public class UI extends javax.swing.JFrame {
         
         browseText.setText("");
     }//GEN-LAST:event_exportButtonActionPerformed
-    private void printCard(final JPanel panel){
-        PrinterJob printerJob = PrinterJob.getPrinterJob();
-        printerJob.setJobName("Print Record");
-        
-        printerJob.setPrintable(new Printable() {
-
-            @Override
-            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-                if (pageIndex > 0) {
-                    return Printable.NO_SUCH_PAGE;
-                }
-                Graphics2D graphics2D = (Graphics2D)graphics;
-                graphics2D.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-                graphics2D.scale(0.6, 0.6);
-                panel.paint(graphics2D);
-                return Printable.PAGE_EXISTS;
-            }
-        });
-        boolean returningResult = printerJob.printDialog();
-        if (returningResult) {
-            try {
-                printerJob.print();
-            } catch (Exception e) {
-                showMessageDialog("Print Error");
-            }
-        }
-    }
-    private void fileChooser(String dataType){
-        JFileChooser fileChooser = new JFileChooser();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-        String date = dateFormat.format(new Date());
-        fileChooser.showOpenDialog(this);
-        try {
-            File save = fileChooser.getSelectedFile();
-            String path = save.getAbsolutePath();
-            path = path +"_"+date+dataType;
-            browseText.setText(path);
-        } catch (Exception e) {
-            
-        }
-    }
-    public void exportToTXT(){
-        String filePath = browseText.getText();
-        File file = new File(filePath);
-        try {
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < dataTable.getRowCount(); i++) {
-                for (int j = 0; j < dataTable.getColumnCount(); j++) {
-                    bw.write(dataTable.getValueAt(i, j).toString()+" ");
-                }
-                bw.newLine();
-            }
-            bw.close();
-            fw.close();
-            JOptionPane.showMessageDialog(this, bahasa.getMessageError7());
-        } catch (IOException | HeadlessException e) {
-        }
-    }
-    public void exportToPDF(){
-        MessageFormat footer = new MessageFormat("Halaman {0,number,integer}");
-        MessageFormat header = new MessageFormat("Medical Assist Software");
-        try {
-            dataTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e) {
-        }
-    }
-    public void exportToExcel(){
-        XSSFWorkbook workBook = new XSSFWorkbook();
-        XSSFSheet workSheet = workBook.createSheet();
-        //TableModel model = dataTable.getModel();
-        DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
-        TreeMap<String, Object[] > map = new TreeMap<>();
-        map.put("0", new Object[]{model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),
-        model.getColumnName(4),model.getColumnName(5),model.getColumnName(6)});
-        
-        for (int i = 1; i < model.getRowCount(); ) {
-            map.put(Integer.toString(i), new Object[]{model.getValueAt(i, 0),model.getValueAt(i, 1),
-            model.getValueAt(i, 2),model.getValueAt(i, 3),model.getValueAt(i, 4),model.getValueAt(i, 5),
-            model.getValueAt(i, 6)});
-            i++;
-        }
-        Set<String> id = map.keySet();
-        XSSFRow fRow;
-        int rowId = 0;
-        
-        for (String key: id) {
-            fRow = workSheet.createRow(rowId);
-            Object[] value = map.get(key);
-            int cellId = 0;
-            for(Object object : value){
-                XSSFCell cell = fRow.createCell(cellId);
-                cell.setCellValue(object.toString());
-                cellId++;
-            }
-            rowId++;
-        }
-        try(FileOutputStream output = new FileOutputStream(new File(browseText.getText()));) {
-            
-            workBook.write(output);
-            JOptionPane.showMessageDialog(this, bahasa.getMessageError8());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
     
     private void exportButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exportButtonMouseEntered
         exportButton.setForeground(Color.white);
@@ -3758,39 +4425,176 @@ public class UI extends javax.swing.JFrame {
     private void searchTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextFieldKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextFieldKeyTyped
+
+    private void informationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informationButtonActionPerformed
+        dashboardButton.setForeground(colorSource.abuabu());
+        dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.dashboard2Url)));
+        otherButton.setForeground(colorSource.abuabu());
+        otherButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.about2Url)));
+        dataButton.setForeground(colorSource.abuabu());
+        dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
+        informationButton.setForeground(colorSource.biruMuda());
+        dataButtonVisible(false);
+        DashBoardPanel.setVisible(false);
+        DataPanel.setVisible(false);
+        AboutPanel.setVisible(false);
+        InformationPanel.setVisible(true);
+    }//GEN-LAST:event_informationButtonActionPerformed
+
+    private void sinovacInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinovacInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.SinovacCardPanel(false));
+            centerInformation("Sinovac");
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_sinovacInformationButtonActionPerformed
+    private void centerInformation(String vaksin){
+        switch(vaksin){
+            case  "Sinovac" :
+                //Header
+                informationImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
+                informationVaksinTitle.setText("Sinovac");
+                //Section
+                informationJenisVaksin.setText("COVID-19 tidak aktif");
+                informationEfikasi.setText("50 - 91%");
+                informationDosis.setText("2x selang waktu 28 hari");
+                informationUsia.setText("12 - 59 tahun");
+                //Footer
+                informationVaksin.setText("Sinovac");
+                informationBooster1.setText("Sinovac");informationEfektivitas1.setText("70,89%");
+                informationBooster2.setText("Astrazeneca");informationEfektivitas2.setText("90,53%");
+                informationBooster3.setText("Pfizer");informationEfektivitas3.setText("93,18%");
+            break;
+        }
+    }
+    private void sputnikInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sputnikInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.SputnikCardPanel(false));
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_sputnikInformationButtonActionPerformed
+
+    private void novavaxInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novavaxInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.NovavaxCardPanel(false));
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_novavaxInformationButtonActionPerformed
+
+    private void astrazenecaInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_astrazenecaInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.AstrazenecaCardPanel(false));
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_astrazenecaInformationButtonActionPerformed
+
+    private void pfizerInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfizerInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.PfizerCardPanel(false));
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_pfizerInformationButtonActionPerformed
+
+    private void modernaInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modernaInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.ModernaCardPanel(false));
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_modernaInformationButtonActionPerformed
+
+    private void sinopharmInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinopharmInformationButtonActionPerformed
+        if (value.getCard1Repeater() % 2 == 0) {
+            centerInformationPanel.setBackground(colorSource.SinopharmCardPanel(false));
+        }else{
+            centerInformationPanel.setBackground(colorSource.background());
+        }
+        value.addCardRepeater();
+    }//GEN-LAST:event_sinopharmInformationButtonActionPerformed
+
+    private void buttonSinovacMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSinovacMouseEntered
+        informationPanel1.setBackground(colorSource.SinovacCardPanel(false));
+        sinovacInformationButton.setForeground(colorSource.SinovacCardPanel(true));
+    }//GEN-LAST:event_buttonSinovacMouseEntered
+
+    private void sinovacInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sinovacInformationButtonMouseExited
+        informationPanel1.setBackground(colorSource.SinovacCardPanel(true));
+        sinovacInformationButton.setForeground(colorSource.SinovacCardPanel(false));
+    }//GEN-LAST:event_sinovacInformationButtonMouseExited
+
+    private void sputnikInformationButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sputnikInformationButtonMouseEntered
+        informationPanel2.setBackground(colorSource.SputnikCardPanel(false));
+        sputnikInformationButton.setForeground(colorSource.SputnikCardPanel(true));
+    }//GEN-LAST:event_sputnikInformationButtonMouseEntered
+
+    private void sputnikInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sputnikInformationButtonMouseExited
+        informationPanel2.setBackground(colorSource.SputnikCardPanel(true));
+        sputnikInformationButton.setForeground(colorSource.SputnikCardPanel(false));
+    }//GEN-LAST:event_sputnikInformationButtonMouseExited
+
+    private void novavaxInformationButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novavaxInformationButtonMouseEntered
+        informationPanel3.setBackground(colorSource.NovavaxCardPanel(false));
+        novavaxInformationButton.setForeground(colorSource.NovavaxCardPanel(true));
+    }//GEN-LAST:event_novavaxInformationButtonMouseEntered
+
+    private void novavaxInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_novavaxInformationButtonMouseExited
+        informationPanel3.setBackground(colorSource.NovavaxCardPanel(true));
+        novavaxInformationButton.setForeground(colorSource.NovavaxCardPanel(false));
+    }//GEN-LAST:event_novavaxInformationButtonMouseExited
+
+    private void astrazenecaInformationButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_astrazenecaInformationButtonMouseEntered
+        informationPanel4.setBackground(colorSource.AstrazenecaCardPanel(false));
+        astrazenecaInformationButton.setForeground(colorSource.AstrazenecaCardPanel(true));
+    }//GEN-LAST:event_astrazenecaInformationButtonMouseEntered
+
+    private void astrazenecaInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_astrazenecaInformationButtonMouseExited
+        informationPanel4.setBackground(colorSource.NovavaxCardPanel(true));
+        novavaxInformationButton.setForeground(colorSource.NovavaxCardPanel(false));
+    }//GEN-LAST:event_astrazenecaInformationButtonMouseExited
+
+    private void pfizerInformationButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfizerInformationButtonMouseEntered
+        informationPanel5.setBackground(colorSource.PfizerCardPanel(false));
+        pfizerInformationButton.setForeground(colorSource.PfizerCardPanel(true));
+    }//GEN-LAST:event_pfizerInformationButtonMouseEntered
+
+    private void pfizerInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pfizerInformationButtonMouseExited
+        informationPanel5.setBackground(colorSource.PfizerCardPanel(true));
+        pfizerInformationButton.setForeground(colorSource.PfizerCardPanel(false));
+    }//GEN-LAST:event_pfizerInformationButtonMouseExited
+
+    private void modernaInformationButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modernaInformationButtonMouseEntered
+        informationPanel6.setBackground(colorSource.ModernaCardPanel(false));
+        modernaInformationButton.setForeground(colorSource.ModernaCardPanel(true));
+    }//GEN-LAST:event_modernaInformationButtonMouseEntered
+
+    private void modernaInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modernaInformationButtonMouseExited
+        informationPanel6.setBackground(colorSource.ModernaCardPanel(true));
+        modernaInformationButton.setForeground(colorSource.ModernaCardPanel(false));
+    }//GEN-LAST:event_modernaInformationButtonMouseExited
+
+    private void sinopharmInformationButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sinopharmInformationButtonMouseEntered
+        informationPanel7.setBackground(colorSource.SinopharmCardPanel(false));
+        sinopharmInformationButton.setForeground(colorSource.SinopharmCardPanel(true));
+    }//GEN-LAST:event_sinopharmInformationButtonMouseEntered
+
+    private void sinopharmInformationButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sinopharmInformationButtonMouseExited
+        informationPanel7.setBackground(colorSource.SinopharmCardPanel(true));
+        sinopharmInformationButton.setForeground(colorSource.SinopharmCardPanel(false));
+    }//GEN-LAST:event_sinopharmInformationButtonMouseExited
     
 
-    private void searchData(String input){
-        List<userModel> ls = new ArrayList<userModel>();
-        ls = new userData().searchData(input);
-        String DataMahasiswa[][] = new String[ls.size()][7];
-        for (int i = 0; i < ls.size(); i++) {
-            DataMahasiswa[i][0] = ls.get(i).getNIM();
-            DataMahasiswa[i][1] = ls.get(i).getNama();
-            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
-            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
-            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
-            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
-            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
-        }
-        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
-    }
-    private void showOnlySort(int value){
-        List<userModel> ls = new ArrayList<userModel>();
-        ls = new userData().showOnly(value);
-        String DataMahasiswa[][] = new String[ls.size()][7];
-        for (int i = 0; i < ls.size(); i++) {
-            DataMahasiswa[i][0] = ls.get(i).getNIM();
-            DataMahasiswa[i][1] = ls.get(i).getNama();
-            DataMahasiswa[i][2] = ls.get(i).getVaksin1();
-            DataMahasiswa[i][3] = ls.get(i).getVaksin2();
-            DataMahasiswa[i][4] = ls.get(i).getVaksin3();
-            DataMahasiswa[i][5] = ls.get(i).getVaksin4();
-            DataMahasiswa[i][6] = ls.get(i).getVaksin5();
-        }
-        dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
-    }
-
+   
     /**
      * @param args the command line arguments
      */
@@ -3831,7 +4635,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel AboutPanel;
     private javax.swing.JPanel DashBoardPanel;
     private javax.swing.JPanel DataPanel;
-    private javax.swing.JButton aboutButton;
+    private javax.swing.JPanel InformationPanel;
+    private javax.swing.JButton astrazenecaInformationButton;
     private javax.swing.JComboBox bahasaComboBox;
     private javax.swing.JLabel booster1CardPrint;
     private javax.swing.JLabel booster2CardPrint;
@@ -3890,6 +4695,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel cardVaksinValue5;
     private javax.swing.JLabel cardVaksinValue6;
     private javax.swing.JLabel cardVaksinValue7;
+    private javax.swing.JPanel centerInformationPanel;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JButton dataButton;
     private javax.swing.JLabel dataLabel1;
@@ -3934,6 +4740,28 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel hapusPanel;
     private javax.swing.JPanel hiddenPanel;
+    private javax.swing.JLabel informationBooster1;
+    private javax.swing.JLabel informationBooster2;
+    private javax.swing.JLabel informationBooster3;
+    private javax.swing.JButton informationButton;
+    private javax.swing.JLabel informationDosis;
+    private javax.swing.JLabel informationEfektivitas1;
+    private javax.swing.JLabel informationEfektivitas2;
+    private javax.swing.JLabel informationEfektivitas3;
+    private javax.swing.JLabel informationEfikasi;
+    private javax.swing.JLabel informationImage;
+    private javax.swing.JLabel informationJenisVaksin;
+    private javax.swing.JPanel informationPanel;
+    private javax.swing.JPanel informationPanel1;
+    private javax.swing.JPanel informationPanel2;
+    private javax.swing.JPanel informationPanel3;
+    private javax.swing.JPanel informationPanel4;
+    private javax.swing.JPanel informationPanel5;
+    private javax.swing.JPanel informationPanel6;
+    private javax.swing.JPanel informationPanel7;
+    private javax.swing.JLabel informationUsia;
+    private javax.swing.JLabel informationVaksin;
+    private javax.swing.JLabel informationVaksinTitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3945,6 +4773,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -3955,6 +4784,13 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3977,10 +4813,12 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin2;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin3;
@@ -3992,21 +4830,28 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel labelMahasiswa4;
     private javax.swing.JLabel labelMahasiswa5;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JButton modernaInformationButton;
     private javax.swing.JLabel namaCardPrint;
     private javax.swing.JTextField namaTextField;
     private javax.swing.JLabel nimCardPrint;
     private javax.swing.JTextField nimTextField;
+    private javax.swing.JButton novavaxInformationButton;
+    private javax.swing.JButton otherButton;
     private javax.swing.JLabel persentasiVaksin1;
     private javax.swing.JLabel persentasiVaksin2;
     private javax.swing.JLabel persentasiVaksin3;
     private javax.swing.JLabel persentasiVaksin4;
     private javax.swing.JLabel persentasiVaksin5;
+    private javax.swing.JButton pfizerInformationButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JPanel searchPanel;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JComboBox showComboBox;
     private javax.swing.JButton simpanButton;
     private javax.swing.JPanel simpanPanel;
+    private javax.swing.JButton sinopharmInformationButton;
+    private javax.swing.JButton sinovacInformationButton;
+    private javax.swing.JButton sputnikInformationButton;
     private javax.swing.JScrollPane tabelScroll;
     private javax.swing.JButton tambahButton;
     private javax.swing.JPanel tambahPanel;
