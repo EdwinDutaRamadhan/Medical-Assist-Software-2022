@@ -8,6 +8,7 @@ package View;
 import Data.userData;
 import Language.language;
 import Model.userModel;
+import Storage.informationData;
 import Storage.valueData;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -56,6 +57,7 @@ public class UI extends javax.swing.JFrame {
     ColorSource colorSource = new ColorSource();
     valueData value = new valueData();
     language bahasa = new language();
+    informationData information = new informationData();
     int maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20,card1InformationRepeater = 0;
     int sinovacVaksin,sputnikVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
     int vaksinCardValue1,vaksinCardValue2,vaksinCardValue3,vaksinCardValue4,vaksinCardValue5,vaksinCardValue6,vaksinCardValue7,boosterValue1,boosterValue2,boosterValue3;
@@ -888,7 +890,25 @@ public class UI extends javax.swing.JFrame {
         }
         dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
     }
-
+    private void centerInformation(int vaksin){
+        informationData information = new informationData();
+                //Header
+                informationImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(information.getVaksin(vaksin, 0))));
+                informationVaksinTitle.setText(information.getVaksin(vaksin, 1));
+                //Section
+                informationJenisVaksin.setText(information.getVaksin(vaksin, 2));
+                informationEfikasi.setText(information.getVaksin(vaksin, 3));
+                informationDosis.setText(information.getVaksin(vaksin, 4));
+                informationUsia.setText(information.getVaksin(vaksin, 5));
+                //Footer
+                informationVaksin.setText(information.getVaksin(vaksin, 6));
+                informationBooster1.setText(information.getVaksin(vaksin, 7));
+                informationBooster2.setText(information.getVaksin(vaksin, 8));
+                informationBooster3.setText(information.getVaksin(vaksin, 9));
+                informationEfektivitas1.setText(information.getVaksin(vaksin, 10));
+                informationEfektivitas2.setText(information.getVaksin(vaksin, 11));
+                informationEfektivitas3.setText(information.getVaksin(vaksin, 12));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1096,14 +1116,14 @@ public class UI extends javax.swing.JFrame {
         informationPanel = new javax.swing.JPanel();
         informationImage = new javax.swing.JLabel();
         informationVaksinTitle = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
+        informationJenisLabel = new javax.swing.JLabel();
+        informationEfikasiLabel = new javax.swing.JLabel();
+        informationDosisLabel = new javax.swing.JLabel();
+        informationUsiaLabel = new javax.swing.JLabel();
+        informationTitle1 = new javax.swing.JLabel();
+        informationSeparator = new javax.swing.JSeparator();
+        informationTitle2 = new javax.swing.JLabel();
+        informationTitle3 = new javax.swing.JLabel();
         informationVaksin = new javax.swing.JLabel();
         informationBooster1 = new javax.swing.JLabel();
         informationBooster2 = new javax.swing.JLabel();
@@ -3311,33 +3331,33 @@ public class UI extends javax.swing.JFrame {
         informationVaksinTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         informationVaksinTitle.setText("VACCINE");
 
-        jLabel31.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel31.setText(" Jenis Vaksin");
+        informationJenisLabel.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationJenisLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationJenisLabel.setText(" Jenis");
 
-        jLabel32.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel32.setText(" Efikasi*");
+        informationEfikasiLabel.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationEfikasiLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationEfikasiLabel.setText(" Efikasi*");
 
-        jLabel33.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel33.setText(" Dosis");
+        informationDosisLabel.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationDosisLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationDosisLabel.setText(" Dosis");
 
-        jLabel34.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel34.setText(" Kelompok Usia");
+        informationUsiaLabel.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationUsiaLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        informationUsiaLabel.setText(" Usia");
 
-        jLabel35.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel35.setText("Vaksin");
+        informationTitle1.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationTitle1.setText("Vaksin");
 
-        jLabel36.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel36.setText("Booster");
+        informationTitle2.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationTitle2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationTitle2.setText("Booster");
 
-        jLabel37.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
-        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel37.setText("Efektivitas");
+        informationTitle3.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        informationTitle3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        informationTitle3.setText("Efektivitas");
 
         informationVaksin.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
         informationVaksin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -3394,7 +3414,7 @@ public class UI extends javax.swing.JFrame {
         informationPanel.setLayout(informationPanelLayout);
         informationPanelLayout.setHorizontalGroup(
             informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addComponent(informationSeparator)
             .addGroup(informationPanelLayout.createSequentialGroup()
                 .addComponent(informationVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3402,29 +3422,11 @@ public class UI extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(informationEfektivitas1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
             .addGroup(informationPanelLayout.createSequentialGroup()
-                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(informationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(informationUsia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(informationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(informationJenisVaksin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(informationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(informationEfikasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(informationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(informationDosis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(informationPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(informationTitle1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(informationTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(informationTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(informationPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -3443,6 +3445,18 @@ public class UI extends javax.swing.JFrame {
                         .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(informationEfektivitas2, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                             .addComponent(informationEfektivitas3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))))
+            .addGroup(informationPanelLayout.createSequentialGroup()
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(informationJenisLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationEfikasiLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                    .addComponent(informationDosisLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationUsiaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(informationJenisVaksin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationEfikasi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationDosis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(informationUsia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         informationPanelLayout.setVerticalGroup(
             informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3453,27 +3467,27 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(informationVaksinTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
+                    .addComponent(informationJenisLabel)
                     .addComponent(informationJenisVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
+                    .addComponent(informationEfikasiLabel)
                     .addComponent(informationEfikasi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel33)
+                    .addComponent(informationDosisLabel)
                     .addComponent(informationDosis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
+                    .addComponent(informationUsiaLabel)
                     .addComponent(informationUsia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(informationSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel37))
+                    .addComponent(informationTitle1)
+                    .addComponent(informationTitle2)
+                    .addComponent(informationTitle3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(informationVaksin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3487,7 +3501,7 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(informationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(informationBooster3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(informationEfektivitas3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout centerInformationPanelLayout = new javax.swing.GroupLayout(centerInformationPanel);
@@ -3603,7 +3617,7 @@ public class UI extends javax.swing.JFrame {
         );
         informationPanel3Layout.setVerticalGroup(
             informationPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(novavaxInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(novavaxInformationButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
         informationPanel4.setBackground(new java.awt.Color(250, 168, 33));
@@ -3669,7 +3683,7 @@ public class UI extends javax.swing.JFrame {
         );
         informationPanel5Layout.setVerticalGroup(
             informationPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pfizerInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pfizerInformationButton, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
 
         informationPanel6.setBackground(new java.awt.Color(66, 84, 106));
@@ -3747,7 +3761,7 @@ public class UI extends javax.swing.JFrame {
                 .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(informationPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(informationPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(informationPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(informationPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(centerInformationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -3763,22 +3777,25 @@ public class UI extends javax.swing.JFrame {
             InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InformationPanelLayout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationPanelLayout.createSequentialGroup()
-                        .addComponent(informationPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(informationPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationPanelLayout.createSequentialGroup()
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(InformationPanelLayout.createSequentialGroup()
                         .addComponent(informationPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(informationPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(centerInformationPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(informationPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(informationPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(informationPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                        .addComponent(informationPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(InformationPanelLayout.createSequentialGroup()
+                        .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(centerInformationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(InformationPanelLayout.createSequentialGroup()
+                                .addComponent(informationPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(informationPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)))
+                .addGroup(InformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(informationPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(informationPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(informationPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         AboutPanel.setBackground(new java.awt.Color(245, 246, 251));
@@ -4439,88 +4456,72 @@ public class UI extends javax.swing.JFrame {
         DataPanel.setVisible(false);
         AboutPanel.setVisible(false);
         InformationPanel.setVisible(true);
+        resetInformationPanel(false);
     }//GEN-LAST:event_informationButtonActionPerformed
-
-    private void sinovacInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinovacInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
-            centerInformationPanel.setBackground(colorSource.SinovacCardPanel(false));
-            centerInformation("Sinovac");
+    private void resetInformationPanel(boolean bool){
+        if (bool == true) {
+            informationJenisLabel.setText("Jenis");
+            informationEfikasiLabel.setText("Efikasi*");
+            informationDosisLabel.setText("Dosis");
+            informationUsiaLabel.setText("Usia");
+            informationTitle1.setText("Vaksin");
+            informationTitle2.setText("Booster");
+            informationTitle3.setText("Efiktivasi");
+            informationSeparator.setVisible(true);
         }else{
+            centerInformation(7);
+            informationImage.setText("");
+            informationJenisLabel.setText("");
+            informationEfikasiLabel.setText("");
+            informationDosisLabel.setText("");
+            informationUsiaLabel.setText("");
+            informationTitle1.setText("");
+            informationTitle2.setText("");
+            informationTitle3.setText("");
+            informationSeparator.setVisible(false);
             centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
-    }//GEN-LAST:event_sinovacInformationButtonActionPerformed
-    private void centerInformation(String vaksin){
-        switch(vaksin){
-            case  "Sinovac" :
-                //Header
-                informationImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
-                informationVaksinTitle.setText("Sinovac");
-                //Section
-                informationJenisVaksin.setText("COVID-19 tidak aktif");
-                informationEfikasi.setText("50 - 91%");
-                informationDosis.setText("2x selang waktu 28 hari");
-                informationUsia.setText("12 - 59 tahun");
-                //Footer
-                informationVaksin.setText("Sinovac");
-                informationBooster1.setText("Sinovac");informationEfektivitas1.setText("70,89%");
-                informationBooster2.setText("Astrazeneca");informationEfektivitas2.setText("90,53%");
-                informationBooster3.setText("Pfizer");informationEfektivitas3.setText("93,18%");
-            break;
         }
     }
+    private void sinovacInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinovacInformationButtonActionPerformed
+            centerInformationPanel.setBackground(colorSource.SinovacCardPanel(false));
+            centerInformation(0);
+            resetInformationPanel(true);
+    }//GEN-LAST:event_sinovacInformationButtonActionPerformed
+    
     private void sputnikInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sputnikInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
             centerInformationPanel.setBackground(colorSource.SputnikCardPanel(false));
-        }else{
-            centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
+            centerInformation(1);
+            resetInformationPanel(true);
     }//GEN-LAST:event_sputnikInformationButtonActionPerformed
 
     private void novavaxInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novavaxInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
             centerInformationPanel.setBackground(colorSource.NovavaxCardPanel(false));
-        }else{
-            centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
+            centerInformation(2);
+            resetInformationPanel(true);
     }//GEN-LAST:event_novavaxInformationButtonActionPerformed
 
     private void astrazenecaInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_astrazenecaInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
             centerInformationPanel.setBackground(colorSource.AstrazenecaCardPanel(false));
-        }else{
-            centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
+            centerInformation(3);
+            resetInformationPanel(true);
     }//GEN-LAST:event_astrazenecaInformationButtonActionPerformed
 
     private void pfizerInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfizerInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
             centerInformationPanel.setBackground(colorSource.PfizerCardPanel(false));
-        }else{
-            centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
+            centerInformation(4);
+            resetInformationPanel(true);
     }//GEN-LAST:event_pfizerInformationButtonActionPerformed
 
     private void modernaInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modernaInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
             centerInformationPanel.setBackground(colorSource.ModernaCardPanel(false));
-        }else{
-            centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
+            centerInformation(5);
+            resetInformationPanel(true);
     }//GEN-LAST:event_modernaInformationButtonActionPerformed
 
     private void sinopharmInformationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinopharmInformationButtonActionPerformed
-        if (value.getCard1Repeater() % 2 == 0) {
             centerInformationPanel.setBackground(colorSource.SinopharmCardPanel(false));
-        }else{
-            centerInformationPanel.setBackground(colorSource.background());
-        }
-        value.addCardRepeater();
+            centerInformation(6);
+            resetInformationPanel(true);
     }//GEN-LAST:event_sinopharmInformationButtonActionPerformed
 
     private void buttonSinovacMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSinovacMouseEntered
@@ -4745,11 +4746,14 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel informationBooster3;
     private javax.swing.JButton informationButton;
     private javax.swing.JLabel informationDosis;
+    private javax.swing.JLabel informationDosisLabel;
     private javax.swing.JLabel informationEfektivitas1;
     private javax.swing.JLabel informationEfektivitas2;
     private javax.swing.JLabel informationEfektivitas3;
     private javax.swing.JLabel informationEfikasi;
+    private javax.swing.JLabel informationEfikasiLabel;
     private javax.swing.JLabel informationImage;
+    private javax.swing.JLabel informationJenisLabel;
     private javax.swing.JLabel informationJenisVaksin;
     private javax.swing.JPanel informationPanel;
     private javax.swing.JPanel informationPanel1;
@@ -4759,7 +4763,12 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel informationPanel5;
     private javax.swing.JPanel informationPanel6;
     private javax.swing.JPanel informationPanel7;
+    private javax.swing.JSeparator informationSeparator;
+    private javax.swing.JLabel informationTitle1;
+    private javax.swing.JLabel informationTitle2;
+    private javax.swing.JLabel informationTitle3;
     private javax.swing.JLabel informationUsia;
+    private javax.swing.JLabel informationUsiaLabel;
     private javax.swing.JLabel informationVaksin;
     private javax.swing.JLabel informationVaksinTitle;
     private javax.swing.JLabel jLabel1;
@@ -4784,13 +4793,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4818,7 +4820,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin2;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin3;
