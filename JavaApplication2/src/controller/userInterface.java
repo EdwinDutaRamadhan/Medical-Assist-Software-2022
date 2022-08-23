@@ -18,4 +18,5 @@ public interface userInterface {
     public List<userModel> getAll();
     public List<userModel> showOnly(int value);
     public List<userModel> searchData(String input);
+    public boolean validation(String username, String password);
 }

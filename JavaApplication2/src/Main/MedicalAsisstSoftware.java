@@ -6,6 +6,9 @@
 package Main;
 
 import View.UI;
+import View.loginPage;
+
+
 
 /**
  *
@@ -17,7 +20,8 @@ public class MedicalAsisstSoftware {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new UI().setVisible(true);
+        //new UI().setVisible(true);
+        new loginPage().setVisible(true);
     }
     
 }

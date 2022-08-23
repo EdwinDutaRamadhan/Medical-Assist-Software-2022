@@ -187,5 +187,25 @@ public class userData implements userInterface {
         
         return ls;
     }
-    
-}
+
+    @Override
+    public boolean validation(String username, String password) {
+       boolean valid = false;
+        try {
+           PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_admin");
+           ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                mahasiswa = new userModel();
+                if (rs.getString(1).equals(username)&&(rs.getString(2).equals(password))) {
+                    valid = true;
+                }
+                                
+            }            
+           
+        } catch (Exception e) {
+            System.out.println("Search eror");
+        }
+        return valid;
+    }
+
+}  

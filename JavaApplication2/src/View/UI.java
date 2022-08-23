@@ -109,6 +109,7 @@ public class UI extends javax.swing.JFrame {
         dashboardButton.setForeground(new Color(91,124,253));
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.dashboard1Url)));
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
+        informationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.info2Url)));
         dataSortingProgress();
         cardVaksinSortingAlgortim();
         progressImplements();
@@ -128,8 +129,10 @@ public class UI extends javax.swing.JFrame {
         String dashboard2Url = "/Image/dashboardIcon2.png";
         String data1Url = "/Image/dataIcon1.png";
         String data2Url = "/Image/dataIcon2.png";
-        String about1Url = "/Image/infoIcon1.png";
-        String about2Url = "/Image/infoIcon2.png";
+        String about1Url = "/Image/otherIcon1.png";
+        String about2Url = "/Image/otherIcon2.png";
+        String info1Url = "/Image/infoIcon1.png";
+        String info2Url = "/Image/infoIcon2.png";
     }
     class ColorSource{
         public Color biruTua(){ 
@@ -3978,6 +3981,7 @@ public class UI extends javax.swing.JFrame {
         dataButton.setForeground(colorSource.abuabu());
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
         informationButton.setForeground(colorSource.abuabu());
+        informationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.info2Url)));
         dataButtonVisible(false);
         DashBoardPanel.setVisible(true);
         DataPanel.setVisible(false);
@@ -3999,6 +4003,7 @@ public class UI extends javax.swing.JFrame {
         dataButton.setForeground(new Color(91,124,253));
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data1Url)));
         informationButton.setForeground(colorSource.abuabu());
+        informationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.info2Url)));
         InformationPanel.setVisible(false);
         dataButtonVisible(true);
         DashBoardPanel.setVisible(false);
@@ -4015,6 +4020,7 @@ public class UI extends javax.swing.JFrame {
         dataButton.setForeground(colorSource.abuabu());
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
         informationButton.setForeground(colorSource.abuabu());
+        informationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.info2Url)));
         InformationPanel.setVisible(false);
         DashBoardPanel.setVisible(false);
         DataPanel.setVisible(false);
@@ -4451,6 +4457,7 @@ public class UI extends javax.swing.JFrame {
         dataButton.setForeground(colorSource.abuabu());
         dataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.data2Url)));
         informationButton.setForeground(colorSource.biruMuda());
+        informationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.info1Url)));
         dataButtonVisible(false);
         DashBoardPanel.setVisible(false);
         DataPanel.setVisible(false);

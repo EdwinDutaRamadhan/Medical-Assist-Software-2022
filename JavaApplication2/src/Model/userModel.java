@@ -13,6 +13,7 @@ package Model;
 public class userModel {
     private String NIM, Nama, Vaksin1, Vaksin2, Vaksin3, vaksin4, vaksin5;
     private String NIMCard, NamaCard, Vaksin1Card, Vaksin2Card, Vaksin3Card, Vaksin4Card, Vaksin5Card;
+    private String Username, Password;
 
     public String getNIM() {
         return NIM;
@@ -125,5 +126,22 @@ public class userModel {
     public void setVaksin5Card(String Vaksin5Card) {
         this.Vaksin5Card = Vaksin5Card;
     }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+    
     
 }
