@@ -2203,7 +2203,7 @@
                               <Component id="cardVaksinImage7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Component id="cardTitle77" alignment="1" pref="130" max="32767" attributes="0"/>
+                          <Component id="cardTitle7" alignment="1" pref="130" max="32767" attributes="0"/>
                           <Component id="cardVaksinValue7" alignment="0" pref="130" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
@@ -2213,7 +2213,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cardVaksinImage7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cardTitle77" min="-2" max="-2" attributes="0"/>
+                              <Component id="cardTitle7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cardVaksinValue7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
@@ -2229,7 +2229,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="cardTitle77">
+                    <Component class="javax.swing.JLabel" name="cardTitle7">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Dubai" size="18" style="1"/>

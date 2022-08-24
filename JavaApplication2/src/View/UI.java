@@ -668,31 +668,31 @@ public class UI extends javax.swing.JFrame {
             
             if (vaksinCardValue7 == sinovacVaksin && sinovac == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
-                cardTitle77.setText("Sinovac");
+                cardTitle7.setText("Sinovac");
                 sinovac = false;
             }else if (vaksinCardValue7 == sputnikVaksin && sputnik == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
-                cardTitle77.setText("Sputnik V");
+                cardTitle7.setText("Sputnik V");
                 sputnik = false;
             }else if (vaksinCardValue7 == novavaxVaksin && novavax == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
-                cardTitle77.setText("Novavax");
+                cardTitle7.setText("Novavax");
                 novavax = false;
             }else if (vaksinCardValue7 == oxfordAZVaksin && oxfordaz == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
-                cardTitle77.setText("AstraZeneca");
+                cardTitle7.setText("AstraZeneca");
                 oxfordaz = false;
             }else if (vaksinCardValue7 == pfizerBTVaksin && pfizerbt == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
-                cardTitle77.setText("Pfizer");
+                cardTitle7.setText("Pfizer");
                 pfizerbt = false;
             }else if (vaksinCardValue7 == modernaVaksin && moderna == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
-                cardTitle77.setText("Moderna");
+                cardTitle7.setText("Moderna");
                 moderna = false;
             }else if (vaksinCardValue7 == sinopharmVaksin && sinopharm == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
-                cardTitle77.setText("Sinopharm");
+                cardTitle7.setText("Sinopharm");
                 sinopharm = false;
             }
             card7 = false;
@@ -1033,7 +1033,7 @@ public class UI extends javax.swing.JFrame {
         cardVaksin12 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         cardVaksinImage7 = new javax.swing.JLabel();
-        cardTitle77 = new javax.swing.JLabel();
+        cardTitle7 = new javax.swing.JLabel();
         cardVaksinValue7 = new javax.swing.JLabel();
         cardBooster1 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -2205,10 +2205,10 @@ public class UI extends javax.swing.JFrame {
 
         cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/sinovacCard.png"))); // NOI18N
 
-        cardTitle77.setFont(new java.awt.Font("Dubai", 1, 18)); // NOI18N
-        cardTitle77.setForeground(new java.awt.Color(102, 102, 102));
-        cardTitle77.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cardTitle77.setText("Vaccine");
+        cardTitle7.setFont(new java.awt.Font("Dubai", 1, 18)); // NOI18N
+        cardTitle7.setForeground(new java.awt.Color(102, 102, 102));
+        cardTitle7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cardTitle7.setText("Vaccine");
 
         cardVaksinValue7.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
         cardVaksinValue7.setForeground(new java.awt.Color(102, 102, 102));
@@ -2223,7 +2223,7 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cardVaksinImage7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(cardTitle77, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+            .addComponent(cardTitle7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
             .addComponent(cardVaksinValue7, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
         );
         jPanel19Layout.setVerticalGroup(
@@ -2232,7 +2232,7 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(cardVaksinImage7)
                 .addGap(18, 18, 18)
-                .addComponent(cardTitle77)
+                .addComponent(cardTitle7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardVaksinValue7)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -4398,7 +4398,6 @@ public class UI extends javax.swing.JFrame {
                 displayDataMahasiswa();            
             }
         }
-        reset();  
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void searchButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchButtonMouseEntered
@@ -4676,7 +4675,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel cardTitle4;
     private javax.swing.JLabel cardTitle5;
     private javax.swing.JLabel cardTitle6;
-    private javax.swing.JLabel cardTitle77;
+    private javax.swing.JLabel cardTitle7;
     private javax.swing.JPanel cardVaksin1;
     private javax.swing.JPanel cardVaksin10;
     private javax.swing.JPanel cardVaksin11;

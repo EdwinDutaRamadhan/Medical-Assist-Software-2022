@@ -8,7 +8,7 @@ package Data;
 
 import Connection.userConnection;
 import Model.userModel;
-import controller.userInterface;
+import Controller.userInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -207,5 +207,58 @@ public class userData implements userInterface {
         }
         return valid;
     }
+
+    @Override
+    public boolean simpanDataAdminAuth(userModel mahasiswa) {
+        boolean result = false;
+        try{
+            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_auth" + " VALUES (?,?)");
+            ps.setString(1, mahasiswa.getUsername());
+            ps.setString(2, mahasiswa.getPassword());
+            ps.executeUpdate();
+            result = true;
+        }catch(SQLException e){
+            System.out.println("Button Simpan admin Error \n" +e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public boolean authAdmin(String username) {
+        boolean valid = false;
+        try {
+           PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_admin");
+           ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                mahasiswa = new userModel();
+                if (rs.getString(1).equals(username)) {
+                    mahasiswa.setUsernameAuth(rs.getString(1));
+                    mahasiswa.setPasswordAuth(rs.getString(2));
+                    valid = true;
+                }
+                                
+            }            
+           
+        } catch (Exception e) {
+            System.out.println("auth admin eror");
+        }
+        return valid;
+    }
+
+    @Override
+    public boolean saveDataAdmin(userModel mahasiswa) {
+         boolean result = false;
+        try{
+            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_admin" + " VALUES (?,?)");
+            ps.setString(1, mahasiswa.getUsername());
+            ps.setString(2, mahasiswa.getPassword());
+            ps.executeUpdate();
+            result = true;
+        }catch(SQLException e){
+            System.out.println("save data admin error \n" +e.getMessage());
+        }
+        return result;
+    }
+
 
 }  

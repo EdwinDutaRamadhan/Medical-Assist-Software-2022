@@ -7,7 +7,9 @@ package View;
 
 import Data.userData;
 import Model.userModel;
-import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,7 @@ public class loginPage extends javax.swing.JFrame {
     UI menu = new UI();
     userData data = new userData();
     userModel mahasiswa = new userModel();
+    int repeater = 0;
     /**
      * Creates new form loginPage
      */
@@ -27,14 +30,7 @@ public class loginPage extends javax.swing.JFrame {
         startup();
     }
     private void startup(){
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        double width = toolkit.getScreenSize().getWidth();
-        double height = toolkit.getScreenSize().getHeight();
-        if (width > 1366 && height > 768) {
-            this.setSize(1366, 768);
-        }else{
-            this.setSize((int)width, (int)height);
-        }   
+ 
         usernameTextField.setForeground(menu.colorSource.abuabu());
     }
     /**
@@ -61,16 +57,19 @@ public class loginPage extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1366, 768));
+        setResizable(false);
 
         jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setFocusable(false);
+        jPanel2.setPreferredSize(new java.awt.Dimension(1119, 571));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/loginImage.png"))); // NOI18N
 
@@ -93,6 +92,14 @@ public class loginPage extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 usernameTextFieldFocusLost(evt);
+            }
+        });
+        usernameTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameTextFieldKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                usernameTextFieldKeyTyped(evt);
             }
         });
 
@@ -139,6 +146,11 @@ public class loginPage extends javax.swing.JFrame {
         registerButton.setText("Register");
         registerButton.setContentAreaFilled(false);
         registerButton.setFocusable(false);
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -165,13 +177,13 @@ public class loginPage extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logo_fti_50x50.png"))); // NOI18N
 
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("Dubai Medium", 0, 11)); // NOI18N
-        jCheckBox1.setText(" Remember Me");
-        jCheckBox1.setFocusable(false);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkBox.setBackground(new java.awt.Color(255, 255, 255));
+        checkBox.setFont(new java.awt.Font("Dubai Medium", 0, 11)); // NOI18N
+        checkBox.setText(" Remember Me");
+        checkBox.setFocusable(false);
+        checkBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkBoxActionPerformed(evt);
             }
         });
 
@@ -187,7 +199,7 @@ public class loginPage extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(83, Short.MAX_VALUE))
+                        .addContainerGap(84, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
@@ -197,7 +209,7 @@ public class loginPage extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
+                            .addComponent(checkBox)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(usernameTextField)
@@ -225,7 +237,7 @@ public class loginPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(checkBox)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,16 +252,16 @@ public class loginPage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
+                .addGap(127, 127, 127)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(130, 130, 130))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(98, 98, 98))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -260,9 +272,7 @@ public class loginPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 80, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -287,9 +297,20 @@ public class loginPage extends javax.swing.JFrame {
         passwordField.setText("");
     }//GEN-LAST:event_passwordFieldMouseClicked
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
+        if (data.validation(usernameTextField.getText(), passwordField.getText())) {
+            //AuthSave
+            mahasiswa = new userModel();
+            mahasiswa.setUsername(usernameTextField.getText());
+            mahasiswa.setPassword(passwordField.getText());
+            if (data.simpanDataAdminAuth(mahasiswa)) {
+                System.out.println("remember akun berhasil");
+            }else{
+                System.out.println("remember akun gagal");
+            }
+        }
         
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_checkBoxActionPerformed
 
     private void logInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInButtonActionPerformed
         if (data.validation(usernameTextField.getText(),passwordField.getText())) {
@@ -299,6 +320,32 @@ public class loginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Login gagal");
         }
     }//GEN-LAST:event_logInButtonActionPerformed
+
+    private void usernameTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameTextFieldKeyTyped
+        //System.out.println(usernameTextField.getText());
+    }//GEN-LAST:event_usernameTextFieldKeyTyped
+
+    private void usernameTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameTextFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            if (data.authAdmin(usernameTextField.getText())) {
+                passwordField.setText(mahasiswa.getPasswordAuth());
+            }
+            System.out.println("Pass " + mahasiswa.getPasswordAuth());
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            if (data.authAdmin(usernameTextField.getText())) {
+                passwordField.setText(mahasiswa.getPasswordAuth());
+
+            }else{
+                System.out.println("pass " + mahasiswa.getPasswordAuth());
+            }
+        }
+    }//GEN-LAST:event_usernameTextFieldKeyPressed
+
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        new registerPage().setVisible(true);
+
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -336,8 +383,8 @@ public class loginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkBox;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
