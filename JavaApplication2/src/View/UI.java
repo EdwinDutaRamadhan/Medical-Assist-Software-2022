@@ -22,10 +22,12 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +38,11 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
 import javax.swing.JOptionPane;
@@ -44,6 +51,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -85,7 +96,7 @@ public class UI extends javax.swing.JFrame {
         startUp();
         colorStartUp();
         defaultTableModel();
-        
+
     }
 
     private void defaultTableModel(){
@@ -1153,11 +1164,15 @@ public class UI extends javax.swing.JFrame {
         informationPanel7 = new javax.swing.JPanel();
         sinopharmInformationButton = new javax.swing.JButton();
         AboutPanel = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        bahasaComboBox = new javax.swing.JComboBox();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
         dashboardButton = new javax.swing.JButton();
         dataButton = new javax.swing.JButton();
         otherButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        bahasaComboBox = new javax.swing.JComboBox();
         informationButton = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
@@ -3807,15 +3822,81 @@ public class UI extends javax.swing.JFrame {
         AboutPanel.setPreferredSize(new java.awt.Dimension(1366, 714));
         AboutPanel.setRequestFocusEnabled(false);
 
+        jPanel11.setBackground(new java.awt.Color(153, 153, 153));
+
+        jLabel19.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Bahasa");
+
+        bahasaComboBox.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
+        bahasaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Indonesia", "Inggris", "Spanyol", "Germany", "India" }));
+        bahasaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bahasaComboBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(bahasaComboBox, 0, 212, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bahasaComboBox))
+                .addContainerGap())
+        );
+
+        jLabel32.setText("Deskripsi here");
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel32)
+                .addContainerGap(410, Short.MAX_VALUE))
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel32)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout AboutPanelLayout = new javax.swing.GroupLayout(AboutPanel);
         AboutPanel.setLayout(AboutPanelLayout);
         AboutPanelLayout.setHorizontalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
+            .addGroup(AboutPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(429, Short.MAX_VALUE))
         );
         AboutPanelLayout.setVerticalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AboutPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AboutPanelLayout.createSequentialGroup()
+                        .addGap(0, 673, Short.MAX_VALUE)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         dashboardButton.setFont(new java.awt.Font("Dubai", 0, 20)); // NOI18N
@@ -3866,13 +3947,6 @@ public class UI extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(91, 124, 253));
         jLabel11.setText("Medical Assist Software");
 
-        bahasaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bahasa Indonesia", "Bahasa Inggris", "Bahasa Spanyol" }));
-        bahasaComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bahasaComboBoxActionPerformed(evt);
-            }
-        });
-
         informationButton.setFont(new java.awt.Font("Dubai", 0, 18)); // NOI18N
         informationButton.setForeground(new java.awt.Color(153, 153, 153));
         informationButton.setText("  Information");
@@ -3903,9 +3977,7 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(informationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(otherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bahasaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addGap(82, 251, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(DashBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3932,7 +4004,6 @@ public class UI extends javax.swing.JFrame {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(otherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bahasaComboBox)
                             .addComponent(informationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(12, 12, 12)
                 .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
@@ -4428,7 +4499,6 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTextFieldKeyPressed
 
     private void bahasaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bahasaComboBoxActionPerformed
-        
         if (bahasaComboBox.getSelectedIndex()==0) {
             bahasa.setLanguage("Indonesia");
             reset();
@@ -4441,6 +4511,14 @@ public class UI extends javax.swing.JFrame {
             bahasa.setLanguage("Spanish");
             reset();
             //bahasa Spanyol
+        }else if (bahasaComboBox.getSelectedIndex()==3) {
+            bahasa.setLanguage("Germany");
+            reset();
+            //bahasa German
+        }else if (bahasaComboBox.getSelectedIndex()==4) {
+            bahasa.setLanguage("India");
+            reset();
+            //bahasa India
         }
     }//GEN-LAST:event_bahasaComboBoxActionPerformed
 
@@ -4787,6 +4865,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -4799,6 +4878,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4808,6 +4888,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
@@ -4818,6 +4899,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
