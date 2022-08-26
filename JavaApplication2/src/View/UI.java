@@ -20,14 +20,14 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,11 +38,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
 import javax.swing.JOptionPane;
@@ -51,10 +46,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -923,6 +914,8 @@ public class UI extends javax.swing.JFrame {
                 informationEfektivitas2.setText(information.getVaksin(vaksin, 11));
                 informationEfektivitas3.setText(information.getVaksin(vaksin, 12));
     }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1169,6 +1162,8 @@ public class UI extends javax.swing.JFrame {
         bahasaComboBox = new javax.swing.JComboBox();
         jPanel21 = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        text = new javax.swing.JTextArea();
         dashboardButton = new javax.swing.JButton();
         dataButton = new javax.swing.JButton();
         otherButton = new javax.swing.JButton();
@@ -3822,7 +3817,7 @@ public class UI extends javax.swing.JFrame {
         AboutPanel.setPreferredSize(new java.awt.Dimension(1366, 714));
         AboutPanel.setRequestFocusEnabled(false);
 
-        jPanel11.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel11.setBackground(new java.awt.Color(208, 231, 251));
 
         jLabel19.setFont(new java.awt.Font("Dubai Light", 1, 14)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -3866,7 +3861,7 @@ public class UI extends javax.swing.JFrame {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel32)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3876,27 +3871,38 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        text.setEditable(false);
+        text.setColumns(20);
+        text.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+        text.setRows(5);
+        text.setText("Initial Commit -- August 5, 2022\nV0.1 -- August 5, 2022 -- UI initial\nV0.2 -- August 6, 2022 -- Table, Place holder added\nV0.3 -- August 8, 2022 -- CRUD updated\nV0.4 -- August 8, 2022 -- new UI, Image added\nV0.5 -- August 10, 2022 -- add new color & Icon\nV0.6 -- August 11, 2022 -- add Diagram & Algoritm\nV0.7 -- August 11, 2022 -- new Diagram & Icon\nV0.8 -- August 14, 2022 -- add Object Sorting Algoritm\nV0.9 -- August 14, 2022 -- new Image & Card\nV1.0 -- August 16, 2022 -- Table Data Sorting added\nV1.1 -- August 18, 2022 -- add Export to Excel & PDF\nV1.2 -- August 19, 2022 -- add Search Engine\nV1.3 -- August 21, 2022 -- add Language (Indonesia & English)\nV1.4 -- August 21, 2022 -- new Export Card & Spanish Language\nV1.5 -- August 24, 2022 -- new panel UI (Information)\nV1.6 -- August 24, 2022 -- add Login Page\nV1.7 -- August 25, 2022 -- add Registration Page\nV1.8 -- August 27, 2022 -- new About Page\n");
+        jScrollPane1.setViewportView(text);
+
         javax.swing.GroupLayout AboutPanelLayout = new javax.swing.GroupLayout(AboutPanel);
         AboutPanel.setLayout(AboutPanelLayout);
         AboutPanelLayout.setHorizontalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AboutPanelLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addGap(40, 40, 40)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(429, Short.MAX_VALUE))
+                .addContainerGap(530, Short.MAX_VALUE))
         );
         AboutPanelLayout.setVerticalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AboutPanelLayout.createSequentialGroup()
+            .addGroup(AboutPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AboutPanelLayout.createSequentialGroup()
-                        .addGap(0, 673, Short.MAX_VALUE)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(AboutPanelLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         dashboardButton.setFont(new java.awt.Font("Dubai", 0, 20)); // NOI18N
@@ -4908,6 +4914,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin2;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin3;
@@ -4944,6 +4951,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JScrollPane tabelScroll;
     private javax.swing.JButton tambahButton;
     private javax.swing.JPanel tambahPanel;
+    private javax.swing.JTextArea text;
     private javax.swing.JLabel vaksin1CardPrint;
     private javax.swing.JProgressBar vaksin1ProgressBar;
     private javax.swing.JTextField vaksin1TextField;
