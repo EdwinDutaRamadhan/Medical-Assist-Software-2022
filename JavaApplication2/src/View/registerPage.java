@@ -247,6 +247,9 @@ public class registerPage extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         mahasiswa = new userModel();
+        if (usernameTextField.getText().equals(null) == false) {
+            
+        }
         if (repasswordField.getText().equals(passwordField.getText())) {
             //done
             mahasiswa.setUsername(usernameTextField.getText());

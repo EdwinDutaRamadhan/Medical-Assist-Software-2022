@@ -16,6 +16,7 @@ public class language {
     private String NIM , NAMA, BOOSTER, VAKSIN, VAKSIN1, VAKSIN2, VAKSIN3, VAKSIN4, VAKSIN5,Search,Mahasiswa,Dashboard,Data,Information,Other;
     private String ButtonSimpan,ButtonHapus,ButtonGanti,ButtonTambah,ButtonSearch,ButtonBrowse,ButtonExport;
     private String MessageError1,MessageError2,MessageError3,MessageError4,MessageError5,MessageError6,MessageError7,MessageError8,MessageError9,MessageError10;
+    private String cardTitle1,cardTitle2,cardTitle3,cardTitle4,cardDesc1,cardDesc2,cardDesc3,cardDesc4;
     public void setLanguage(String bahasa) {
         switch (bahasa) {
             case "Indonesia":
@@ -62,6 +63,15 @@ public class language {
                 this.ButtonBrowse = "Jelajahi";
                 this.ButtonExport = "Ekspor";
                 this.Information = "Informasi";
+                //=====About Card=====
+                this.cardTitle1 = "Versi Pertama";
+                this.cardTitle2 = "Versi Kedua";
+                this.cardTitle3 = "Tema";
+                this.cardTitle4 = "Program";
+                this.cardDesc1 = "CRUD, UI Lama, Program Simpel";
+                this.cardDesc2 = "CRUD, UI Baru, Program Kompleks";
+                this.cardDesc3 = "Assisten Aplikasi";
+                this.cardDesc4 = "Pemrograman Desktop";
                 break;
             case "English":
                 //=====Message=====
@@ -107,6 +117,16 @@ public class language {
                 this.ButtonBrowse = "Browse";
                 this.ButtonExport = "Eksport";
                 this.Information = "Information";
+                //=====About Card=====
+                this.cardTitle1 = "First Version";
+                this.cardTitle2 = "Second Version";
+                this.cardTitle3 = "Theme";
+                this.cardTitle4 = "Program";
+                this.cardDesc1 = "CRUD, Old UI, Simple Program";
+                this.cardDesc2 = "CRUD, New UI, Complex Program";
+                this.cardDesc3 = "Software Assistant";
+                this.cardDesc4 = "Desktop Programming";
+                
                 break;
             case "Spanish":
                 //=====Message=====
@@ -152,6 +172,15 @@ public class language {
                 this.ButtonBrowse = "Navegar";
                 this.ButtonExport = "Eksport";
                 this.Information = "información";
+                //=====About Card=====
+                this.cardTitle1 = "Primera versión";
+                this.cardTitle2 = "Segunda versión";
+                this.cardTitle3 = "Tema";
+                this.cardTitle4 = "Programa";
+                this.cardDesc1 = "CRUD, Antiguo UI, Programa Sencillo";
+                this.cardDesc2 = "CRUD, Nuevo UI, Programas Complejos";
+                this.cardDesc3 = "Asistente de software";
+                this.cardDesc4 = "Programación de escritorio";
                 break;
         }
     }
@@ -195,6 +224,14 @@ public class language {
     public String getMessageError10() {return MessageError10;}
     public String getInformation() {return Information;}
     public String getOther() {return Other;}
+    public String getCardTitle1() {return cardTitle1;}
+    public String getCardTitle2() {return cardTitle2;}
+    public String getCardTitle3() {return cardTitle3;}
+    public String getCardTitle4() {return cardTitle4;}
+    public String getCardDesc1() {return cardDesc1;}
+    public String getCardDesc2() {return cardDesc2;}
+    public String getCardDesc3() {return cardDesc3;}
+    public String getCardDesc4() {return cardDesc4;}
     
     
 }
