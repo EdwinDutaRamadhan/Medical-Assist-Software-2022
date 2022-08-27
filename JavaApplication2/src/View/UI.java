@@ -8,6 +8,7 @@ package View;
 import Data.userData;
 import Language.language;
 import Model.userModel;
+import Storage.colorData;
 import Storage.informationData;
 import Storage.valueData;
 import java.awt.Color;
@@ -56,10 +57,11 @@ public class UI extends javax.swing.JFrame {
     userModel mahasiswa;
     userData data = new userData();
     UrlSource urlSource = new UrlSource();
-    ColorSource colorSource = new ColorSource();
+    
     valueData value = new valueData();
     language bahasa = new language();
     informationData information = new informationData();
+    colorData colorSource = new colorData();
     int maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20,card1InformationRepeater = 0;
     int sinovacVaksin,sputnikVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
     int vaksinCardValue1,vaksinCardValue2,vaksinCardValue3,vaksinCardValue4,vaksinCardValue5,vaksinCardValue6,vaksinCardValue7,boosterValue1,boosterValue2,boosterValue3;
@@ -136,72 +138,7 @@ public class UI extends javax.swing.JFrame {
         String info1Url = "/Image/infoIcon1.png";
         String info2Url = "/Image/infoIcon2.png";
     }
-    class ColorSource{
-        public Color biruTua(){ 
-            return new Color(208,231,251);
-        }
-        public Color abuabu(){
-            return new Color(153,153,153);
-        }
-        public Color biruMuda(){
-            return new Color(91,123,253);
-        }
-        public Color hitam(){
-            return new Color(0,0,0);
-        }
-        public Color background(){
-            return new Color(245,246,251);
-        }
-        public Color SinovacCardPanel(boolean val){
-            if (val == true) {
-                return new Color(16,116,182);
-            } else {
-                return new Color(98,177,229);
-            }
-        }
-        public Color SputnikCardPanel(boolean val){
-            if (val == true) {
-                return new Color(0,165,143);
-            } else {
-                return new Color(71,236,214);
-            }
-        }
-        public Color NovavaxCardPanel(boolean val){
-            if (val == true) {
-                return new Color(149,182,71);
-            } else {
-                return new Color(193,213,147);
-            }
-        }
-        public Color AstrazenecaCardPanel(boolean val){
-            if (val == true) {
-                return new Color(250,168,33);
-            } else {
-                return new Color(254,204,124);
-            }
-        }
-        public Color PfizerCardPanel(boolean val){
-            if (val == true) {
-                return new Color(199,60,60);
-            } else {
-                return new Color(223,140,140);
-            }
-        }
-        public Color ModernaCardPanel(boolean val){
-            if (val == true) {
-                return new Color(66,84,106);
-            } else {
-                return new Color(135,154,174);
-            }
-        }
-        public Color SinopharmCardPanel(boolean val){
-            if (val == true) {
-                return new Color(128,90,163);
-            } else {
-                return new Color(204,153,210);
-            }
-        }
-    }
+    
     private void colorStartUp(){
         colorHover();
         themeMainColor1(91,124,253);
@@ -223,6 +160,7 @@ public class UI extends javax.swing.JFrame {
             cardBooster1.setBorder(new LineBorder(colorSource.biruTua(), 8, true));
             cardBooster2.setBorder(new LineBorder(colorSource.biruTua(), 8, true));
             cardBooster3.setBorder(new LineBorder(colorSource.biruTua(), 8, true));
+            centerAboutPage.setBorder(new LineBorder(colorSource.biruTua(), 8, true));
             vaksinDiagram.setBorder(new LineBorder(colorSource.biruTua(), 5, true));
             boosterDiagram.setBorder(new LineBorder(colorSource.biruTua(), 5, true));
             
@@ -1160,8 +1098,14 @@ public class UI extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         bahasaComboBox = new javax.swing.JComboBox();
-        jPanel21 = new javax.swing.JPanel();
+        centerAboutPage = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         text = new javax.swing.JTextArea();
         dashboardButton = new javax.swing.JButton();
@@ -3852,23 +3796,78 @@ public class UI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel32.setText("Deskripsi here");
+        centerAboutPage.setBackground(new java.awt.Color(245, 246, 251));
 
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
+        jPanel22.setBackground(new java.awt.Color(208, 231, 251));
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/aboutImage1.png"))); // NOI18N
+
+        jLabel30.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel30.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(91, 124, 253));
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("Medical Assist Software");
+
+        jLabel32.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel32.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(91, 124, 253));
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setText("2.0");
+
+        jLabel33.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel33.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(91, 124, 253));
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("Vaccine Developement");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(208, 231, 251));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Vaccine Development Software adalah software\natau aplikasi desktop yang berfungsi sebagai\ndata manajemen sistem di bidang kesehatan\nyaitu mengolah data mahasiswa yang sudah atau\nbelum divaksin di local area FTI atau sampai\nUKSW. Software ini merupakan software data \nmanajemen sistem yang didukung framework Swing\ndengan menggunakan bahasa Java. Salah satu \nmetode yang digunakan adalah MVC (Model, View,\nController) \n");
+        jTextArea1.setFocusable(false);
+        jTextArea1.setOpaque(false);
+        jScrollPane2.setViewportView(jTextArea1);
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel32)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel30)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel32)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout centerAboutPageLayout = new javax.swing.GroupLayout(centerAboutPage);
+        centerAboutPage.setLayout(centerAboutPageLayout);
+        centerAboutPageLayout.setHorizontalGroup(
+            centerAboutPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        centerAboutPageLayout.setVerticalGroup(
+            centerAboutPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         text.setEditable(false);
@@ -3888,14 +3887,14 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(40, 40, 40)
-                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addComponent(centerAboutPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(516, Short.MAX_VALUE))
         );
         AboutPanelLayout.setVerticalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AboutPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(centerAboutPage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(AboutPanelLayout.createSequentialGroup()
                 .addGap(75, 75, 75)
@@ -4786,6 +4785,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel cardVaksinValue5;
     private javax.swing.JLabel cardVaksinValue6;
     private javax.swing.JLabel cardVaksinValue7;
+    private javax.swing.JPanel centerAboutPage;
     private javax.swing.JPanel centerInformationPanel;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JButton dataButton;
@@ -4884,7 +4884,10 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4905,7 +4908,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -4915,6 +4918,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin1;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin2;
     private javax.swing.JLabel jumlahMahasiswaCardVaksin3;
