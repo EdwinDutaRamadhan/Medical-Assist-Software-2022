@@ -6,6 +6,8 @@
 
 package Language;
 
+import Storage.informationData;
+
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -17,6 +19,8 @@ public class language {
     private String ButtonSimpan,ButtonHapus,ButtonGanti,ButtonTambah,ButtonSearch,ButtonBrowse,ButtonExport;
     private String MessageError1,MessageError2,MessageError3,MessageError4,MessageError5,MessageError6,MessageError7,MessageError8,MessageError9,MessageError10;
     private String cardTitle1,cardTitle2,cardTitle3,cardTitle4,cardDesc1,cardDesc2,cardDesc3,cardDesc4;
+
+    
     public void setLanguage(String bahasa) {
         switch (bahasa) {
             case "Indonesia":
@@ -181,6 +185,116 @@ public class language {
                 this.cardDesc2 = "CRUD, Nuevo UI, Programas Complejos";
                 this.cardDesc3 = "Asistente de software";
                 this.cardDesc4 = "Programación de escritorio";
+                break;
+             case "Germany":
+                //=====Message=====
+                this.MessageInputProtection1 = "Geben Sie zuerst NIM ein";
+                this.MessageInputProtection2 = "Geben Sie zuerst einen Namen ein";
+                this.MessageInputProtection3 = "Geben Sie zuerst NIM und Name ein";
+                this.MessageDialog1 = "Erfolgreich ";
+                this.MessageDialog2 = "Scheitern ";
+                this.MessageDialog3 = "Hinzufügen ";
+                this.MessageDialog4 = "Ersetzen ";
+                this.MessageDialog5 = "Löschen ";
+                this.MessageError1 = "NIM kann nicht dupliziert werden";
+                this.MessageError2 = "Wählen Sie die Daten aus, die Sie löschen möchten";
+                this.MessageError3 = "Wählen Sie die Daten aus, die Sie ersetzen möchten";
+                this.MessageError4 = "Exportieren Sie PDF, ohne dass Sie die Dateiadresse eingeben müssen";
+                this.MessageError5 = "Es können keine Daten exportiert werden";
+                this.MessageError6 = "Wählen Sie zuerst den Exportspeicherort aus";
+                this.MessageError7 = "Erfolgreicher Export .txt";
+                this.MessageError8 = "Erfolgreicher Export .xlsx";
+                this.MessageError9 = "Füllen Sie zuerst das Suchtextfeld aus";
+                this.MessageError10 = "Die gesuchten Daten wurden nicht gefunden";
+                //=====Label=====
+                this.NIM = "NIM";
+                this.NAMA = "Name";
+                this.VAKSIN1 = "Impfung 1";
+                this.VAKSIN2 = "Impfung 2";
+                this.VAKSIN3 = "Booster 1";
+                this.VAKSIN4 = "Booster 2";
+                this.VAKSIN5 = "Booster 3";
+                this.VAKSIN = "Impfung";
+                this.BOOSTER = "Booster";
+                this.Search = "Suche";
+                this.Mahasiswa = "Student";
+                this.Dashboard = "Armaturenbrett";
+                this.Data = "Daten";
+                this.Other = "Sonstiges";
+                //=====Button=====
+                this.ButtonSimpan = "Speichern";
+                this.ButtonHapus = "Löschen";
+                this.ButtonGanti = "Veränderung";
+                this.ButtonTambah = "Hinzufügen";
+                this.ButtonSearch = "Suche";
+                this.ButtonBrowse = "Durchsuche";
+                this.ButtonExport = "Eksport";
+                this.Information = "Information";
+                //=====About Card=====
+                this.cardTitle1 = "Erste Version";
+                this.cardTitle2 = "Zweite Fassung";
+                this.cardTitle3 = "Thema";
+                this.cardTitle4 = "Programm";
+                this.cardDesc1 = "CRUD, Alt UI, Einfaches Programm";
+                this.cardDesc2 = "CRUD, Neu UI, Komplexes Programm";
+                this.cardDesc3 = "Software-Assistant";
+                this.cardDesc4 = "Desktop-Programmierung";
+                
+                break;
+            case "Poland":
+                //=====Message=====
+                this.MessageInputProtection1 = "Wpisz NIM jako pierwszy";
+                this.MessageInputProtection2 = "Najpierw wpisz imię";
+                this.MessageInputProtection3 = "Wprowadź NIM i imię i nazwisko";
+                this.MessageDialog1 = "Odnieść sukces ";
+                this.MessageDialog2 = "Ponieść porażkę ";
+                this.MessageDialog3 = "Dodać ";
+                this.MessageDialog4 = "Zastępować ";
+                this.MessageDialog5 = "Usuwać ";
+                this.MessageError1 = "NIM nie może być duplikowany";
+                this.MessageError2 = "Wybierz dane, które chcesz usunąć";
+                this.MessageError3 = "Wybierz dane, które chcesz zastąpić";
+                this.MessageError4 = "Eksportuj PDF bez konieczności wpisywania adresu pliku";
+                this.MessageError5 = "Żadne dane nie mogą być eksportowane";
+                this.MessageError6 = "Najpierw wybierz lokalizację eksportu";
+                this.MessageError7 = "Udany eksport .txt";
+                this.MessageError8 = "Udany eksport .xlsx";
+                this.MessageError9 = "Wypełnij najpierw pole tekstowe wyszukiwania";
+                this.MessageError10 = "Nie znaleziono danych, których szukasz";
+                //=====Label=====
+                this.NIM = "NIM";
+                this.NAMA = "Nazwa";
+                this.VAKSIN1 = "Szczepionka 1";
+                this.VAKSIN2 = "Szczepionka 2";
+                this.VAKSIN3 = "Wzmacniacz 1";
+                this.VAKSIN4 = "Wzmacniacz 2";
+                this.VAKSIN5 = "Wzmacniacz 3";
+                this.VAKSIN = "Szczepionka";
+                this.BOOSTER = "Wzmacniacz";
+                this.Search = "Szukaj";
+                this.Mahasiswa = "Student";
+                this.Dashboard = "Panel";
+                this.Data = "Dane";
+                this.Other = "Inny";
+                //=====Button=====
+                this.ButtonSimpan = "Ratować";
+                this.ButtonHapus = "Usuwać";
+                this.ButtonGanti = "Zmiana";
+                this.ButtonTambah = "Dodać";
+                this.ButtonSearch = "Szukaj";
+                this.ButtonBrowse = "Przeglądaj";
+                this.ButtonExport = "Eksportuj";
+                this.Information = "Informacja";
+                //=====About Card=====
+                this.cardTitle1 = "Pierwsza wersja";
+                this.cardTitle2 = "Druga wersja";
+                this.cardTitle3 = "Motyw";
+                this.cardTitle4 = "Program";
+                this.cardDesc1 = "CRUD, Stary UI, Prosty program";
+                this.cardDesc2 = "CRUD, Nowy UI, Kompleksowy program";
+                this.cardDesc3 = "Asystent oprogramowania";
+                this.cardDesc4 = "Programowanie pulpitu";
+                
                 break;
         }
     }

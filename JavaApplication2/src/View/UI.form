@@ -4656,7 +4656,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -4715,7 +4715,7 @@
                         <StringItem index="1" value="Inggris"/>
                         <StringItem index="2" value="Spanyol"/>
                         <StringItem index="3" value="Germany"/>
-                        <StringItem index="4" value="India"/>
+                        <StringItem index="4" value="Poland"/>
                       </StringArray>
                     </Property>
                   </Properties>

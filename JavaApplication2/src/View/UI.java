@@ -135,7 +135,7 @@ public class UI extends javax.swing.JFrame {
         String about2Url = "/Image/otherIcon2.png";
         String info1Url = "/Image/infoIcon1.png";
         String info2Url = "/Image/infoIcon2.png";
-    }
+    }   
     
     private void colorStartUp(){
         colorHover();
@@ -3805,7 +3805,7 @@ public class UI extends javax.swing.JFrame {
         jLabel19.setText("Bahasa");
 
         bahasaComboBox.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
-        bahasaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Indonesia", "Inggris", "Spanyol", "Germany", "India" }));
+        bahasaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Indonesia", "Inggris", "Spanyol", "Germany", "Poland" }));
         bahasaComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bahasaComboBoxActionPerformed(evt);
@@ -4924,7 +4924,7 @@ public class UI extends javax.swing.JFrame {
             reset();
             //bahasa German
         }else if (bahasaComboBox.getSelectedIndex()==4) {
-            bahasa.setLanguage("India");
+            bahasa.setLanguage("Poland");
             reset();
             //bahasa India
         }
@@ -5087,7 +5087,12 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_sinopharmInformationButtonMouseExited
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin keluar?", "Sign Out", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/Image/404Error.png")));
+        if (confirm == 0) {
+            this.setVisible(false);
+        } else {
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
 
