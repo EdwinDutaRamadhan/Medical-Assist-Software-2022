@@ -8,6 +8,7 @@ package View;
 import Data.userData;
 import Language.language;
 import Model.userModel;
+import Storage.booleanData;
 import Storage.colorData;
 import Storage.informationData;
 import Storage.valueData;
@@ -55,18 +56,12 @@ public class UI extends javax.swing.JFrame {
     userModel mahasiswa;
     userData data = new userData();
     UrlSource urlSource = new UrlSource();
-    
+    booleanData bool = new booleanData();
     valueData value = new valueData();
     language bahasa = new language();
     informationData information = new informationData();
     colorData colorSource = new colorData();
-    int maxDiagramVaksinValue = 20,maxDiagramBoosterValue = 20,card1InformationRepeater = 0;
-    int sinovacVaksin,sputnikVaksin,novavaxVaksin,oxfordAZVaksin,pfizerBTVaksin,modernaVaksin,sinopharmVaksin, pfizerBTBooster, oxfordAZBooster, modernaBooster;
-    int vaksinCardValue1,vaksinCardValue2,vaksinCardValue3,vaksinCardValue4,vaksinCardValue5,vaksinCardValue6,vaksinCardValue7,boosterValue1,boosterValue2,boosterValue3;
-    boolean card1=true,card2=true,card3=true,card4=true,card5=true,card6=true,card7=true,card8 = true, card9 = true, card10=true;
-    boolean sinovac=true,sputnik=true,novavax=true,oxfordaz=true,pfizerbt=true,moderna=true,sinopharm=true;
-    boolean pfizerCard = true, astrazenecaCard = true, modernaCard =true, tableClicked = false;
-    int sinovacValue,sputnikValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue;
+    
     /**
      * Creates new form UI
      */
@@ -117,6 +112,8 @@ public class UI extends javax.swing.JFrame {
         progressImplements();
         cardBoosterSortingAlgoritm();
         hiddenPanel.setVisible(false);
+        value.setMaxDiagramBoosterValue(20);
+        value.setMaxDiagramVaksinValue(20);
     } 
     
     class UrlSource{
@@ -266,13 +263,13 @@ public class UI extends javax.swing.JFrame {
         aboutCard4Desc.setText(bahasa.getCardDesc4());
         showComboBox.setSelectedIndex(0);
         exportComboBox.setSelectedIndex(0);
-        tableClicked = false;
+        bool.setTableClicked(false);
     }
     private void dataSortingProgress(){     
         value.setVaksin1(0); value.setVaksin2(0); value.setVaksin3(0);value.setVaksin4(0);value.setVaksin5(0);
         value.setMahasiswaVaksin1(0); value.setMahasiswaVaksin2(0);value.setMahasiswaVaksin3(0);value.setMahasiswaVaksin4(0);value.setMahasiswaVaksin5(0);
-        sinovacVaksin = 0; sputnikVaksin = 0; novavaxVaksin = 0; oxfordAZVaksin = 0; pfizerBTVaksin = 0; modernaVaksin = 0; sinopharmVaksin = 0;
-        pfizerBTBooster = 0; oxfordAZBooster = 0; modernaBooster = 0;
+        value.setSinovacVaksin(0); value.setSputnikvaksin(0); value.setNovavaxVaksin(0); value.setOxfordAZVaksin(0); value.setPfizerBTVaksin(0); value.setModernaVaksin(0); value.setSinopharmVaksin(0);
+        value.setPfizerBTBooster(0);value.setOxfordAZBooster(0);value.setModernaBooster(0);
         List<userModel> ls = new ArrayList<userModel>();
         ls = new userData().getAll();
         String DataSort[][] = new String[ls.size()][7];
@@ -281,20 +278,20 @@ public class UI extends javax.swing.JFrame {
                 DataSort[i][1] = ls.get(i).getNama();
                 DataSort[i][2] = ls.get(i).getVaksin1();
                 if (DataSort[i][2].equals("-") == false) {value.addVaksin1();value.addMahasiswaVaksin1();}
-                if(DataSort[i][2].equals("Sinovac") == true){sinovacVaksin++;}
-                else if(DataSort[i][2].equals("Sputnik V") == true){sputnikVaksin++;}
-                else if(DataSort[i][2].equals("Novavax") == true){novavaxVaksin++;}
-                else if(DataSort[i][2].equals("Oxford-AstraZeneca") == true){oxfordAZVaksin++;}
-                else if(DataSort[i][2].equals("Pfizer-BioNTech") == true){pfizerBTVaksin++;}
-                else if(DataSort[i][2].equals("Moderna") == true){modernaVaksin++;}
-                else if(DataSort[i][2].equals("Sinopharm") == true){sinopharmVaksin++;}
+                if(DataSort[i][2].equals("Sinovac") == true){value.addSinovacVaksin();}
+                else if(DataSort[i][2].equals("Sputnik V") == true){value.addSputnikvaksin();}
+                else if(DataSort[i][2].equals("Novavax") == true){value.addNovavaxVaksin();}
+                else if(DataSort[i][2].equals("Oxford-AstraZeneca") == true){value.addOxfordAZVaksin();}
+                else if(DataSort[i][2].equals("Pfizer-BioNTech") == true){value.addPfizerVaksin();}
+                else if(DataSort[i][2].equals("Moderna") == true){value.addModernaVaksin();}
+                else if(DataSort[i][2].equals("Sinopharm") == true){value.addSinopharmVaksin();}
                 DataSort[i][3] = ls.get(i).getVaksin2();
                 if (DataSort[i][3].equals("-") == false) {value.addVaksin2();value.addMahasiswaVaksin2();}
                 DataSort[i][4] = ls.get(i).getVaksin3();
                 if (DataSort[i][4].equals("-") == false) {value.addVaksin3();value.addMahasiswaVaksin3();}
-                if (DataSort[i][4].equals("Pfizer-BioNTech") == true) {pfizerBTBooster++;}
-                else if (DataSort[i][4].equals("Oxford-AstraZeneca") == true) {oxfordAZBooster++;}
-                else if (DataSort[i][4].equals("Moderna") == true) {modernaBooster++;}
+                if (DataSort[i][4].equals("Pfizer-BioNTech") == true) {value.addPfizerBTBooster();}
+                else if (DataSort[i][4].equals("Oxford-AstraZeneca") == true) {value.addOxfordAZBooster();}
+                else if (DataSort[i][4].equals("Moderna") == true) {value.addModernaBooster();}
                 DataSort[i][5] = ls.get(i).getVaksin4();
                 if (DataSort[i][5].equals("-") == false) {value.addVaksin4();value.addMahasiswaVaksin4();}
                 DataSort[i][6] = ls.get(i).getVaksin5();
@@ -304,370 +301,369 @@ public class UI extends javax.swing.JFrame {
         
     }
     private void cardBoosterSortingAlgoritm(){
-        int pfizerBoosterValue = pfizerBTBooster;
-        int oxfordBoosterValue = oxfordAZBooster;
-        int modernaBoosterValue = modernaBooster;
-        card8 = true; card9 = true; card10 = true;
-        pfizerCard = true; astrazenecaCard = true; modernaCard =true;
+        int pfizerBoosterValue = value.getPfizerBTBooster();
+        int oxfordBoosterValue = value.getOxfordAZBooster();
+        int modernaBoosterValue = value.getModernaBooster();
+        bool.setCard8(true);bool.setCard9(true);bool.setCard10(true);
+        bool.setPfizerCard(true);bool.setAstrazenecaCard(true);bool.setModernaCard(true);
         int boosterArray[] = {pfizerBoosterValue,oxfordBoosterValue,modernaBoosterValue};
         Arrays.sort(boosterArray);
         sortData(boosterArray);
-        boosterCardValue1.setText(""+boosterValue1);
-        boosterCardValue2.setText(""+boosterValue2);
-        boosterCardValue3.setText(""+boosterValue3);
-        boosterSorting(pfizerBTBooster);
-        boosterSorting(oxfordAZBooster);
+        boosterCardValue1.setText(""+value.getBoosterValue1());
+        boosterCardValue2.setText(""+value.getBoosterValue2());
+        boosterCardValue3.setText(""+value.getBoosterValue3());
+        boosterSorting(pfizerBoosterValue);
+        boosterSorting(oxfordBoosterValue);
         boosterSorting(modernaBoosterValue);
     }
     private void sortData(int[] sortBooster){
         for (int i = 0; i < 3; ) {
-            boosterValue3 = sortBooster[0];
-            boosterValue2 = sortBooster[1];
-            boosterValue1 = sortBooster[2];
+            value.setBoosterValue3(sortBooster[0]);
+            value.setBoosterValue2(sortBooster[1]);
+            value.setBoosterValue1(sortBooster[2]);
             i++;
         }        
     }
-    private void boosterSorting(int value){
-        if(value == boosterValue1 && card8 == true){
-            if (boosterValue1 == pfizerBTBooster && pfizerCard == true) {//========================================================================= Card 1 =========================================================//
+    private void boosterSorting(int valueSort){
+        if(valueSort == value.getBoosterValue1() && bool.isCard8() == true){
+            if (value.getBoosterValue1() == value.getPfizerBTBooster() && bool.isPfizerCard() == true) {//========================================================================= Card 1 =========================================================//
                 cardBoosterImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 boosterTitle1.setText("Pfizer");
-                pfizerCard = false;
-            }else if (boosterValue1 == oxfordAZBooster && astrazenecaCard == true) {
+                bool.setPfizerCard(false);
+            }else if (value.getBoosterValue1() == value.getOxfordAZBooster() && bool.isAstrazenecaCard() == true) {
                 cardBoosterImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 boosterTitle1.setText("AstraZeneca");
-                astrazenecaCard = false;
-            }else if (boosterValue1 == modernaBooster && modernaCard == true) {
+                bool.setAstrazenecaCard(false);
+            }else if (value.getBoosterValue1() == value.getModernaBooster() && bool.isModernaCard() == true) {
                 cardBoosterImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 boosterTitle1.setText("Moderna");
-                modernaCard = false;
+                bool.setModernaCard(false);
             }
-            card8 = false;
-        }else if(value == boosterValue2 && card9 == true){
-            if (boosterValue2 == pfizerBTBooster && pfizerCard == true) {//========================================================================= Card 2 =========================================================//
+            bool.setCard8(false);
+        }else if(valueSort == value.getBoosterValue2() && bool.isCard9() == true){
+            if (value.getBoosterValue2()  == value.getPfizerBTBooster() && bool.isPfizerCard() == true) {//========================================================================= Card 2 =========================================================//
                 cardBoosterImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 boosterTitle2.setText("Pfizer");
-                pfizerCard = false;
-            }else if (boosterValue2 == oxfordAZBooster && astrazenecaCard == true) {
+                bool.setPfizerCard(false);
+            }else if (value.getBoosterValue2()  == value.getOxfordAZBooster() && bool.isAstrazenecaCard() == true) {
                 cardBoosterImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 boosterTitle2.setText("AstraZeneca");
-                astrazenecaCard = false;
-            }else if (boosterValue2 == modernaBooster && modernaCard == true) {
+                bool.setAstrazenecaCard(false);
+            }else if (value.getBoosterValue2()  == value.getModernaBooster() && bool.isModernaCard() == true) {
                 cardBoosterImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 boosterTitle2.setText("Moderna");
-                modernaCard = false;
+                bool.setModernaCard(false);
             }
-            card9 = false;
-        }else if(value == boosterValue3 && card10 == true){
-            if (boosterValue3 == pfizerBTBooster && pfizerCard == true) {//========================================================================= Card 3 =========================================================//
+            bool.setCard9(false);
+        }else if(valueSort == value.getBoosterValue3() && bool.isCard10() == true){
+            if (value.getBoosterValue3() == value.getPfizerBTBooster() && bool.isPfizerCard() == true) {//========================================================================= Card 3 =========================================================//
                 cardBoosterImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 boosterTitle3.setText("Pfizer");
-                pfizerCard = false;
-            }else if (boosterValue3 == oxfordAZBooster && astrazenecaCard == true) {
+                bool.setPfizerCard(false);
+            }else if (value.getBoosterValue3() == value.getOxfordAZBooster() && bool.isAstrazenecaCard() == true) {
                 cardBoosterImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 boosterTitle3.setText("AstraZeneca");
-                astrazenecaCard = false;
-            }else if (boosterValue3 == modernaBooster && modernaCard == true) {
+                bool.setAstrazenecaCard(false);
+            }else if (value.getBoosterValue3() == value.getModernaBooster() && bool.isModernaCard() == true) {
                 cardBoosterImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 boosterTitle3.setText("Moderna");
-                modernaCard = false;
+                bool.setModernaCard(false);
             }
-            card10 = false;
+            bool.setCard10(false);
         }
         
     }
     
     private void cardVaksinSortingAlgortim(){
-        //String sinovacString = "" + sinovacVaksin;
-        sinovac=true;sputnik=true;novavax=true;oxfordaz=true;pfizerbt=true;moderna=true;sinopharm=true;
-        card1 = true;card2 = true;card3 = true;card4 = true;card5 = true;card6 = true;card7 = true;
-        sinovacValue = sinovacVaksin;
-        sputnikValue = sputnikVaksin;
-        novavaxValue = novavaxVaksin;
-        oxfordazValue = oxfordAZVaksin;
-        pfizerbtValue = pfizerBTVaksin;
-        modernaValue = modernaVaksin;
-        sinopharmValue = sinopharmVaksin;
-        int vaccineArray[] = {sinovacValue,sputnikValue,novavaxValue,oxfordazValue,pfizerbtValue,modernaValue,sinopharmValue};
+        bool.setSinovac(true);bool.setSputnik(true);bool.setNovavax(true);bool.setOxfordaz(true);bool.setPfizerbt(true);bool.setModerna(true);bool.setSinopharm(true);
+        bool.setCard1(true);bool.setCard2(true);bool.setCard3(true);bool.setCard4(true);bool.setCard5(true);bool.setCard6(true);bool.setCard7(true);
+        value.setSinovacValue(value.getSinovacVaksin()); 
+        value.setSputnikvalue(value.getSputnikvaksin());
+        value.setNovavaxValue(value.getNovavaxVaksin());
+        value.setOxfordazValue(value.getOxfordAZVaksin());
+        value.setPfizerbtValue(value.getPfizerBTVaksin());
+        value.setModernaValue(value.getModernaVaksin());
+        value.setSinopharmValue(value.getSinopharmVaksin());
+        int vaccineArray[] = {value.getSinovacValue(),value.getSputnikvalue(),value.getNovavaxValue(),value.getOxfordazValue(),value.getPfizerbtValue(),value.getModernaValue(),value.getSinopharmValue()};
         Arrays.sort(vaccineArray);
         showSort(vaccineArray);
-        cardVaksinValue1.setText("" + vaksinCardValue1);
-        cardVaksinValue2.setText("" + vaksinCardValue2);
-        cardVaksinValue3.setText("" + vaksinCardValue3);
-        cardVaksinValue4.setText("" + vaksinCardValue4);
-        cardVaksinValue5.setText("" + vaksinCardValue5);
-        cardVaksinValue6.setText("" + vaksinCardValue6);
-        cardVaksinValue7.setText("" + vaksinCardValue7);
-        titleSort(sinovacVaksin);
-        titleSort(sputnikVaksin);
-        titleSort(novavaxVaksin);
-        titleSort(oxfordAZVaksin);
-        titleSort(pfizerBTVaksin);
-        titleSort(modernaVaksin);
-        titleSort(sinopharmVaksin);
+        cardVaksinValue1.setText("" + value.getVaksinValue1());
+        cardVaksinValue2.setText("" + value.getVaksinValue2());
+        cardVaksinValue3.setText("" + value.getVaksinValue3());
+        cardVaksinValue4.setText("" + value.getVaksinValue4());
+        cardVaksinValue5.setText("" + value.getVaksinValue5());
+        cardVaksinValue6.setText("" + value.getVaksinValue6());
+        cardVaksinValue7.setText("" + value.getVaksinValue7());
+        titleSort(value.getSinovacVaksin());
+        titleSort(value.getSputnikvaksin());
+        titleSort(value.getNovavaxVaksin());
+        titleSort(value.getOxfordAZVaksin());
+        titleSort(value.getPfizerBTVaksin());
+        titleSort(value.getModernaVaksin());
+        titleSort(value.getSinopharmVaksin());
     }
     public void showSort(int[] sortVaksin){
         for (int i = 0; i < 7; ) {
-            vaksinCardValue7 = sortVaksin[0];
-            vaksinCardValue6 = sortVaksin[1];
-            vaksinCardValue5 = sortVaksin[2];
-            vaksinCardValue4 = sortVaksin[3];
-            vaksinCardValue3 = sortVaksin[4];
-            vaksinCardValue2 = sortVaksin[5];
-            vaksinCardValue1 = sortVaksin[6];
+            value.setVaksinValue7(sortVaksin[0]);
+            value.setVaksinValue6(sortVaksin[1]);
+            value.setVaksinValue5(sortVaksin[2]);
+            value.setVaksinValue4(sortVaksin[3]);
+            value.setVaksinValue3(sortVaksin[4]);
+            value.setVaksinValue2(sortVaksin[5]);
+            value.setVaksinValue1(sortVaksin[6]);
             i++;
         }
     }
-    public void titleSort(int value){
-        if (value == vaksinCardValue1 && card1 == true) {
+    public void titleSort(int valueSort){
+        if (valueSort == value.getVaksinValue1()  && bool.isCard1() == true) {
             
-            if (vaksinCardValue1 == sinovacVaksin && sinovac == true) {//========================================================================= Card 1 =========================================================//
+            if (value.getVaksinValue1() == value.getSinovacVaksin() && bool.isSinovac() == true) {//========================================================================= Card 1 =========================================================//
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle1.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue1 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue1() == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle1.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue1 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue1() == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle1.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue1 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue1() == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle1.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue1 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue1() == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle1.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue1 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue1() == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle1.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue1 == sinopharmVaksin && sinopharm == true) {
+                bool.setModerna(false);
+            }else if (value.getVaksinValue1() == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage1.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle1.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card1 = false;
-        }else if (value == vaksinCardValue2 && card2 == true) {//========================================================================= Card 2 =========================================================//
+            bool.setCard1(false);
+        }else if (valueSort == value.getVaksinValue2() && bool.isCard2() == true) {//========================================================================= Card 2 =========================================================//
             
-            if (vaksinCardValue2 == sinovacVaksin && sinovac == true) {
+            if (value.getVaksinValue2()  == value.getSinovacVaksin() && bool.isSinovac() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle2.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue2 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue2()  == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle2.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue2 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue2()  == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle2.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue2 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue2()  == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle2.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue2 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue2()  == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle2.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue2 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue2()  == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle2.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue2 == sinopharmVaksin && sinopharm == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue2()  == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage2.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle2.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card2 = false;
-        }else if (value == vaksinCardValue3 && card3 == true) {//========================================================================= Card 3 =========================================================//
+            bool.setCard2(false);
+        }else if (valueSort == value.getVaksinValue3() && bool.isCard3() == true) {//========================================================================= Card 3 =========================================================//
             
-            if (vaksinCardValue3 == sinovacVaksin && sinovac == true) {
+            if (value.getVaksinValue3() == value.getSinovacVaksin() && bool.isSinovac() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle3.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue3 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue3() == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle3.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue3 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue3() == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle3.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue3 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue3() == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle3.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue3 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue3() == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle3.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue3 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue3() == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle3.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue3 == sinopharmVaksin && sinopharm == true) {
+                bool.setModerna(false);
+            }else if (value.getVaksinValue3() == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage3.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle3.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card3 = false;
-        }else if (value == vaksinCardValue4 && card4 == true) {//========================================================================= Card 4 =========================================================//
+            bool.setCard3(false);
+        }else if (valueSort == value.getVaksinValue4() && bool.isCard4() == true) {//========================================================================= Card 4 =========================================================//
             
-            if (vaksinCardValue4 == sinovacVaksin && sinovac == true) {
+            if (value.getVaksinValue4() == value.getSinovacVaksin() && bool.isSinovac() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle4.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue4 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue4() == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle4.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue4 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue4() == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle4.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue4 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue4() == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle4.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue4 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue4() == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle4.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue4 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue4() == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle4.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue4 == sinopharmVaksin && sinopharm == true) {
+                bool.setModerna(false);
+            }else if (value.getVaksinValue4() == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage4.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle4.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card4 = false;
-        }else if (value == vaksinCardValue5 && card5 == true) {//========================================================================= Card 5 =========================================================//
+            bool.setCard4(false);
+        }else if (valueSort == value.getVaksinValue5() && bool.isCard6() == true) {//========================================================================= Card 5 =========================================================//
             
-            if (vaksinCardValue5 == sinovacVaksin && sinovac == true) {
+            if (value.getVaksinValue5() == value.getSinovacVaksin() && bool.isSinovac() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle5.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue5 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue5() == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle5.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue5 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue5() == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle5.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue5 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue5() == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle5.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue5 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue5() == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle5.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue5 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue5() == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle5.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue5 == sinopharmVaksin && sinopharm == true) {
+                bool.setModerna(false);
+            }else if (value.getVaksinValue5() == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage5.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle5.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card5 = false;
-        }else if (value == vaksinCardValue6 && card6 == true) {//========================================================================= Card 6 =========================================================//
+            bool.setCard5(false);
+        }else if (valueSort == value.getVaksinValue6() && bool.isCard6() == true) {//========================================================================= Card 6 =========================================================//
             
-            if (vaksinCardValue6 == sinovacVaksin && sinovac == true) {
+            if (value.getVaksinValue6() == value.getSinovacVaksin() && bool.isSinovac() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle6.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue3 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue6() == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle6.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue6 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue6() == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle6.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue6 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue6() == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle6.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue6 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue6() == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle6.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue6 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue6() == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle6.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue6 == sinopharmVaksin && sinopharm == true) {
+                bool.setModerna(false);
+            }else if (value.getVaksinValue6() == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage6.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle6.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card6 = false;
-        }else if (value == vaksinCardValue7 && card7 == true) {//========================================================================= Card 7 =========================================================//
+            bool.setCard6(false);
+        }else if (valueSort == value.getVaksinValue7() && bool.isCard7() == true) {//========================================================================= Card 7 =========================================================//
             
-            if (vaksinCardValue7 == sinovacVaksin && sinovac == true) {
+            if (value.getVaksinValue7() == value.getSinovacVaksin() && bool.isSinovac() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinovacUrl)));
                 cardTitle7.setText("Sinovac");
-                sinovac = false;
-            }else if (vaksinCardValue7 == sputnikVaksin && sputnik == true) {
+                bool.setSinovac(false);
+            }else if (value.getVaksinValue7() == value.getSputnikvaksin() && bool.isSputnik() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sputnik)));
                 cardTitle7.setText("Sputnik V");
-                sputnik = false;
-            }else if (vaksinCardValue7 == novavaxVaksin && novavax == true) {
+                bool.setSputnik(false);
+            }else if (value.getVaksinValue7() == value.getNovavaxVaksin() && bool.isNovavax() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.novavaxUrl)));
                 cardTitle7.setText("Novavax");
-                novavax = false;
-            }else if (vaksinCardValue7 == oxfordAZVaksin && oxfordaz == true) {
+                bool.setNovavax(false);
+            }else if (value.getVaksinValue7() == value.getOxfordAZVaksin() && bool.isOxfordaz() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.astrazenecaUrl)));
                 cardTitle7.setText("AstraZeneca");
-                oxfordaz = false;
-            }else if (vaksinCardValue7 == pfizerBTVaksin && pfizerbt == true) {
+                bool.setOxfordaz(false);
+            }else if (value.getVaksinValue7() == value.getPfizerBTVaksin() && bool.isPfizerbt() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.pfizerUrl)));
                 cardTitle7.setText("Pfizer");
-                pfizerbt = false;
-            }else if (vaksinCardValue7 == modernaVaksin && moderna == true) {
+                bool.setPfizerbt(false);
+            }else if (value.getVaksinValue7() == value.getModernaVaksin() && bool.isModerna() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.modernaUrl)));
                 cardTitle7.setText("Moderna");
-                moderna = false;
-            }else if (vaksinCardValue7 == sinopharmVaksin && sinopharm == true) {
+                bool.setModerna(false);
+            }else if (value.getVaksinValue7() == value.getSinopharmVaksin() && bool.isSinopharm() == true) {
                 cardVaksinImage7.setIcon(new javax.swing.ImageIcon(getClass().getResource(urlSource.sinopharmUrl)));
                 cardTitle7.setText("Sinopharm");
-                sinopharm = false;
+                bool.setSinopharm(false);
             }
-            card7 = false;
+            bool.setCard7(false);
         }
     }
     private void diagramValueResponsive(){
-    if (sinovacVaksin > maxDiagramVaksinValue || sputnikVaksin > maxDiagramVaksinValue || novavaxVaksin > maxDiagramVaksinValue || oxfordAZVaksin > maxDiagramVaksinValue | pfizerBTVaksin > maxDiagramVaksinValue || modernaVaksin > maxDiagramVaksinValue || sinopharmVaksin > maxDiagramVaksinValue) {
-            maxDiagramVaksinValue += 20;
+    if (value.getSinovacVaksin() > value.getMaxDiagramVaksinValue() || value.getSputnikvaksin() > value.getMaxDiagramVaksinValue() || value.getNovavaxVaksin() > value.getMaxDiagramVaksinValue() || value.getOxfordAZVaksin() > value.getMaxDiagramVaksinValue() | value.getPfizerBTVaksin() > value.getMaxDiagramVaksinValue() || value.getModernaVaksin() > value.getMaxDiagramVaksinValue() || value.getSinopharmVaksin() > value.getMaxDiagramVaksinValue()) {
+            value.addMaxDiagramVaksinValue(20);
         }
-    if (pfizerBTBooster > maxDiagramBoosterValue || oxfordAZBooster > maxDiagramBoosterValue || modernaBooster > maxDiagramBoosterValue) {
-            maxDiagramBoosterValue += 20;
+    if (value.getPfizerBTBooster() > value.getMaxDiagramBoosterValue() || value.getOxfordAZBooster() > value.getMaxDiagramBoosterValue() || value.getModernaBooster() > value.getMaxDiagramBoosterValue()) {
+            value.addMaxDiagramBoosterValue(20);
     }
-    int halfDiagramVaksinValue = (maxDiagramVaksinValue / 2);
-    int halfDiagramBoosterValue = (maxDiagramBoosterValue / 2);
+    int halfDiagramVaksinValue = (value.getMaxDiagramVaksinValue() / 2);
+    int halfDiagramBoosterValue = (value.getMaxDiagramBoosterValue() / 2);
     diagramHalfMaxValueBooster.setText("" + halfDiagramBoosterValue);
     diagramHalfMaxValueVaksin.setText("" + halfDiagramVaksinValue);
-    diagramMaxValueBooster.setText("" + maxDiagramBoosterValue);
-    diagramMaxValueVaksin.setText("" + maxDiagramVaksinValue);
-    diagramProgressBarVaksin1.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBaVaksinr2.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBarVaksin3.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBarVaksin4.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBarVaksin5.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBarVaksin6.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBarVaksin7.setMaximum(maxDiagramVaksinValue);
-    diagramProgressBarBooster1.setMaximum(maxDiagramBoosterValue);
-    diagramProgressBarBooster2.setMaximum(maxDiagramBoosterValue);
-    diagramProgressBarBooster3.setMaximum(maxDiagramBoosterValue);
+    diagramMaxValueBooster.setText("" + value.getMaxDiagramBoosterValue());
+    diagramMaxValueVaksin.setText("" + value.getMaxDiagramVaksinValue());
+    diagramProgressBarVaksin1.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBaVaksinr2.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBarVaksin3.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBarVaksin4.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBarVaksin5.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBarVaksin6.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBarVaksin7.setMaximum(value.getMaxDiagramVaksinValue());
+    diagramProgressBarBooster1.setMaximum(value.getMaxDiagramBoosterValue());
+    diagramProgressBarBooster2.setMaximum(value.getMaxDiagramBoosterValue());
+    diagramProgressBarBooster3.setMaximum(value.getMaxDiagramBoosterValue());
     }
     private void progressImplements(){
         vaksin1ProgressBar.setValue(progressAlgoritm(value.getVaksin1()));
@@ -680,16 +676,16 @@ public class UI extends javax.swing.JFrame {
         persentasiVaksin3.setText(progressAlgoritm(value.getVaksin3())+"%");
         persentasiVaksin4.setText(progressAlgoritm(value.getVaksin4())+"%");
         persentasiVaksin5.setText(progressAlgoritm(value.getVaksin5())+"%");
-        diagramProgressBarVaksin1.setValue(sinovacVaksin);
-        diagramProgressBaVaksinr2.setValue(sputnikVaksin);
-        diagramProgressBarVaksin3.setValue(novavaxVaksin);
-        diagramProgressBarVaksin4.setValue(oxfordAZVaksin);
-        diagramProgressBarVaksin5.setValue(pfizerBTVaksin);
-        diagramProgressBarVaksin6.setValue( modernaVaksin);
-        diagramProgressBarVaksin7.setValue(sinopharmVaksin);
-        diagramProgressBarBooster1.setValue(pfizerBTBooster);
-        diagramProgressBarBooster2.setValue(oxfordAZBooster);
-        diagramProgressBarBooster3.setValue(modernaBooster);
+        diagramProgressBarVaksin1.setValue(value.getSinovacVaksin());
+        diagramProgressBaVaksinr2.setValue(value.getSputnikvaksin());
+        diagramProgressBarVaksin3.setValue(value.getNovavaxVaksin());
+        diagramProgressBarVaksin4.setValue(value.getOxfordAZVaksin());
+        diagramProgressBarVaksin5.setValue(value.getPfizerBTVaksin());
+        diagramProgressBarVaksin6.setValue( value.getModernaVaksin());
+        diagramProgressBarVaksin7.setValue(value.getSinopharmVaksin());
+        diagramProgressBarBooster1.setValue(value.getPfizerBTBooster());
+        diagramProgressBarBooster2.setValue(value.getOxfordAZBooster());
+        diagramProgressBarBooster3.setValue(value.getModernaBooster());
         jumlahMahasiswaCardVaksin1.setText("" + value.getMahasiswaVaksin1());
         jumlahMahasiswaCardVaksin2.setText("" + value.getMahasiswaVaksin2());
         jumlahMahasiswaCardVaksin3.setText("" + value.getMahasiswaVaksin3());
@@ -3917,7 +3913,7 @@ public class UI extends javax.swing.JFrame {
         text.setColumns(20);
         text.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
         text.setRows(5);
-        text.setText("Initial Commit -- August 5, 2022\nV0.1 -- August 5, 2022 -- UI initial\nV0.2 -- August 6, 2022 -- Table, Place holder added\nV0.3 -- August 8, 2022 -- CRUD updated\nV0.4 -- August 8, 2022 -- new UI, Image added\nV0.5 -- August 10, 2022 -- add new color & Icon\nV0.6 -- August 11, 2022 -- add Diagram & Algoritm\nV0.7 -- August 11, 2022 -- new Diagram & Icon\nV0.8 -- August 14, 2022 -- add Object Sorting Algoritm\nV0.9 -- August 14, 2022 -- new Image & Card\nV1.0 -- August 16, 2022 -- Table Data Sorting added\nV1.1 -- August 18, 2022 -- add Export to Excel & PDF\nV1.2 -- August 19, 2022 -- add Search Engine\nV1.3 -- August 21, 2022 -- add Language (Indonesia & English)\nV1.4 -- August 21, 2022 -- new Export Card & Spanish Language\nV1.5 -- August 24, 2022 -- new panel UI (Information)\nV1.6 -- August 24, 2022 -- add Login Page\nV1.7 -- August 25, 2022 -- add Registration Page\nV1.8 -- August 27, 2022 -- new About Page\n");
+        text.setText("Initial Commit -- August 5, 2022\nV0.1 -- August 5, 2022 -- UI initial\nV0.2 -- August 6, 2022 -- Table, Place holder added\nV0.3 -- August 8, 2022 -- CRUD updated\nV0.4 -- August 8, 2022 -- new UI, Image added\nV0.5 -- August 10, 2022 -- add new color & Icon\nV0.6 -- August 11, 2022 -- add Diagram & Algoritm\nV0.7 -- August 11, 2022 -- new Diagram & Icon\nV0.8 -- August 14, 2022 -- add Object Sorting Algoritm\nV0.9 -- August 14, 2022 -- new Image & Card\nV1.0 -- August 16, 2022 -- Table Data Sorting added\nV1.1 -- August 18, 2022 -- add Export to Excel & PDF\nV1.2 -- August 19, 2022 -- add Search Engine\nV1.3 -- August 21, 2022 -- add Language (Indonesia & English)\nV1.4 -- August 21, 2022 -- new Export Card & Spanish Language\nV1.5 -- August 24, 2022 -- new panel UI (Information)\nV1.6 -- August 24, 2022 -- add Login Page\nV1.7 -- August 25, 2022 -- add Registration Page\nV1.8 -- August 27, 2022 -- new About Page\nV1.9 -- August 28, 2022 -- protection improved\nV2.0 -- August 29, 2022 -- code program improved");
         jScrollPane1.setViewportView(text);
 
         cardAbout1.setBackground(new java.awt.Color(245, 246, 251));
@@ -4289,7 +4285,7 @@ public class UI extends javax.swing.JFrame {
                                 .addComponent(cardAbout3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cardAbout4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         dashboardButton.setFont(new java.awt.Font("Dubai", 0, 20)); // NOI18N
@@ -4613,7 +4609,7 @@ public class UI extends javax.swing.JFrame {
         booster2CardPrint.setText(dataTable.getValueAt(row, 5).toString());
         booster3CardPrint.setText(dataTable.getValueAt(row, 6).toString());   
         nimTextField.setEditable(false);
-        tableClicked = true;
+        bool.setTableClicked(true);
     }//GEN-LAST:event_dataTableMouseClicked
 
     private void nimTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nimTextFieldFocusGained
@@ -4820,7 +4816,7 @@ public class UI extends javax.swing.JFrame {
                     }
             break; 
                 case 3 :  
-                    if (tableClicked == false) {
+                    if (bool.isTableClicked() == false) {
                         showMessageDialog("Pilih data yang akan di ekspor");
                     }else {
                         printCard(vaksinCardPrint);

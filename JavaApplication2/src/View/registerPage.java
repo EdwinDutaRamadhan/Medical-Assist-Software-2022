@@ -7,8 +7,6 @@ package View;
 
 import Data.userData;
 import Model.userModel;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +14,6 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class registerPage extends javax.swing.JFrame {
-    UI menu = new UI();
     userData data = new userData();
     userModel mahasiswa = new userModel();
     /**

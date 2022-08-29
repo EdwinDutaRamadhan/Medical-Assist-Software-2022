@@ -7,9 +7,7 @@ package View;
 
 import Data.userData;
 import Model.userModel;
-import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Storage.colorData;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +15,10 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class loginPage extends javax.swing.JFrame {
-    UI menu = new UI();
     userData data = new userData();
     userModel mahasiswa = new userModel();
     int repeater = 0;
+    colorData color = new colorData();
     /**
      * Creates new form loginPage
      */
@@ -31,7 +29,7 @@ public class loginPage extends javax.swing.JFrame {
     }
     private void startup(){
  
-        usernameTextField.setForeground(menu.colorSource.abuabu());
+        usernameTextField.setForeground(color.abuabu());
     }
     /**
      * This method is called from within the constructor to initialize the form.
