@@ -72,8 +72,8 @@ public class language {
                 this.cardTitle2 = "Versi Kedua";
                 this.cardTitle3 = "Tema";
                 this.cardTitle4 = "Program";
-                this.cardDesc1 = "CRUD, UI Lama, Program Simpel";
-                this.cardDesc2 = "CRUD, UI Baru, Program Kompleks";
+                this.cardDesc1 = "Non-MVC, UI Lama, Program Simpel";
+                this.cardDesc2 = "MVC, UI Baru, Program Kompleks";
                 this.cardDesc3 = "Assisten Aplikasi";
                 this.cardDesc4 = "Pemrograman Desktop";
                 break;
@@ -126,8 +126,8 @@ public class language {
                 this.cardTitle2 = "Second Version";
                 this.cardTitle3 = "Theme";
                 this.cardTitle4 = "Program";
-                this.cardDesc1 = "CRUD, Old UI, Simple Program";
-                this.cardDesc2 = "CRUD, New UI, Complex Program";
+                this.cardDesc1 = "Non-MVC, Old UI, Simple Program";
+                this.cardDesc2 = "MVC, New UI, Complex Program";
                 this.cardDesc3 = "Software Assistant";
                 this.cardDesc4 = "Desktop Programming";
                 
@@ -181,8 +181,8 @@ public class language {
                 this.cardTitle2 = "Segunda versión";
                 this.cardTitle3 = "Tema";
                 this.cardTitle4 = "Programa";
-                this.cardDesc1 = "CRUD, Antiguo UI, Programa Sencillo";
-                this.cardDesc2 = "CRUD, Nuevo UI, Programas Complejos";
+                this.cardDesc1 = "Non-MVC, Antiguo UI, Programa Sencillo";
+                this.cardDesc2 = "MVC, Nuevo UI, Programas Complejos";
                 this.cardDesc3 = "Asistente de software";
                 this.cardDesc4 = "Programación de escritorio";
                 break;
@@ -235,8 +235,8 @@ public class language {
                 this.cardTitle2 = "Zweite Fassung";
                 this.cardTitle3 = "Thema";
                 this.cardTitle4 = "Programm";
-                this.cardDesc1 = "CRUD, Alt UI, Einfaches Programm";
-                this.cardDesc2 = "CRUD, Neu UI, Komplexes Programm";
+                this.cardDesc1 = "Non-MVC, Alt UI, Einfaches Programm";
+                this.cardDesc2 = "MVC, Neu UI, Komplexes Programm";
                 this.cardDesc3 = "Software-Assistant";
                 this.cardDesc4 = "Desktop-Programmierung";
                 
@@ -290,8 +290,8 @@ public class language {
                 this.cardTitle2 = "Druga wersja";
                 this.cardTitle3 = "Motyw";
                 this.cardTitle4 = "Program";
-                this.cardDesc1 = "CRUD, Stary UI, Prosty program";
-                this.cardDesc2 = "CRUD, Nowy UI, Kompleksowy program";
+                this.cardDesc1 = "Non-MVC, Stary UI, Prosty program";
+                this.cardDesc2 = "MVC, Nowy UI, Kompleksowy program";
                 this.cardDesc3 = "Asystent oprogramowania";
                 this.cardDesc4 = "Programowanie pulpitu";
                 

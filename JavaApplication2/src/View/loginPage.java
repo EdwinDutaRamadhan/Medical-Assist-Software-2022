@@ -317,7 +317,8 @@ public class loginPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Username atau password salah");
             }
         }
-
+        usernameTextField.setText("");
+        passwordField.setText("");
     }//GEN-LAST:event_logInButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
