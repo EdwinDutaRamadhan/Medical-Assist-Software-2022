@@ -5137,7 +5137,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String url = "http://localhost/php/Implementasi-Belajar-PHP/View/guest.php";
+        String url = "http://localhost/php/Vaccine-development/View/guest.php";
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException ex) {
