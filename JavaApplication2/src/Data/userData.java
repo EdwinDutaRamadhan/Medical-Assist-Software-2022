@@ -151,7 +151,7 @@ public class userData implements userInterface {
         List<userModel> ls = new ArrayList<>();
         
         try {
-           PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_mahasiswa");
+           PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_mahasiswa WHERE NIM LIKE '%"+input+"%' OR Nama LIKE '%"+input+"%' OR Vaksin1 LIKE '%"+input+"%' OR Vaksin2 LIKE '%"+input+"%' OR Vaksin3 LIKE '%"+input+"%' OR Vaksin4 LIKE '%"+input+"%' OR Vaksin5 LIKE '%"+input+"%'");
            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 mahasiswa = new userModel();
@@ -162,23 +162,7 @@ public class userData implements userInterface {
                 mahasiswa.setVaksin3(rs.getString(5));
                 mahasiswa.setVaksin4(rs.getString(6));
                 mahasiswa.setVaksin5(rs.getString(7));
-                
-                if(rs.getString(1).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }else if(rs.getString(2).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }else if(rs.getString(3).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }else if(rs.getString(4).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }else if(rs.getString(5).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }else if(rs.getString(6).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }else if(rs.getString(7).equalsIgnoreCase(input) == true){
-                    ls.add(mahasiswa);
-                }
-                
+                ls.add(mahasiswa);
             }            
            
         } catch (Exception e) {
