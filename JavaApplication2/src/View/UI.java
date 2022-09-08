@@ -5,13 +5,13 @@
  */
 package View;
 
-import Data.userData;
-import Language.language;
-import Model.userModel;
-import Storage.booleanData;
-import Storage.colorData;
-import Storage.informationData;
-import Storage.valueData;
+import Data.UserData;
+import Language.Language;
+import Model.UserModel;
+import Storage.BooleanData;
+import Storage.ColorData;
+import Storage.InformationData;
+import Storage.ValueData;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -53,14 +53,14 @@ import org.apache.poi.xssf.usermodel.*;
 public class UI extends javax.swing.JFrame {
     boolean crud,repeater = true;
     DefaultTableModel model;
-    userModel mahasiswa;
-    userData data = new userData();
+    UserModel mahasiswa;
+    UserData data = new UserData();
     UrlSource urlSource = new UrlSource();
-    booleanData bool = new booleanData();
-    valueData value = new valueData();
-    language bahasa = new language();
-    informationData information = new informationData();
-    colorData colorSource = new colorData();
+    BooleanData bool = new BooleanData();
+    ValueData value = new ValueData();
+    Language bahasa = new Language();
+    InformationData information = new InformationData();
+    ColorData colorSource = new ColorData();
     
     /**
      * Creates new form UI
@@ -188,8 +188,8 @@ public class UI extends javax.swing.JFrame {
         vaksin5TextField.setVisible(crud);
     }
     private void displayDataMahasiswa(){
-        List<userModel> ls = new ArrayList<userModel>();
-        ls = new userData().getAll();
+        List<UserModel> ls = new ArrayList<UserModel>();
+        ls = new UserData().getAll();
         String DataMahasiswa[][] = new String[ls.size()][7];
         for (int i = 0; i < ls.size(); i++) {
             DataMahasiswa[i][0] = ls.get(i).getNIM();
@@ -270,8 +270,8 @@ public class UI extends javax.swing.JFrame {
         value.setMahasiswaVaksin1(0); value.setMahasiswaVaksin2(0);value.setMahasiswaVaksin3(0);value.setMahasiswaVaksin4(0);value.setMahasiswaVaksin5(0);
         value.setSinovacVaksin(0); value.setSputnikvaksin(0); value.setNovavaxVaksin(0); value.setOxfordAZVaksin(0); value.setPfizerBTVaksin(0); value.setModernaVaksin(0); value.setSinopharmVaksin(0);
         value.setPfizerBTBooster(0);value.setOxfordAZBooster(0);value.setModernaBooster(0);
-        List<userModel> ls = new ArrayList<userModel>();
-        ls = new userData().getAll();
+        List<UserModel> ls = new ArrayList<UserModel>();
+        ls = new UserData().getAll();
         String DataSort[][] = new String[ls.size()][7];
             for (int i = 0; i < ls.size(); i++) {
                 DataSort[i][0] = ls.get(i).getNIM();
@@ -768,7 +768,6 @@ public class UI extends javax.swing.JFrame {
     public void exportToExcel(){
         XSSFWorkbook workBook = new XSSFWorkbook();
         XSSFSheet workSheet = workBook.createSheet();
-        //TableModel model = dataTable.getModel();
         DefaultTableModel model = (DefaultTableModel) dataTable.getModel();
         TreeMap<String, Object[] > map = new TreeMap<>();
         map.put("0", new Object[]{model.getColumnName(0),model.getColumnName(1),model.getColumnName(2),model.getColumnName(3),
@@ -807,8 +806,8 @@ public class UI extends javax.swing.JFrame {
         
     }
      private void searchData(String input){
-        List<userModel> ls = new ArrayList<userModel>();
-        ls = new userData().searchData(input);
+        List<UserModel> ls = new ArrayList<UserModel>();
+        ls = new UserData().searchData(input);
         String DataMahasiswa[][] = new String[ls.size()][7];
         for (int i = 0; i < ls.size(); i++) {
             DataMahasiswa[i][0] = ls.get(i).getNIM();
@@ -822,8 +821,8 @@ public class UI extends javax.swing.JFrame {
         dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
     }
     private void showOnlySort(int value){
-        List<userModel> ls = new ArrayList<userModel>();
-        ls = new userData().showOnly(value);
+        List<UserModel> ls = new ArrayList<UserModel>();
+        ls = new UserData().showOnly(value);
         String DataMahasiswa[][] = new String[ls.size()][7];
         for (int i = 0; i < ls.size(); i++) {
             DataMahasiswa[i][0] = ls.get(i).getNIM();
@@ -837,7 +836,7 @@ public class UI extends javax.swing.JFrame {
         dataTable.setModel(new DefaultTableModel(DataMahasiswa, new String[]{"NIM",bahasa.getNAMA(),bahasa.getVAKSIN1(),bahasa.getVAKSIN2(),bahasa.getVAKSIN3(),bahasa.getVAKSIN4(),bahasa.getVAKSIN5()}));
     }
     private void centerInformation(int vaksin){
-        informationData information = new informationData();
+        InformationData information = new InformationData();
                 //Header
                 informationImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(information.getVaksin(vaksin, 0))));
                 informationVaksinTitle.setText(information.getVaksin(vaksin, 1));
@@ -4550,7 +4549,7 @@ public class UI extends javax.swing.JFrame {
 
     private void simpanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanButtonActionPerformed
         boolean prompt = true;
-        mahasiswa = new userModel();
+        mahasiswa = new UserModel();
             if(nimTextField.getText().equals(bahasa.getNIM()) && namaTextField.getText().equals(bahasa.getNAMA())){
                 JOptionPane.showMessageDialog(this, bahasa.getMessageInputProtection3());
                 prompt =false;
@@ -4589,7 +4588,7 @@ public class UI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, bahasa.getMessageError2());
         }else{
             if(JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus data ini?","Delete Mahasiswa",0)==0){
-                mahasiswa = new userModel();
+                mahasiswa = new UserModel();
                 mahasiswa.setNIM(nimTextField.getText());
                 if (data.hapusDataMahasiswa(mahasiswa)) {
                     JOptionPane.showMessageDialog(this, bahasa.getMessageDialog1() + bahasa.getMessageDialog5() + bahasa.getData());
@@ -4608,7 +4607,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     private void gantiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gantiButtonActionPerformed
-        mahasiswa = new userModel();
+        mahasiswa = new UserModel();
         if(nimTextField.getText().equals(bahasa.getNIM()) || namaTextField.getText().equals(bahasa.getNAMA())){
             JOptionPane.showMessageDialog(this, bahasa.getMessageError3());
         }else{

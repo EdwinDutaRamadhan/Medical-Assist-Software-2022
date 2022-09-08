@@ -5,21 +5,21 @@
  */
 package View;
 
-import Data.userData;
-import Model.userModel;
+import Data.UserData;
+import Model.UserModel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class registerPage extends javax.swing.JFrame {
-    userData data = new userData();
-    userModel mahasiswa = new userModel();
+public class RegisterPage extends javax.swing.JFrame {
+    UserData data = new UserData();
+    UserModel mahasiswa = new UserModel();
     /**
      * Creates new form registerPage
      */
-    public registerPage() {
+    public RegisterPage() {
         initComponents();
         startup();
     }
@@ -262,7 +262,7 @@ public class registerPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        mahasiswa = new userModel();
+        mahasiswa = new UserModel();
         if (usernameTextField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Isi username terlebih dahulu");
         }else if(passwordField.getText().isEmpty()){
@@ -307,20 +307,21 @@ public class registerPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(registerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(registerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(registerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(registerPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registerPage().setVisible(true);
+                new RegisterPage().setVisible(true);
             }
         });
     }

@@ -6,14 +6,14 @@
 
 package Storage;
 
-import Language.language;
+import Language.Language;
 
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class informationData {
-    language bahasa = new language();
+public class InformationData {
+    Language bahasa = new Language();
     private String[][] vaksin = {
         {"/Image/sinovacCard.png", "SINOVAC", "COVID-19 yang tidak aktif","50-91%","2x selang waktu 4 minggu","12 - 59 tahun","Sinovac","Sinovac","AstraZeneca", "Pfizer","70,89%","90,53%","93,18%"}, 
         {"/Image/sputnikCard.png", "SPUTNIK V", "Modifikasi 2 virus","60-92%","2x selang waktu 12 minggu","18 tahun ke atas","","","", "","","",""},

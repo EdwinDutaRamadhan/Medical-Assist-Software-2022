@@ -6,9 +6,9 @@
 
 package Data;
 
-import Connection.userConnection;
-import Model.userModel;
-import Controller.userInterface;
+import Connection.UserConnection;
+import Model.UserModel;
+import Controller.UserInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,16 +20,16 @@ import java.util.List;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class userData implements userInterface {
-    userModel mahasiswa;
+public class UserData implements UserInterface {
+    UserModel mahasiswa;
     
     private Connection koneksi = null;
-    public userData(){
-        this.koneksi = new userConnection().getConnection();
+    public UserData(){
+        this.koneksi = new UserConnection().getConnection();
     }
     
     @Override
-    public boolean simpanDataMahasiswa(userModel mahasiswa) {
+    public boolean simpanDataMahasiswa(UserModel mahasiswa) {
         boolean result = false;
         try{
             PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_mahasiswa" + " VALUES (?,?,?,?,?,?,?)");
@@ -49,14 +49,14 @@ public class userData implements userInterface {
     }
 
     @Override
-    public List<userModel> getAll() {
-        List<userModel> ls = new ArrayList<>();
+    public List<UserModel> getAll() {
+        List<UserModel> ls = new ArrayList<>();
         
         try {
            PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_mahasiswa");
            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                mahasiswa = new userModel();
+                mahasiswa = new UserModel();
                 mahasiswa.setNIM(rs.getString(1));
                 mahasiswa.setNama(rs.getString(2));
                 mahasiswa.setVaksin1(rs.getString(3));
@@ -75,7 +75,7 @@ public class userData implements userInterface {
     }
 
     @Override
-    public boolean hapusDataMahasiswa(userModel mahasiswa) {
+    public boolean hapusDataMahasiswa(UserModel mahasiswa) {
         boolean result = false;
         try {
             PreparedStatement ps = koneksi.prepareStatement("DELETE FROM tbl_mahasiswa" + " WHERE NIM=?");
@@ -89,7 +89,7 @@ public class userData implements userInterface {
     }
 
     @Override
-    public boolean gantiDataMahasiswa(userModel mahasiswa) {
+    public boolean gantiDataMahasiswa(UserModel mahasiswa) {
         boolean result = false;
         String query = ("UPDATE tbl_mahasiswa SET Nama=?, Vaksin1=?, Vaksin2=?, Vaksin3=?, Vaksin4=?, Vaksin5=? WHERE NIM=?");
         try {
@@ -111,14 +111,14 @@ public class userData implements userInterface {
     }
 
     @Override
-    public List<userModel> showOnly(int value) {
-        List<userModel> ls = new ArrayList<>();
+    public List<UserModel> showOnly(int value) {
+        List<UserModel> ls = new ArrayList<>();
         
         try {
            PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_mahasiswa");
            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                mahasiswa = new userModel();
+                mahasiswa = new UserModel();
                 mahasiswa.setNIM(rs.getString(1));
                 mahasiswa.setNama(rs.getString(2));
                 mahasiswa.setVaksin1(rs.getString(3));
@@ -147,14 +147,14 @@ public class userData implements userInterface {
     }
 
     @Override
-    public List<userModel> searchData(String input) {
-        List<userModel> ls = new ArrayList<>();
+    public List<UserModel> searchData(String input) {
+        List<UserModel> ls = new ArrayList<>();
         
         try {
            PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_mahasiswa WHERE NIM LIKE '%"+input+"%' OR Nama LIKE '%"+input+"%' OR Vaksin1 LIKE '%"+input+"%' OR Vaksin2 LIKE '%"+input+"%' OR Vaksin3 LIKE '%"+input+"%' OR Vaksin4 LIKE '%"+input+"%' OR Vaksin5 LIKE '%"+input+"%'");
            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                mahasiswa = new userModel();
+                mahasiswa = new UserModel();
                 mahasiswa.setNIM(rs.getString(1));
                 mahasiswa.setNama(rs.getString(2));
                 mahasiswa.setVaksin1(rs.getString(3));
@@ -179,7 +179,7 @@ public class userData implements userInterface {
            PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_admin");
            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                mahasiswa = new userModel();
+                mahasiswa = new UserModel();
                 if (rs.getString(1).equals(username)&&(rs.getString(2).equals(password))) {
                     valid = true;
                 }
@@ -193,7 +193,7 @@ public class userData implements userInterface {
     }
 
     @Override
-    public boolean simpanDataAdminAuth(userModel mahasiswa) {
+    public boolean simpanDataAdminAuth(UserModel mahasiswa) {
         boolean result = false;
         try{
             PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_auth" + " VALUES (?,?)");
@@ -214,7 +214,7 @@ public class userData implements userInterface {
            PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM tbl_admin");
            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                mahasiswa = new userModel();
+                mahasiswa = new UserModel();
                 if (rs.getString(1).equals(username)) {
                     mahasiswa.setUsernameAuth(rs.getString(1));
                     mahasiswa.setPasswordAuth(rs.getString(2));
@@ -230,7 +230,7 @@ public class userData implements userInterface {
     }
 
     @Override
-    public boolean saveDataAdmin(userModel mahasiswa) {
+    public boolean saveDataAdmin(UserModel mahasiswa) {
          boolean result = false;
         try{
             PreparedStatement ps = koneksi.prepareStatement("INSERT INTO tbl_admin" + " VALUES (?,?)");

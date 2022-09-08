@@ -12,7 +12,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class userConnection {
+public class UserConnection {
     public Connection koneksi = null;
     
     public Connection getConnection(){

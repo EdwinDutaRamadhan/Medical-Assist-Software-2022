@@ -5,7 +5,7 @@
  */
 package Main;
 
-import View.loginPage;
+import View.LoginPage;
 
 
 
@@ -20,7 +20,7 @@ public class MedicalAsisstSoftware {
      */
     public static void main(String[] args) {
         //new UI().setVisible(true);
-        new loginPage().setVisible(true);
+        new LoginPage().setVisible(true);
     }
     
 }

@@ -12,7 +12,7 @@ import java.awt.Color;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class colorData {
+public class ColorData {
     public Color biruTua(){ 
             return new Color(208,231,251);
         }

@@ -10,7 +10,7 @@ package Model;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class userModel {
+public class UserModel {
     private String NIM, Nama, Vaksin1, Vaksin2, Vaksin3, vaksin4, vaksin5;
     private String NIMCard, NamaCard, Vaksin1Card, Vaksin2Card, Vaksin3Card, Vaksin4Card, Vaksin5Card;
     private String Username, Password,UsernameAuth,PasswordAuth;

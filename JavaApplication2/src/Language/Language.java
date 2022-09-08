@@ -6,13 +6,13 @@
 
 package Language;
 
-import Storage.informationData;
+import Storage.InformationData;
 
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class language {
+public class Language {
     private String MessageInputProtection1,MessageInputProtection2,MessageInputProtection3; 
     private String MessageDialog1, MessageDialog2,MessageDialog3,MessageDialog4,MessageDialog5;
     private String NIM , NAMA, BOOSTER, VAKSIN, VAKSIN1, VAKSIN2, VAKSIN3, VAKSIN4, VAKSIN5,Search,Mahasiswa,Dashboard,Data,Information,Other;

@@ -10,7 +10,7 @@ package Storage;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class valueData {
+public class ValueData {
     private double vaksin1,vaksin2,vaksin3,vaksin4,vaksin5;
     private int mahasiswaVaksin1,mahasiswaVaksin2,mahasiswaVaksin3,mahasiswaVaksin4,mahasiswaVaksin5;
     private int cardRepeater,maxDiagramVaksinValue, maxDiagramBoosterValue;

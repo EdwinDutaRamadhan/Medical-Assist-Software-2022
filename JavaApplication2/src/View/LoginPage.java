@@ -5,24 +5,24 @@
  */
 package View;
 
-import Data.userData;
-import Model.userModel;
-import Storage.colorData;
+import Data.UserData;
+import Model.UserModel;
+import Storage.ColorData;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class loginPage extends javax.swing.JFrame {
-    userData data = new userData();
-    userModel mahasiswa = new userModel();
+public class LoginPage extends javax.swing.JFrame {
+    UserData data = new UserData();
+    UserModel mahasiswa = new UserModel();
     int repeater = 0;
-    colorData color = new colorData();
+    ColorData color = new ColorData();
     /**
      * Creates new form loginPage
      */
-    public loginPage() {
+    public LoginPage() {
         initComponents();
 
         startup();
@@ -292,7 +292,7 @@ public class loginPage extends javax.swing.JFrame {
     private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
         if (data.validation(usernameTextField.getText(), passwordField.getText())) {
             //AuthSave
-            mahasiswa = new userModel();
+            mahasiswa = new UserModel();
             mahasiswa.setUsername(usernameTextField.getText());
             mahasiswa.setPassword(passwordField.getText());
             if (data.simpanDataAdminAuth(mahasiswa)) {
@@ -322,7 +322,7 @@ public class loginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_logInButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        new registerPage().setVisible(true);
+        new RegisterPage().setVisible(true);
 
     }//GEN-LAST:event_registerButtonActionPerformed
 
@@ -343,20 +343,21 @@ public class loginPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new loginPage().setVisible(true);
+                new LoginPage().setVisible(true);
             }
         });
     }

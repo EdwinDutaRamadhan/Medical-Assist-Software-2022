@@ -10,7 +10,7 @@ package Storage;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class booleanData {
+public class BooleanData {
     private boolean card1,card2,card3,card4,card5,card6,card7,card8,card9,card10;
     private boolean sinovac, sputnik, novavax,oxfordaz,pfizerbt,moderna,sinopharm;
     private boolean pfizerCard, astrazenecaCard, modernaCard, tableClicked;
