@@ -7,6 +7,11 @@ package View;
 
 import Data.UserData;
 import Model.UserModel;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +19,8 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class RegisterPage extends javax.swing.JFrame {
+    private static final String enc1 = "KBM";
+    private static final String enc2 = "PEDES";
     UserData data = new UserData();
     UserModel mahasiswa = new UserModel();
     /**
@@ -270,8 +277,10 @@ public class RegisterPage extends javax.swing.JFrame {
         }else{
             if (repasswordField.getText().equals(passwordField.getText())) {
             //done
-            mahasiswa.setUsername(usernameTextField.getText());
-            mahasiswa.setPassword(passwordField.getText());
+            String usernameEnc = inputEncrypt(usernameTextField.getText());
+            String passwordEnc = inputEncrypt(passwordField.getText());
+            mahasiswa.setUsername(usernameEnc);
+            mahasiswa.setPassword(passwordEnc);
                 if (data.saveDataAdmin(mahasiswa)) {
                     JOptionPane.showMessageDialog(this, "Berhasil membuat akun");
                     this.setVisible(false);
@@ -285,7 +294,20 @@ public class RegisterPage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_registerButtonActionPerformed
-
+     private String inputEncrypt(String input){
+        String name = input;
+        String encPass;
+        String VSHA1 = null;
+        try {
+            MessageDigest namaBaru = MessageDigest.getInstance("SHA1");
+            namaBaru.update(name.getBytes(),0,name.length());
+            encPass = new BigInteger(1,namaBaru.digest()).toString(16);
+            VSHA1 = encPass.toUpperCase(); 
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return enc1+VSHA1+enc2;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -5134,12 +5134,11 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_sinopharmInformationButtonMouseExited
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
-        int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin keluar?", "Sign Out", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/Image/404Error.png")));
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin logout?", "Sign Out", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/Image/404Error.png")));
         if (confirm == 0) {
             this.dispose();
-        } else {
-            
-        }
+            new LoginPage().setVisible(true);
+        } 
     }//GEN-LAST:event_logoutActionPerformed
 
     private void webUrlButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webUrlButtonActionPerformed

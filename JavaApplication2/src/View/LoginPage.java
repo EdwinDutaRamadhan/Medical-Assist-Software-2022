@@ -8,6 +8,11 @@ package View;
 import Data.UserData;
 import Model.UserModel;
 import Storage.ColorData;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class LoginPage extends javax.swing.JFrame {
+    private static final String enc1 = "KBM";
+    private static final String enc2 = "PEDES";
     UserData data = new UserData();
     UserModel mahasiswa = new UserModel();
     int repeater = 0;
@@ -310,7 +317,10 @@ public class LoginPage extends javax.swing.JFrame {
         }else if(passwordField.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Isi password terlebih dahulu");
         }else{
-            if (data.validation(usernameTextField.getText(),passwordField.getText())) {
+            String usernameEnc, passwordEnc;
+            usernameEnc = inputEncrypt(usernameTextField.getText());
+            passwordEnc = inputEncrypt(passwordField.getText());          
+            if (data.validation(usernameEnc,passwordEnc)) {
                 JOptionPane.showMessageDialog(this, "Login berhasil");
                 
                 new UI().setVisible(true);                
@@ -322,7 +332,20 @@ public class LoginPage extends javax.swing.JFrame {
         usernameTextField.setText("");
         passwordField.setText("");
     }//GEN-LAST:event_logInButtonActionPerformed
-
+    private String inputEncrypt(String input){
+        String name = input;
+        String encPass;
+        String VSHA1 = null;
+        try {
+            MessageDigest namaBaru = MessageDigest.getInstance("SHA1");
+            namaBaru.update(name.getBytes(),0,name.length());
+            encPass = new BigInteger(1,namaBaru.digest()).toString(16);
+            VSHA1 = encPass.toUpperCase();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return enc1+VSHA1+enc2;
+    }
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         new RegisterPage().setVisible(true);
 
