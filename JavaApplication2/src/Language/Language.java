@@ -6,8 +6,6 @@
 
 package Language;
 
-import Storage.InformationData;
-
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -17,7 +15,7 @@ public class Language {
     private String MessageDialog1, MessageDialog2,MessageDialog3,MessageDialog4,MessageDialog5;
     private String NIM , NAMA, BOOSTER, VAKSIN, VAKSIN1, VAKSIN2, VAKSIN3, VAKSIN4, VAKSIN5,Search,Mahasiswa,Dashboard,Data,Information,Other;
     private String ButtonSimpan,ButtonHapus,ButtonGanti,ButtonTambah,ButtonSearch,ButtonBrowse,ButtonExport;
-    private String MessageError1,MessageError2,MessageError3,MessageError4,MessageError5,MessageError6,MessageError7,MessageError8,MessageError9,MessageError10;
+    private String MessageError1,MessageError2,MessageError3,MessageError4,MessageError5,MessageError6,MessageError7,MessageError8,MessageError9,MessageError10,MessageError11;
     private String cardTitle1,cardTitle2,cardTitle3,cardTitle4,cardDesc1,cardDesc2,cardDesc3,cardDesc4;
 
     
@@ -43,6 +41,7 @@ public class Language {
                 this.MessageError8 = "Berhasil export .xlsx";
                 this.MessageError9 = "Isi textfield search terlebih dahulu";
                 this.MessageError10 = "Data yang dicari tidak ditemukan";
+                this.MessageError11 = "Pilih data yang akan di ekspor";
                 //=====Label=====
                 this.NIM = "NIM";
                 this.NAMA = "Nama";
@@ -97,6 +96,7 @@ public class Language {
                 this.MessageError8 = "Successful export .xlsx";
                 this.MessageError9 = "Fill in the search textfield first";
                 this.MessageError10 = "The data you are looking for is not found";
+                this.MessageError11 = "Pilih data yang akan di ekspor";
                 //=====Label=====
                 this.NIM = "NIM";
                 this.NAMA = "Name";
@@ -152,6 +152,7 @@ public class Language {
                 this.MessageError8 = "Exportación exitosa .xlsx";
                 this.MessageError9 = "Complete el campo de texto de búsqueda primero";
                 this.MessageError10 = "Los datos que busca no se encuentran";
+                this.MessageError11 = "Selecciona los datos a exportar";
                 //=====Label=====
                 this.NIM = "NIM";
                 this.NAMA = "Nombre";
@@ -206,6 +207,7 @@ public class Language {
                 this.MessageError8 = "Erfolgreicher Export .xlsx";
                 this.MessageError9 = "Füllen Sie zuerst das Suchtextfeld aus";
                 this.MessageError10 = "Die gesuchten Daten wurden nicht gefunden";
+                this.MessageError11 = "Wählen Sie die zu exportierenden Daten aus";
                 //=====Label=====
                 this.NIM = "NIM";
                 this.NAMA = "Name";
@@ -261,6 +263,7 @@ public class Language {
                 this.MessageError8 = "Udany eksport .xlsx";
                 this.MessageError9 = "Wypełnij najpierw pole tekstowe wyszukiwania";
                 this.MessageError10 = "Nie znaleziono danych, których szukasz";
+                this.MessageError11 = "Wybierz dane do wyeksportowania";
                 //=====Label=====
                 this.NIM = "NIM";
                 this.NAMA = "Nazwa";
@@ -346,6 +349,7 @@ public class Language {
     public String getCardDesc2() {return cardDesc2;}
     public String getCardDesc3() {return cardDesc3;}
     public String getCardDesc4() {return cardDesc4;}
-    
+    public String getMessageError11() {return MessageError11;}
+   
     
 }

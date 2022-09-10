@@ -1141,13 +1141,14 @@ public class UI extends javax.swing.JFrame {
         changelogs = new javax.swing.JLabel();
         jPanel26 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        webUrlButton = new javax.swing.JButton();
+        hostUrl = new javax.swing.JComboBox();
         dashboardButton = new javax.swing.JButton();
         dataButton = new javax.swing.JButton();
         otherButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         informationButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        logout = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
         jPopupMenu1.add(jMenuItem1);
@@ -3835,6 +3836,7 @@ public class UI extends javax.swing.JFrame {
 
         jPanel22.setBackground(new java.awt.Color(208, 231, 251));
 
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/aboutImage1.png"))); // NOI18N
 
         jLabel30.setBackground(new java.awt.Color(255, 255, 255));
@@ -3969,7 +3971,7 @@ public class UI extends javax.swing.JFrame {
                         .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(aboutCard1Title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel30Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(aboutCard1Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -4046,7 +4048,7 @@ public class UI extends javax.swing.JFrame {
                         .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(aboutCard2Title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 43, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(aboutCard2Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel35)
@@ -4212,7 +4214,7 @@ public class UI extends javax.swing.JFrame {
                         .addComponent(aboutCard4Title, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(aboutCard4Desc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
         );
         jPanel33Layout.setVerticalGroup(
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4250,17 +4252,19 @@ public class UI extends javax.swing.JFrame {
         jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel44.setText("Vaccine Dev Web 1.0");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(91, 124, 253));
-        jButton2.setText("Open the web page");
-        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton2.setContentAreaFilled(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        webUrlButton.setBackground(new java.awt.Color(255, 255, 255));
+        webUrlButton.setFont(new java.awt.Font("Dubai Light", 0, 14)); // NOI18N
+        webUrlButton.setForeground(new java.awt.Color(91, 124, 253));
+        webUrlButton.setText("Open the web page");
+        webUrlButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        webUrlButton.setContentAreaFilled(false);
+        webUrlButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                webUrlButtonActionPerformed(evt);
             }
         });
+
+        hostUrl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Local", "Hosted" }));
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -4270,16 +4274,19 @@ public class UI extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(webUrlButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(hostUrl, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel26Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel44, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(hostUrl)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(webUrlButton, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
 
@@ -4296,13 +4303,13 @@ public class UI extends javax.swing.JFrame {
                     .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addComponent(centerAboutPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cardAbout3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cardAbout2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cardAbout1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardAbout4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(cardAbout4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         AboutPanelLayout.setVerticalGroup(
             AboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4394,15 +4401,15 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logout.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/logout.png"))); // NOI18N
+        logout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        logout.setBorderPainted(false);
+        logout.setContentAreaFilled(false);
+        logout.setFocusPainted(false);
+        logout.setFocusable(false);
+        logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logoutActionPerformed(evt);
             }
         });
 
@@ -4423,7 +4430,7 @@ public class UI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(otherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(DashBoardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -4452,7 +4459,7 @@ public class UI extends javax.swing.JFrame {
                             .addComponent(dataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(otherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(informationButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
                 .addContainerGap())
@@ -5126,23 +5133,28 @@ public class UI extends javax.swing.JFrame {
         sinopharmInformationButton.setForeground(colorSource.SinopharmCardPanel(false));
     }//GEN-LAST:event_sinopharmInformationButtonMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin keluar?", "Sign Out", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/Image/404Error.png")));
         if (confirm == 0) {
-            this.setVisible(false);
+            this.dispose();
         } else {
             
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_logoutActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String url = "http://localhost/php/Vaccine-development/View/guest.php";
+    private void webUrlButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webUrlButtonActionPerformed
+        String url = ""; 
+        if(hostUrl.getSelectedIndex() == 0){
+            url = "http://localhost/php/vaccine-development/View/guest.php";
+        }else if(hostUrl.getSelectedIndex() == 1){
+            url = "http://medicalassistsoftware.great-site.net/View/guest.php";
+        }
         try {
             java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
         } catch (IOException ex) {
             Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_webUrlButtonActionPerformed
     
 
    
@@ -5305,6 +5317,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton hapusButton;
     private javax.swing.JPanel hapusPanel;
     private javax.swing.JPanel hiddenPanel;
+    private javax.swing.JComboBox hostUrl;
     private javax.swing.JLabel informationBooster1;
     private javax.swing.JLabel informationBooster2;
     private javax.swing.JLabel informationBooster3;
@@ -5335,8 +5348,6 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel informationUsiaLabel;
     private javax.swing.JLabel informationVaksin;
     private javax.swing.JLabel informationVaksinTitle;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -5424,6 +5435,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel labelMahasiswa3;
     private javax.swing.JLabel labelMahasiswa4;
     private javax.swing.JLabel labelMahasiswa5;
+    private javax.swing.JButton logout;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton modernaInformationButton;
     private javax.swing.JLabel namaCardPrint;
@@ -5466,6 +5478,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPanel vaksinCardPrint;
     private javax.swing.JPanel vaksinCardPrint1;
     private javax.swing.JPanel vaksinDiagram;
+    private javax.swing.JButton webUrlButton;
     // End of variables declaration//GEN-END:variables
 
 }

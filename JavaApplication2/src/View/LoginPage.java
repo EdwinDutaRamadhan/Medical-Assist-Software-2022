@@ -312,7 +312,9 @@ public class LoginPage extends javax.swing.JFrame {
         }else{
             if (data.validation(usernameTextField.getText(),passwordField.getText())) {
                 JOptionPane.showMessageDialog(this, "Login berhasil");
-                new UI().setVisible(true);
+                
+                new UI().setVisible(true);                
+                this.dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Username atau password salah");
             }
