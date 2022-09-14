@@ -4575,7 +4575,7 @@ public class UI extends javax.swing.JFrame {
         if (vaksin3TextField.getText().equals(bahasa.getVAKSIN3())) {mahasiswa.setVaksin3("-");}else{mahasiswa.setVaksin3(vaksin3TextField.getText());}
         if (vaksin4TextField.getText().equals(bahasa.getVAKSIN4())) {mahasiswa.setVaksin4("-");}else{mahasiswa.setVaksin4(vaksin4TextField.getText());}
         if (vaksin5TextField.getText().equals(bahasa.getVAKSIN5())) {mahasiswa.setVaksin5("-");}else{mahasiswa.setVaksin5(vaksin5TextField.getText());}
-        
+
         if (data.simpanDataMahasiswa(mahasiswa)) {
             JOptionPane.showMessageDialog(this, bahasa.getMessageDialog1() + bahasa.getMessageDialog3() + bahasa.getData());
             displayDataMahasiswa();
